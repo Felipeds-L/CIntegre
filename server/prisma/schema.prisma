@@ -1,0 +1,130 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Escola {
+  id        Int    @id @default(autoincrement())
+  cnpj      String
+  numero_estudante  Int
+  pontos_acumulados  Int
+
+  acaoEscola  AcaoEscola[]
+}
+
+model Ong {
+  id   Int    @id @default(autoincrement())
+  descricao String
+  anoInicio  Int
+  ongSustainable  Boolean
+
+  redesSociais RedesSociais[]
+  causas Causas[]
+  acaoSocial AcaoSocial[]
+}
+
+model Adress {
+  id   Int    @id @default(autoincrement())
+  rua String
+  numero  Int
+  cep  String
+  complemento  String?
+  cidade    String
+  estado    String
+
+  user User[]
+}
+
+model User {
+  id   Int    @id @default(autoincrement())
+  username String
+  nome  String
+  email  String
+  adressId Int
+  
+  adress  Adress   @relation(fields: [adressId], references: [id])
+  numeroContato  String
+}
+
+model Fotos {
+  id   Int    @id @default(autoincrement())
+  fotoUrl String
+}
+
+model RedesSociais {
+  id   Int    @id @default(autoincrement())
+  ongId  Int
+  ong    Ong      @relation(fields: [ongId], references: [id])
+  linkRedeSocial  String
+}
+
+model Causas {
+  id   Int    @id @default(autoincrement())
+
+  ongId  Int
+  ong    Ong      @relation(fields: [ongId], references: [id])
+
+  nome  String
+  descricao  String
+
+  acaoEscola AcaoEscola[]
+  acaoSocial AcaoSocial[]
+}
+
+model AcaoEscola {
+  id   Int    @id @default(autoincrement())
+
+  escolaId  Int
+  escola    Escola      @relation(fields: [escolaId], references: [id])
+
+  causasId   Int
+  causas   Causas      @relation(fields: [causasId], references: [id])
+
+  status Status[]
+  registros  String
+  pontuacao  Int //ong avalia + porcentagem da doacao
+}
+
+enum Status {
+  aberto
+  fechado
+  outro
+}
+
+model AcaoSocial {
+  id     Int      @id @default(autoincrement())
+
+  causasId   Int
+  causas   Causas      @relation(fields: [causasId], references: [id])
+
+  ongId  Int
+  ong    Ong      @relation(fields: [ongId], references: [id])
+
+  fotoCapa  String //url
+  titulo  String
+  descricao String
+  tipo  Tipos[]
+  area_atuacao AreaAtuacao[]
+  status Status[]
+  pontuacao Int // 100/200 nao mostrar
+}
+
+enum Tipos {
+  doacao
+  voluntariado
+}
+
+enum AreaAtuacao {
+  tecnologia
+  saude
+  gastronomia
+  servico_sociaL
+  moda
+}

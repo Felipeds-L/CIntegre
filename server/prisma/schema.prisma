@@ -22,12 +22,12 @@ model Escola {
 model Ong {
   id   Int    @id @default(autoincrement())
   descricao String
-  anoInicio  Int
-  ongSustainable  Boolean
+  ano_inicio  Int
+  ong_sustainable  Boolean
 
-  redesSociais RedesSociais[]
+  redes_sociais RedesSociais[]
   causas Causas[]
-  acaoSocial AcaoSocial[]
+  acao_social AcaoSocial[]
 }
 
 model Adress {
@@ -47,45 +47,45 @@ model User {
   username String
   nome  String
   email  String
-  adressId Int
+  adress_id Int
   
-  adress  Adress   @relation(fields: [adressId], references: [id])
+  adress  Adress   @relation(fields: [adress_id], references: [id])
   numeroContato  String
 }
 
 model Fotos {
   id   Int    @id @default(autoincrement())
-  fotoUrl String
+  foto_url String
 }
 
 model RedesSociais {
   id   Int    @id @default(autoincrement())
-  ongId  Int
-  ong    Ong      @relation(fields: [ongId], references: [id])
-  linkRedeSocial  String
+  ong_id  Int
+  ong    Ong      @relation(fields: [ong_id], references: [id])
+  link_redesocial  String
 }
 
 model Causas {
   id   Int    @id @default(autoincrement())
 
-  ongId  Int
-  ong    Ong      @relation(fields: [ongId], references: [id])
+  ong_id  Int
+  ong    Ong      @relation(fields: [ong_id], references: [id])
 
   nome  String
   descricao  String
 
-  acaoEscola AcaoEscola[]
-  acaoSocial AcaoSocial[]
+  acao_escola AcaoEscola[]
+  acao_social AcaoSocial[]
 }
 
 model AcaoEscola {
   id   Int    @id @default(autoincrement())
 
-  escolaId  Int
-  escola    Escola      @relation(fields: [escolaId], references: [id])
+  escola_id  Int
+  escola    Escola      @relation(fields: [escola_id], references: [id])
 
-  causasId   Int
-  causas   Causas      @relation(fields: [causasId], references: [id])
+  causas_id   Int
+  causas   Causas      @relation(fields: [causas_id], references: [id])
 
   status Status[]
   registros  String
@@ -101,11 +101,11 @@ enum Status {
 model AcaoSocial {
   id     Int      @id @default(autoincrement())
 
-  causasId   Int
-  causas   Causas      @relation(fields: [causasId], references: [id])
+  causas_id   Int
+  causas   Causas      @relation(fields: [causas_id], references: [id])
 
-  ongId  Int
-  ong    Ong      @relation(fields: [ongId], references: [id])
+  ong_id  Int
+  ong    Ong      @relation(fields: [ong_id], references: [id])
 
   fotoCapa  String //url
   titulo  String

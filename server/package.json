@@ -1,4 +1,10 @@
 {
+	"name": "server",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "tsx watch app.ts"
+	},
 	"dependencies": {
 		"@prisma/client": "^6.11.1",
 		"bcryptjs": "^3.0.2",
@@ -12,6 +18,9 @@
 		"@types/bcryptjs": "^2.4.6",
 		"@types/express": "^5.0.3",
 		"@types/jsonwebtoken": "^9.0.10",
-		"@types/ms": "^2.1.0"
+		"@types/ms": "^2.1.0",
+		"@types/node": "^24.0.13",
+		"tsx": "^4.20.3",
+		"typescript": "^5.8.3"
 	}
 }

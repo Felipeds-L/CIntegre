@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { verifyToken } from '../utils/jwt.utils';
-import { AuthRepository } from '../repository/authRepository';
+import { AuthRepository } from '../auth/authRepository';
 
 // serve para proteger as rotas que precisam de autenticação
 // Adiciona a propriedade 'user' ao tipo Request

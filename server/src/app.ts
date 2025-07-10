@@ -1,8 +1,8 @@
 import express from 'express';
 import { json } from 'body-parser';
-import { setUserRoutes } from './routes/userRoutes';
-import { setSchoolRoutes } from './routes/schoolRoutes';
-import { setAddressRoutes } from './routes/addressRoutes';
+import { setUserRoutes } from './user/userRoutes';
+import { setSchoolRoutes } from './school/schoolRoutes';
+import { setAddressRoutes } from './address/addressRoutes';
 
 const app = express();
 const PORT = process.env.PORT || 3000;

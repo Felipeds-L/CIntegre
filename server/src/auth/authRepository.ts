@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { comparePassword } from '../utils/bcrypt.utils';
-import { LoginDto } from '../dto/authDto';
+import { LoginDto } from './authDto';
 
 const prisma = new PrismaClient();
 

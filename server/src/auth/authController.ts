@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { generateToken } from '../utils/jwt.utils';
-import { AuthRepository } from '../repository/authRepository';
-import { LoginDto } from '../dto/authDto';
+import { AuthRepository } from './authRepository';
+import { LoginDto } from './authDto';
 
 export const AuthController = {
   async login(req: Request, res: Response) {

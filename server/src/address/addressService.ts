@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { Address } from '../types';
+import { Address } from './addressDto';
 
 export class AddressService {
     private prisma: PrismaClient;

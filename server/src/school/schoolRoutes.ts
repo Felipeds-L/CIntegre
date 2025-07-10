@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { SchoolController } from '../controller/schoolController';
+import { SchoolController } from './schoolController';
 
 const router = Router();
 const schoolController = new SchoolController();

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { AddressController } from '../controller/addressController';
+import { AddressController } from './addressController';
 
 const router = Router();
 const addressController = new AddressController();

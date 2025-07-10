@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { School } from '../types';
+import { School } from './schoolDto'; 
 
 class SchoolService {
     private prisma: PrismaClient;

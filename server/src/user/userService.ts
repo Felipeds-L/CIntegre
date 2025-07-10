@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { User } from '../types';
+import { User } from './userDto'; 
 
 export class UserService {
     private prisma: PrismaClient;

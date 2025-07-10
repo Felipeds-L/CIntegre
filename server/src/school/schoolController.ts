@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import SchoolService from '../services/schoolService';
+import SchoolService from './schoolService';
 
 export class SchoolController {
     private schoolService: SchoolService;
@@ -20,7 +20,7 @@ export class SchoolController {
 
     public async getSchool(req: Request, res: Response): Promise<void> {
         try {
-            const schoolId = req.params.id;
+            const schoolId = Number(req.params.id);
             const school = await this.schoolService.getSchool(schoolId);
             if (school) {
                 res.status(200).json(school);
@@ -34,7 +34,7 @@ export class SchoolController {
 
     public async updateSchool(req: Request, res: Response): Promise<void> {
         try {
-            const schoolId = req.params.id;
+            const schoolId = Number(req.params.id);
             const schoolData = req.body;
             const updatedSchool = await this.schoolService.updateSchool(schoolId, schoolData);
             if (updatedSchool) {
@@ -49,7 +49,7 @@ export class SchoolController {
 
     public async deleteSchool(req: Request, res: Response): Promise<void> {
         try {
-            const schoolId = req.params.id;
+            const schoolId = Number(req.params.id);
             const deletedSchool = await this.schoolService.deleteSchool(schoolId);
             if (deletedSchool) {
                 res.status(204).send();

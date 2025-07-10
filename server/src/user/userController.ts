@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { UserService } from '../services/userService';
+import { UserService } from './userService';
 
 export class UserController {
     private userService: UserService;
@@ -19,7 +19,7 @@ export class UserController {
 
     public async getUser(req: Request, res: Response): Promise<void> {
         try {
-            const user = await this.userService.getUser(req.params.id);
+            const user = await this.userService.getUser(Number(req.params.id));
             if (user) {
                 res.status(200).json(user);
             } else {
@@ -32,7 +32,7 @@ export class UserController {
 
     public async updateUser(req: Request, res: Response): Promise<void> {
         try {
-            const updatedUser = await this.userService.updateUser(req.params.id, req.body);
+            const updatedUser = await this.userService.updateUser(Number(req.params.id), req.body);
             if (updatedUser) {
                 res.status(200).json(updatedUser);
             } else {
@@ -45,7 +45,7 @@ export class UserController {
 
     public async deleteUser(req: Request, res: Response): Promise<void> {
         try {
-            const deletedUser = await this.userService.deleteUser(req.params.id);
+            const deletedUser = await this.userService.deleteUser(Number(req.params.id));
             if (deletedUser) {
                 res.status(204).send();
             } else {

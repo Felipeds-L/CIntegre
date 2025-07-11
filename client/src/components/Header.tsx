@@ -8,8 +8,8 @@ const ongLogged = false;
 
 export default function Header() {
   return (
-    <header className="py-[1.25rem] bg-white border-b border-[#ddd] h-[5.625rem]">
-      <div className="container items-center flex justify-between text-xl font-medium text-[#0A3A80]">
+    <header className="py-[1.25rem] bg-white border-b border-[#ddd]">
+      <div className="container items-center flex flex-wrap justify-between text-xl font-medium text-[#0A3A80]">
         <Link href="/">
           <Image
             src={cintegreHeader}

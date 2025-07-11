@@ -1,3 +1,4 @@
+import Tag from "@/components/general/Tag";
 import Image from "next/image";
 
 const mockedData = {
@@ -44,9 +45,7 @@ export default function ActionPage() {
         />
 
         <div className="absolute bottom-5 left-5 right-0">
-          <span className="items-center gap-2.5 bg-[#4f97ff] text-white px-3 py-1 rounded-3xl text-sm">
-            {mockedData.tags[0]}
-          </span>
+          <Tag>{mockedData.tags[0]}</Tag>
           <h1 className="text-white text-4xl">{mockedData.title}</h1>
           <p className="text-gray-300 text-3xl">{mockedData.ngo.name}</p>
         </div>
@@ -87,12 +86,7 @@ export default function ActionPage() {
             </h1>
             <ul className="flex flex-wrap gap-2">
               {mockedData.experiences.map((item, index) => (
-                <li
-                  key={index}
-                  className="flex items-center gap-2.5 bg-[#4f97ff] text-white px-3 py-1 rounded-3xl text-sm"
-                >
-                  {item}
-                </li>
+                <Tag key={index}>{item}</Tag>
               ))}
             </ul>
           </div>
@@ -228,12 +222,7 @@ export default function ActionPage() {
             <h1 className="text-2xl font-bold mb-2.5">Tags</h1>
             <ul className="flex flex-wrap gap-2.5">
               {mockedData.tags.map((tag, index) => (
-                <li
-                  key={index}
-                  className="flex items-center gap-2.5 bg-[#4f97ff] text-white px-3 py-1 rounded-3xl text-sm"
-                >
-                  {tag}
-                </li>
+                <Tag key={index}>{tag}</Tag>
               ))}
             </ul>
           </div>

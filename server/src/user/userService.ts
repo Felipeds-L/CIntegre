@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { User } from './userDto'; 
+import { User, UserCreateDTO } from './userDto'; 
 
 export class UserService {
     private prisma: PrismaClient;
@@ -8,7 +8,7 @@ export class UserService {
         this.prisma = new PrismaClient();
     }
 
-    async createUser(data: Omit<User, 'id'>): Promise<User> {
+    async createUser(data: Omit<UserCreateDTO, 'id'>): Promise<User> {
         return await this.prisma.user.create({
             data,
         });
@@ -20,7 +20,7 @@ export class UserService {
         });
     }
 
-    async updateUser(id: number, data: Partial<Omit<User, 'id'>>): Promise<User> {
+    async updateUser(id: number, data: Partial<Omit<UserCreateDTO, 'id'>>): Promise<User> {
         return await this.prisma.user.update({
             where: { id },
             data,

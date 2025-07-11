@@ -10,122 +10,109 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Escola {
+model School {
   id        Int    @id @default(autoincrement())
   cnpj      String
-  numero_estudante  Int
-  pontos_acumulados  Int
-
-  acaoEscola  AcaoEscola[]
+  student_number  Int
+  score  Int
+  schoolAction  SchoolAction[]
 }
 
 model Ong {
   id   Int    @id @default(autoincrement())
-  descricao String
-  ano_inicio  Int
+  description String
+  year_started  Int
   ong_sustainable  Boolean
-
-  redes_sociais RedesSociais[]
-  causas Causas[]
-  acao_social AcaoSocial[]
+  social_medias SocialMedias[]
+  cause Causes[]
+  social_action SocialAction[]
 }
 
-model Adress {
+model Address {
   id   Int    @id @default(autoincrement())
-  rua String
-  numero  Int
+  street String
+  number  Int
   cep  String
-  complemento  String?
-  cidade    String
-  estado    String
-
+  complement  String?
+  city    String
+  state    String
   user User[]
 }
 
 model User {
   id   Int    @id @default(autoincrement())
   username String
-  nome  String
+  name  String
   email  String
-  adress_id Int
-  senha String
-  
-  adress  Adress   @relation(fields: [adress_id], references: [id])
-  numeroContato  String
+  password String
+  address_id Int
+  address  Address   @relation(fields: [address_id], references: [id])
+  phone_number  String
 }
 
-model Fotos {
+model Photo {
   id   Int    @id @default(autoincrement())
-  foto_url String
+  photo_url String
 }
 
-model RedesSociais {
+model SocialMedias {
   id   Int    @id @default(autoincrement())
   ong_id  Int
   ong    Ong      @relation(fields: [ong_id], references: [id])
-  link_redesocial  String
+  link_social_media  String
 }
 
-model Causas {
+model Causes {
   id   Int    @id @default(autoincrement())
-
   ong_id  Int
   ong    Ong      @relation(fields: [ong_id], references: [id])
-
-  nome  String
-  descricao  String
-
-  acao_escola AcaoEscola[]
-  acao_social AcaoSocial[]
+  name  String
+  description  String
+  school_action SchoolAction[]
+  social_action SocialAction[]
 }
 
-model AcaoEscola {
+model SchoolAction {
   id   Int    @id @default(autoincrement())
-
-  escola_id  Int
-  escola    Escola      @relation(fields: [escola_id], references: [id])
-
-  causas_id   Int
-  causas   Causas      @relation(fields: [causas_id], references: [id])
-
+  school_id  Int
+  school    School      @relation(fields: [school_id], references: [id])
+  causes_id   Int
+  causes   Causes      @relation(fields: [causes_id], references: [id])
   status Status[]
-  registros  String
-  pontuacao  Int //ong avalia + porcentagem da doacao
+  registers  String
+  pontuation  Int //ong avalia + porcentagem da doacao
 }
 
 enum Status {
-  aberto
-  fechado
-  outro
+  open
+  close
+  other
 }
 
-model AcaoSocial {
+model SocialAction {
   id     Int      @id @default(autoincrement())
-
-  causas_id   Int
-  causas   Causas      @relation(fields: [causas_id], references: [id])
-
+  causes_id   Int
+  causes   Causes      @relation(fields: [causes_id], references: [id])
   ong_id  Int
   ong    Ong      @relation(fields: [ong_id], references: [id])
-
-  fotoCapa  String //url
-  titulo  String
+  cover_photo  String //url
+  title  String
   descricao String
-  tipo  Tipos[]
-  area_atuacao AreaAtuacao[]
+  tipe  Tipes[]
+  area_expertise AreaExpertise[]
   status Status[]
-  pontuacao Int // 100/200 nao mostrar
+  pontuation Int // 100/200 nao mostrar
 }
 
-enum Tipos {
-  doacao
-  voluntariado
+enum Tipes {
+  donation
+  volunteer_work
 }
 
-enum AreaAtuacao {
-  tecnologia
-  saude
-  gastronomia
-  servico_sociaL
-  moda
+enum AreaExpertise {
+  tecnology
+  healty
+  gastronomy
+  social_services
+  fashion
 }

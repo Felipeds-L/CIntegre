@@ -7,9 +7,9 @@ const prisma = new PrismaClient();
 export const AuthRepository = {
   async login(loginData: LoginDto) {
     // Busca usuário pelo email
-    const user = await prisma.user.findUnique({
+    const user = await prisma.user.findFirst({
       where: { email: loginData.email },
-      include: { adress: true }
+      include: { address: true }
     });
 
     if (!user) { // Se o usuário não for encontrado
@@ -17,7 +17,7 @@ export const AuthRepository = {
     }
 
     // Verifica a senha
-    const passwordMatch = await comparePassword(loginData.senha, user.senha);
+    const passwordMatch = await comparePassword(loginData.senha, user.password);
     if (!passwordMatch) { // Se a senha não bater
       throw new Error('Senha inválida');
     }
@@ -28,7 +28,7 @@ export const AuthRepository = {
   async findUserById(id: number) { //função de busca usuário por ID
     return await prisma.user.findUnique({
       where: { id },
-      include: { adress: true }
+      include: { address: true }
     });
   }
 };

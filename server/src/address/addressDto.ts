@@ -2,11 +2,21 @@ import { User } from '../user/userDto';
 
 export interface Address {
     id: number;
-    rua: string;
-    numero: number;
+    street: string;
+    number: number;
     cep: string;
-    complemento?: string; // Optional
-    cidade: string; // Default: Recife
-    estado: string; // Default: Pernambuco
-    user: User;
+    complement?: string | null; // Optional
+    city: string; // Default: Recife
+    state: string; // Default: Pernambuco
+    user?: User;
+}
+
+export interface AddressCreateDTO {
+    id: number;
+    street: string;
+    number: number;
+    cep: string;
+    complement?: string | null; // Optional
+    city: string; // Default: Recife
+    state: string; // Default: Pernambuco
 }

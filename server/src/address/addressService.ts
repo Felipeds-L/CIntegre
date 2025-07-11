@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { Address } from './addressDto';
+import { Address, AddressCreateDTO } from './addressDto';
 
 export class AddressService {
     private prisma: PrismaClient;
@@ -8,7 +8,7 @@ export class AddressService {
         this.prisma = new PrismaClient();
     }
 
-    async createAddress(data: Omit<Address, 'id'>): Promise<Address> {
+    async createAddress(data: Omit<AddressCreateDTO, 'id'>): Promise<Address> {
         return await this.prisma.address.create({
             data,
         });
@@ -20,7 +20,7 @@ export class AddressService {
         });
     }
 
-    async updateAddress(id: number, data: Partial<Omit<Address, 'id'>>): Promise<Address> {
+    async updateAddress(id: number, data: Partial<Omit<AddressCreateDTO, 'id'>>): Promise<Address> {
         return await this.prisma.address.update({
             where: { id },
             data,

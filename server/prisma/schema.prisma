@@ -21,7 +21,7 @@ model School {
 model Ong {
   id   Int    @id @default(autoincrement())
   description String
-  year_started  Int
+  starting_year   Int
   ong_sustainable  Boolean
   social_medias SocialMedias[]
   cause Causes[]
@@ -31,7 +31,7 @@ model Ong {
 model Address {
   id   Int    @id @default(autoincrement())
   street String
-  number  Int
+  house_number  Int
   cep  String
   complement  String?
   city    String
@@ -43,7 +43,7 @@ model User {
   id   Int    @id @default(autoincrement())
   username String
   name  String
-  email  String
+  email  String @unique
   password String
   address_id Int
   address  Address   @relation(fields: [address_id], references: [id])
@@ -98,13 +98,13 @@ model SocialAction {
   cover_photo  String //url
   title  String
   descricao String
-  tipe  Tipes[]
+  category  Category[]
   area_expertise AreaExpertise[]
   status Status[]
   pontuation Int // 100/200 nao mostrar
 }
 
-enum Tipes {
+enum Category {
   donation
   volunteer_work
 }

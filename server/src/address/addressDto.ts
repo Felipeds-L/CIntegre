@@ -3,7 +3,7 @@ import { User } from '../user/userDto';
 export interface Address {
     id: number;
     street: string;
-    number: number;
+    house_number: number;
     cep: string;
     complement?: string | null; // Optional
     city: string; // Default: Recife
@@ -14,7 +14,7 @@ export interface Address {
 export interface AddressCreateDTO {
     id: number;
     street: string;
-    number: number;
+    house_number: number;
     cep: string;
     complement?: string | null; // Optional
     city: string; // Default: Recife

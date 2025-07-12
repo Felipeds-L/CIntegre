@@ -1,3 +1,5 @@
+import ActivitySection from "@/components/activity/ActivitySection";
+import Tag from "@/components/general/Tag";
 import Image from "next/image";
 
 const mockedData = {
@@ -44,9 +46,7 @@ export default function ActionPage() {
         />
 
         <div className="absolute bottom-5 left-5 right-0">
-          <span className="items-center gap-2.5 bg-[#4f97ff] text-white px-3 py-1 rounded-3xl text-sm">
-            {mockedData.tags[0]}
-          </span>
+          <Tag>{mockedData.tags[0]}</Tag>
           <h1 className="text-white text-4xl">{mockedData.title}</h1>
           <p className="text-gray-300 text-3xl">{mockedData.ngo.name}</p>
         </div>
@@ -57,16 +57,12 @@ export default function ActionPage() {
         {/* Left Column */}
         <div className="col-span-2 flex flex-col gap-5">
           {/* Description Section */}
-          <div className="p-5 border rounded-[4px] border-[#E4E4E7]">
-            <h1 className="text-2xl font-bold mb-2.5">Descrição</h1>
+          <ActivitySection title="Descrição">
             <p className="text-gray-700">{mockedData.description}</p>
-          </div>
+          </ActivitySection>
 
           {/* Schedule Section */}
-          <div className="p-5 border rounded-[4px] border-[#E4E4E7]">
-            <h1 className="text-2xl font-bold mb-2.5">
-              Cronograma da Atividade
-            </h1>
+          <ActivitySection title="Cronograma da Atividade">
             <ul>
               {mockedData.schedule.map((item, index) => (
                 <li
@@ -78,31 +74,22 @@ export default function ActionPage() {
                 </li>
               ))}
             </ul>
-          </div>
+          </ActivitySection>
 
           {/* Experiences and Skills Section */}
-          <div className="p-5 border rounded-[4px] border-[#E4E4E7]">
-            <h1 className="text-2xl font-bold mb-2.5">
-              Experiências e Habilidades
-            </h1>
+          <ActivitySection title="Experiências e Habilidades">
             <ul className="flex flex-wrap gap-2">
               {mockedData.experiences.map((item, index) => (
-                <li
-                  key={index}
-                  className="flex items-center gap-2.5 bg-[#4f97ff] text-white px-3 py-1 rounded-3xl text-sm"
-                >
-                  {item}
-                </li>
+                <Tag key={index}>{item}</Tag>
               ))}
             </ul>
-          </div>
+          </ActivitySection>
         </div>
 
         {/* Right Column */}
         <div className="flex flex-col gap-5">
           {/* Activity Details Section */}
-          <div className="p-5 border rounded-[4px] border-[#E4E4E7]">
-            <h1 className="text-2xl font-bold mb-2.5">Detalhes da Atividade</h1>
+          <ActivitySection title="Detalhes da Atividade">
             <ul className="flex flex-col gap-4">
               <li className="text-gray-600 flex items-center gap-2.5">
                 <Image
@@ -147,12 +134,10 @@ export default function ActionPage() {
                 </span>
               </li>
             </ul>
-          </div>
+          </ActivitySection>
 
           {/* ONG About Section */}
-          <div className="p-5 border rounded-[4px] border-[#E4E4E7]">
-            <h1 className="text-2xl font-bold mb-2.5">Sobre a ONG</h1>
-
+          <ActivitySection title="Sobre a ONG">
             <div className="flex gap-4 items-center">
               <Image
                 src={mockedData.ngo.image}
@@ -204,7 +189,7 @@ export default function ActionPage() {
                 </span>
               </li>
             </ul>
-          </div>
+          </ActivitySection>
 
           {/* Buttons */}
 
@@ -224,19 +209,13 @@ export default function ActionPage() {
           </button>
 
           {/* Tags Section */}
-          <div className="p-5 border rounded-[4px] border-[#E4E4E7]">
-            <h1 className="text-2xl font-bold mb-2.5">Tags</h1>
+          <ActivitySection title="Tags">
             <ul className="flex flex-wrap gap-2.5">
               {mockedData.tags.map((tag, index) => (
-                <li
-                  key={index}
-                  className="flex items-center gap-2.5 bg-[#4f97ff] text-white px-3 py-1 rounded-3xl text-sm"
-                >
-                  {tag}
-                </li>
+                <Tag key={index}>{tag}</Tag>
               ))}
             </ul>
-          </div>
+          </ActivitySection>
         </div>
       </div>
     </section>

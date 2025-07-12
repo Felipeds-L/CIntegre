@@ -19,9 +19,9 @@ export const AuthController = {
         id: user.id,
         username: user.username,
         email: user.email,
-        nome: user.nome,
-        numeroContato: user.numeroContato,
-        address: user.adress,
+        nome: user.name,
+        numeroContato: user.phone_number,
+        address: user.address_id,
         token
       });
       //Se o usuário não for encontrado ou a senha estiver incorreta, dará erro

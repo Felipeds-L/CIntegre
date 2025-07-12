@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "tsx watch app.ts"
+		"dev": "tsx watch src/app.ts"
 	},
 	"dependencies": {
 		"@prisma/client": "^6.11.1",

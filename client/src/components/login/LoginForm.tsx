@@ -58,7 +58,7 @@ export default function LoginForm() {
         </Link>
         <p className="mt-4">
           Ainda não criou sua conta?{" "}
-          <Link href="/" className="font-bold text-blue-600">
+          <Link href="/login/register" className="font-bold text-blue-600">
             Crie agora!
           </Link>
         </p>

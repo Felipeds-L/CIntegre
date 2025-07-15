@@ -6,7 +6,7 @@ interface TagDisplayProps {
   onRemoveTag: (index: number) => void;
 }
 
-const TagDisplay: React.FC<TagDisplayProps> = ({ tags, onRemoveTag }) => {
+export default function TagDisplay({ tags, onRemoveTag }: TagDisplayProps) {
   if (!tags || tags.length === 0) {
     return null;
   }
@@ -22,5 +22,4 @@ const TagDisplay: React.FC<TagDisplayProps> = ({ tags, onRemoveTag }) => {
   </div>
 );
 };
-export default TagDisplay;
 // O componente pode receber uma lista de tags e uma função para remover tags.

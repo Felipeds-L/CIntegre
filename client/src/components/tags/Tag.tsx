@@ -5,7 +5,7 @@ interface TagProps {
     onRemove: () => void; // Função quando clicar no X
 }
 
-const Tag: React.FC<TagProps> = ({ label, onRemove }) => {
+export default function Tag({label, onRemove }: TagProps) {
     return(
         <div
             className="flex items-center justify-center bg-[#0F57BF] text-white text-sm font-normal px-2.5 py-0.5 rounded-full"
@@ -32,5 +32,3 @@ const Tag: React.FC<TagProps> = ({ label, onRemove }) => {
         </div>
     );
 };
-
-export default Tag;

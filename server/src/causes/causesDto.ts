@@ -21,13 +21,3 @@ export interface CausesCreateDTO {
   school_action?: SchoolAction[];
   social_action?: SocialAction[];
 }
-
-//model Causes {
-//  id   Int    @id @default(autoincrement())
-//  ong_id  Int
-//  ong    Ong      @relation(fields: [ong_id], references: [id])
-//  name  String
-//  description  String
-//  school_action SchoolAction[]
-//  social_action SocialAction[]
-//}

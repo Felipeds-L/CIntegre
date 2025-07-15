@@ -13,4 +13,3 @@ export interface SocialMediasCreateDTO {
   ong: Ong; //vai parar de dar erro quando o Dto de ong for criado
   link_social_media: string; //url
 }
-

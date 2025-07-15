@@ -22,14 +22,3 @@ export interface SchoolActionCreateDTO {
   registers: string;
   pontuation: number; // ong avalia 
 }
-
-/*model SchoolAction {
-  id   Int    @id @default(autoincrement())
-  school_id  Int
-  school    School      @relation(fields: [school_id], references: [id])
-  causes_id   Int
-  causes   Causes      @relation(fields: [causes_id], references: [id])
-  status Status[]
-  registers  String
-  pontuation  Int //ong avalia + porcentagem da doacao
-}*/

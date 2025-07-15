@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import LargeInput from "../input/LargeInput";
+import LargeButton from "../buttons/LargeButton";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -15,42 +17,46 @@ export default function LoginForm() {
     alert(`(Simulação) Login com:\n\nUsuário: ${email}\nSenha: ${password}`);
     router.push("/");
   }
-  //---------------------------------------------------------------------------------------------
+
+  function handleEmailChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setEmail(event.target.value);
+  }
+
+  function handlePasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setPassword(event.target.value);
+  }
+
+  //------------------------------------------------------------------------------
   return (
     <>
       {/*react fragment*/}
       <form onSubmit={Submit} className="mb-8">
-        {" "}
+
         {/*executar submit*/}
-        <h1 className="text-2xl font-bold mb-6 text-center">Faça seu login:</h1>
-        <div className="mb-4">
-          <input
-            className="w-full p-2 border border-gray-300 rounded-md"
-            id="email"
-            name="email"
-            type="text"
-            placeholder="E-mail"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="mb-6">
-          <input
-            className="w-full p-2 border border-gray-300 rounded-md"
-            id="password"
-            name="password"
-            type="password"
-            placeholder="Senha"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-full p-2 text-white bg-[#0F57BF] rounded-md hover:bg-blue-700"
-        >
+        <LargeInput
+          label="E-mail"
+          id="email"
+          name="email"
+          type="email"
+          placeholder="E-mail"
+          value={email}
+          onChange={handleEmailChange}
+        />
+
+        <LargeInput
+          label="Senha"
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Senha"
+          value={password}
+          onChange={handlePasswordChange}
+        />
+
+        <LargeButton type="submit">
           Entrar
-        </button>
+        </LargeButton>
+
       </form>
       <div className="text-center">
         <Link href="/" className="text-sm text-blue-600 underline">

@@ -17,7 +17,16 @@ export default function LoginForm() {
     alert(`(Simulação) Login com:\n\nUsuário: ${email}\nSenha: ${password}`);
     router.push("/");
   }
-  //---------------------------------------------------------------------------------------------
+
+  function handleEmailChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setEmail(event.target.value);
+  }
+
+  function handlePasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setPassword(event.target.value);
+  }
+
+  //------------------------------------------------------------------------------
   return (
     <>
       {/*react fragment*/}
@@ -31,7 +40,7 @@ export default function LoginForm() {
           type="email"
           placeholder="E-mail"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={handleEmailChange}
         />
 
         <LargeInput
@@ -41,7 +50,7 @@ export default function LoginForm() {
           type="password"
           placeholder="Senha"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={handlePasswordChange}
         />
 
         <LargeButton type="submit">

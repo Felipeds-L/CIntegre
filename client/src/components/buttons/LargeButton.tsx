@@ -2,7 +2,7 @@ import React from 'react';
 
 interface LargeButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
-const LargeButton: React.FC<LargeButtonProps> = ({ children, className, ...props }) => {
+export default function LargeButton({ children, className, ...props }: LargeButtonProps) {
 
     const baseClasses = "w-full p-2 text-white bg-[#0F57BF] rounded-md hover:bg-blue-700";
 
@@ -15,5 +15,3 @@ const LargeButton: React.FC<LargeButtonProps> = ({ children, className, ...props
         </button>
     );
 };
-
-export default LargeButton;

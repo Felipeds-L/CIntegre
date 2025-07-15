@@ -4,7 +4,7 @@ interface LargeInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     label: string;
 } // recebe as propriedades quando chamado
 
-const LargeInput: React.FC<LargeInputProps> = ({ label, ...props }) => {
+export default function LargeInput({ label, ...props }: LargeInputProps) {
     return (
         <div className="mb-4">
             <label className="block font-medium mb-1">{label}</label>
@@ -16,4 +16,3 @@ const LargeInput: React.FC<LargeInputProps> = ({ label, ...props }) => {
     );
 };
 
-export default LargeInput;

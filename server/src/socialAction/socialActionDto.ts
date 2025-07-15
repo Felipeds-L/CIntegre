@@ -1,11 +1,12 @@
 import { Causes } from "../causes/causesDto";
+import { Ong } from "../ong/ongDto";
 
 export interface SocialAction {
   id: number;
   causes_id: number;
   causes: Causes;
   ong_id: number;
-  // ong: Ong;
+  ong: Ong; //vai parar de dar erro quando o Dto de ong for criado
   cover_photo: string; //url
   title: string;
   descricao: string;
@@ -20,7 +21,7 @@ export interface SocialActionCreateDTO {
   causes_id: number;
   causes: Causes;
   ong_id: number;
-  // ong: Ong;
+  ong: Ong;
   cover_photo: string; //url
   title: string;
   descricao: string;

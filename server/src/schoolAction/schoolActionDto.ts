@@ -9,7 +9,7 @@ export interface SchoolAction {
   causes: Causes;
   status: string[]; 
   registers: string;
-  pontuation: number; // ong avalia + porcentagem da doacao
+  pontuation: number; // ong avalia 
 }
 
 export interface SchoolActionCreateDTO {
@@ -20,7 +20,7 @@ export interface SchoolActionCreateDTO {
   causes: Causes;
   status: string[]; 
   registers: string;
-  pontuation: number; // ong avalia + porcentagem da doacao
+  pontuation: number; // ong avalia 
 }
 
 /*model SchoolAction {

@@ -15,27 +15,29 @@ interface CardProps {
 
 export default function ActivityCard({ apiData }: CardProps) {
   return (
-    <div className="hover:scale-102 transition-transform duration-300 gap-6 rounded-sm bg-white inline-flex pr-6 shadow-md max-w-xl">
+    <div className="gap-6 rounded-sm bg-white inline-flex pr-6 shadow-md max-w-xl max-h-60">
       <Image
         src={apiData.imageUrl}
         width={230}
-        height={220}
+        height={240}
         alt=""
-        className="h-full w-56 object-cover rounded-bl-sm rounded-tl-sm"
+        className="w-56 object-cover rounded-bl-sm rounded-tl-sm"
       />
 
-      <div className="flex flex-col gap-6 pt-8 pb-6 h-full w-full">
+      <div className="flex flex-col gap-6 pt-8 pb-6 h-full w-full overflow-hidden">
         <div className="flex flex-col gap-3">
           <div className="flex align-top justify-between">
             <div className="flex flex-col">
-              <h3 className="text-xl font-medium">{apiData.title}</h3>
+              <h3 className="text-xl font-medium line-clamp-1">
+                {apiData.title}
+              </h3>
               <span className="text-sm">{apiData.ngoName}</span>
             </div>
 
             <span>{apiData.date}</span>
           </div>
 
-          <p className="text-sm">{apiData.description}</p>
+          <p className="text-sm line-clamp-2">{apiData.description}</p>
         </div>
 
         <div className="flex items-end justify-between h-full">

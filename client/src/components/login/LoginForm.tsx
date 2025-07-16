@@ -10,12 +10,19 @@ export default function LoginForm() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+
+  const loginCorrect = email === "teste@teste" && password === "123456";
 
   function Submit(event: React.FormEvent<HTMLFormElement>) {
     //clicar em entrar
     event.preventDefault();
     alert(`(Simulação) Login com:\n\nUsuário: ${email}\nSenha: ${password}`);
-    router.push("/");
+    if (loginCorrect) {
+      router.push("/");
+    } else {
+      setError("Usuário e/ou senha incorretos. Tente novamente.");
+    }
   }
 
   function handleEmailChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -30,6 +37,7 @@ export default function LoginForm() {
   return (
     <>
       {/*react fragment*/}
+      
       <form onSubmit={Submit} className="mb-8">
 
         {/*executar submit*/}
@@ -58,16 +66,24 @@ export default function LoginForm() {
         </LargeButton>
 
       </form>
+      {error && (
+        <p className="text-red-500 text-center mb-4">
+          {error}
+        </p>
+      )}
+
       <div className="text-center">
         <Link href="/" className="text-sm text-blue-600 underline">
           Esqueceu a senha?
         </Link>
+
         <p className="mt-4">
           Ainda não criou sua conta?{" "}
           <Link href="/login/register" className="font-bold text-blue-600">
             Crie agora!
           </Link>
         </p>
+
       </div>
     </>
   );

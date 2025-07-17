@@ -21,7 +21,7 @@ class OngService {
     }
 
     async updateOng(id: number, data: Partial<Omit<Ong, 'id'>>): Promise<Ong> {
-        return await this.prisma.Ong.update({
+        return await this.prisma.ong.update({
             where: { id },
             data,
         });

@@ -1,9 +1,21 @@
+import { Address } from "../address/addressDto";
+
 export interface User {
-    id: number ; 
+    id: number; 
     username: string;
-    nome: string;
+    name: string;
     email: string;
-    adress_id: number; 
-    address: number; // Foreign Key to Address.id
-    numeroContato: string;
+    password: string;
+    address_id: number;  
+    address?: Address;
+    phone_number: string;
+}
+
+export interface UserCreateDTO {
+  username: string;
+  name: string;
+  email: string;
+  password: string;
+  address_id: number;  // só a FK
+  phone_number: string;
 }

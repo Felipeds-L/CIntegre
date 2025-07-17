@@ -1,5 +1,6 @@
 import ActivityCard from "@/components/general/ActivityCard";
 import { CarouselCard } from "@/components/general/CarouselCard";
+import RankingSmall from "@/components/general/RankingSmall";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -34,6 +35,14 @@ const lotsOfCards = [
   <ActivityCard key={mockedData2.id + 2} apiData={mockedData2} />,
   <ActivityCard key={mockedData2.id + 4} apiData={mockedData2} />,
   <ActivityCard key={mockedData2.id + 222} apiData={mockedData2} />,
+];
+
+const placement = [
+  { position: "1", school: "Escola A", points: "100", activities: "5" },
+  { position: "2", school: "Escola B", points: "90", activities: "4" },
+  { position: "3", school: "Escola C", points: "80", activities: "3" },
+  { position: "4", school: "Escola D", points: "70", activities: "2" },
+  { position: "5", school: "Escola E", points: "60", activities: "1" },
 ];
 
 export default function HomePage() {
@@ -83,7 +92,14 @@ export default function HomePage() {
             Escolas Mais Contribuintes
           </h2>
 
-          <div>Ranking</div>
+          <RankingSmall placement={placement} />
+
+          <Link
+            href={"/ranking"}
+            className="bg-[#0F57BF] rounded-sm text-white px-6 py-2.5 w-sm text-center"
+          >
+            Ver Ranking Completo
+          </Link>
         </div>
       </section>
 

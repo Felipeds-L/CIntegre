@@ -45,5 +45,19 @@ describe('SchoolController', () => {
         expect(schoolServiceMock.createSchool).toHaveBeenCalledWith(req.body);
         expect(res.status).toHaveBeenCalledWith(201);
         expect(res.json).toHaveBeenCalledWith(mockSchool)
-    })
+    });
+
+    it('Should return 500 if some school data is missing', () => {
+        req.body = {
+            id: 1,
+            cnpj: '12345678',
+            pontos_acumulados: 0
+        }
+
+        schoolServiceMock.createSchool.mockRejectedValue(new Error('Missing required field'))
+
+        await schoolController.createSchool(req as Request, res as Response);
+        expect(res.status).toHaveBeenCalledWith(500);
+        expect(res.json).toHaveBeenCalledWith({error: 'Missing required field'})
+    });
 });

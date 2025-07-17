@@ -1,11 +1,11 @@
 import { SchoolAction } from "../schoolAction/schoolActionDto";
 import { SocialAction } from "../socialAction/socialActionDto";
-//import { Ong } from "../ong/ongDto";
+import { Ong } from "../ong/ongDto";
 
 export interface Causes {
   id: number;
   ong_id: number;
-  //ong: Ong; //vai parar de dar erro quando o Dto de ong for criado
+  ong: Ong; 
   name: string;
   description: string;
   school_action?: SchoolAction[];
@@ -15,7 +15,7 @@ export interface Causes {
 export interface CausesCreateDTO {
   id: number;
   ong_id: number;
-  //ong: Ong;
+  ong: Ong;
   name: string;
   description: string;
   school_action?: SchoolAction[];

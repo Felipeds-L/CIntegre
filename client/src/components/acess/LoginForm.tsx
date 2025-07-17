@@ -73,7 +73,7 @@ export default function LoginForm() {
       )}
 
       <div className="text-center">
-        <Link href="/" className="text-sm text-blue-600 underline">
+        <Link href="/login/recovery" className="text-sm text-blue-600 underline">
           Esqueceu a senha?
         </Link>
 

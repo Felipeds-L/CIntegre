@@ -12,7 +12,16 @@ export class AddressController {
         try {
             const address = await this.addressService.createAddress(req.body);
             res.status(201).json(address);
-        } catch (error) {
+        } catch (error: any) {
+            res.status(500).json({ error: error.message });
+        }
+    }
+
+    public async getAllAddress(req: Request, res: Response): Promise<void>{
+        try {
+            const address = await this.addressService.getAllAddresses();
+            res.status(200).json(address);
+        } catch (error: any) {
             res.status(500).json({ error: error.message });
         }
     }
@@ -25,7 +34,7 @@ export class AddressController {
                 return;
             }
             res.status(200).json(address);
-        } catch (error) {
+        } catch (error: any) {
             res.status(500).json({ error: error.message });
         }
     }
@@ -38,7 +47,7 @@ export class AddressController {
                 return;
             }
             res.status(200).json(updatedAddress);
-        } catch (error) {
+        } catch (error: any) {
             res.status(500).json({ error: error.message });
         }
     }
@@ -51,7 +60,7 @@ export class AddressController {
                 return;
             }
             res.status(204).send();
-        } catch (error) {
+        } catch (error: any) {
             res.status(500).json({ error: error.message });
         }
     }

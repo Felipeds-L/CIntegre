@@ -3,12 +3,8 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-<<<<<<< HEAD
-		"dev": "tsx watch app.ts",
+		"dev": "tsx watch src/app.ts",
 		"test": "jest"
-=======
-		"dev": "tsx watch src/app.ts"
->>>>>>> origin/main
 	},
 	"dependencies": {
 		"@prisma/client": "^6.11.1",

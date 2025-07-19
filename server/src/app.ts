@@ -1,13 +1,13 @@
 import express from 'express';
-import { json } from 'body-parser';
 import { setUserRoutes } from './user/userRoutes';
 import { setSchoolRoutes } from './school/schoolRoutes';
 import { setAddressRoutes } from './address/addressRoutes';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+var cors = require('cors')
 
-app.use(json());
+app.use(cors);
 
 setUserRoutes(app);
 setSchoolRoutes(app);

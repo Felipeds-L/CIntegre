@@ -3,11 +3,12 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "tsx watch app.ts"
+		"dev": "tsx watch src/app.ts"
 	},
 	"dependencies": {
 		"@prisma/client": "^6.11.1",
 		"bcryptjs": "^3.0.2",
+		"cors": "^2.8.5",
 		"dotenv": "^17.0.1",
 		"express": "^5.1.0",
 		"jsonwebtoken": "^9.0.2",

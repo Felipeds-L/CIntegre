@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { Address, AddressCreateDTO } from './addressDto';
 
-export class AddressService {
+class AddressService {
     private prisma: PrismaClient;
 
     constructor() {
@@ -37,3 +37,5 @@ export class AddressService {
         return await this.prisma.address.findMany();
     }
 }
+
+export default AddressService

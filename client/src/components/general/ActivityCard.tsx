@@ -14,8 +14,12 @@ interface CardProps {
 }
 
 export default function ActivityCard({ apiData }: CardProps) {
+  if (!apiData) {
+    return null;
+  }
+
   return (
-    <div className="gap-6 rounded-sm bg-white inline-flex pr-6 shadow-md max-w-xl max-h-60">
+    <div className="gap-6 rounded-sm bg-white inline-flex pr-6 shadow-md max-w-xl">
       <Image
         src={apiData.imageUrl}
         width={230}
@@ -24,7 +28,7 @@ export default function ActivityCard({ apiData }: CardProps) {
         className="w-56 object-cover rounded-bl-sm rounded-tl-sm"
       />
 
-      <div className="flex flex-col gap-6 pt-8 pb-6 h-full w-full overflow-hidden">
+      <div className="flex flex-col gap-6 pt-8 pb-6 w-full">
         <div className="flex flex-col gap-3">
           <div className="flex align-top justify-between">
             <div className="flex flex-col">
@@ -40,9 +44,10 @@ export default function ActivityCard({ apiData }: CardProps) {
           <p className="text-sm line-clamp-2">{apiData.description}</p>
         </div>
 
-        <div className="flex items-end justify-between h-full">
+        
+        <div className="flex items-end justify-between">
           <span className="items-center gap-2.5 bg-[#4f97ff] text-white px-3 py-1 rounded-3xl text-sm">
-            {apiData.tags[0]}
+            #{apiData.tags[0]}
           </span>
 
           <Link

@@ -1,4 +1,4 @@
-import { UserController } from "../../user/userController";
+    import { UserController } from "../../user/userController";
 import { UserService } from "../../user/userService";
 import { Request, Response } from 'express';
 
@@ -20,9 +20,11 @@ describe('UserController', () => {
             body: {
                 id: 1,
                 username: "Milk",
-                nome: "Felipe",
+                name: "Felipe",
                 email: "teste@teste.com",
-                address_id: 1
+                address_id: 1,
+                phone_number: "99279927",
+                password: "1234"
             }
         };
 
@@ -36,11 +38,11 @@ describe('UserController', () => {
         const mockUser = {
                 id: 1,
                 username: "Milk",
-                nome: "Felipe",
+                name: "Felipe",
                 email: "teste@teste.com",
-                adress_id: 1,
-                address: 1,
-                numeroContato: "99279927"
+                address_id: 1,
+                phone_number: "99279927",
+                password: "1234"
         };
 
         userServiceMock.createUser.mockResolvedValue(mockUser);
@@ -59,20 +61,18 @@ describe('UserController', () => {
         expect(res.json).toHaveBeenCalledWith({error: 'Error on User Creation'})
     });
 
-    it('Should return 500 if email user data is missing', async() => {
+    it('Should return 400 if a user data is missing', async() => {
         req.body = {
             id: 1,
             username: "Milk",
-            nome: "Felipe",
-            adress_id: 1,
-            address: 1,
-            numeroContato: "99279927"
+            name: "Felipe",
+            email: "teste@teste.com",
+            address_id: 1,
+            phone_number: "99279927"
         }
 
-        userServiceMock.createUser.mockRejectedValue(new Error('Missing required field: E-mail'));
-
         await userController.createUser(req as Request, res as Response);
-        expect(res.status).toHaveBeenCalledWith(500);
-        expect(res.json).toHaveBeenCalledWith({ error: 'Missing required field: E-mail' })
+        expect(res.status).toHaveBeenCalledWith(400);
+        expect(res.json).toHaveBeenCalledWith({ error: 'Missing a required field' })
     });
 })

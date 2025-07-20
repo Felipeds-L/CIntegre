@@ -1,8 +1,8 @@
 import { AddressController } from '../../address/addressController';
-import AddressService from '../../address/addressService';
+import {AddressService} from '../../address/addressService';
 import { Response, Request } from 'express';
 
-jest.mock('../../school/schoolService');
+jest.mock('../../address/addressService');
 
 describe('AddressController', () => {
     let addressController: AddressController;
@@ -14,13 +14,17 @@ describe('AddressController', () => {
     beforeEach(() => {
         addressServiceMock = new AddressService() as jest.Mocked<AddressService>;
         addressController = new AddressController();
-        (addressController as any).schoolService = addressServiceMock;
+        (addressController as any).addressService = addressServiceMock;
 
         req = {
             body: {
-                cnpj: '12345678',
-                numero_estudantes: 150,
-                pontos_acumulados: 0
+                id: 1,
+                street: 'Rua x',
+                house_number: 5,
+                cep: '50740587',
+                complement:  null,
+                city: 'Recife',
+                state: 'Pernambuco'
             }
         };
         
@@ -40,9 +44,9 @@ describe('AddressController', () => {
             complement:  null,
             city: 'Recife',
             state: 'Pernambuco'
-        }
+        };
 
-        addressServiceMock.createAddress.mockRejectedValue(mockAddress);
+        addressServiceMock.createAddress.mockResolvedValue(mockAddress);
 
         await addressController.createAddress(req as Request, res as Response);
         expect(addressServiceMock.createAddress).toHaveBeenCalledWith(req.body);
@@ -50,7 +54,7 @@ describe('AddressController', () => {
         expect(res.json).toHaveBeenCalledWith(mockAddress)
     });
 
-    it('Should return 500 if some school data is missing', () => {
+    it('Should return 400 if some school data is missing', async () => {
         req.body = {
             id: 1,
             street: 'Rua x',
@@ -60,10 +64,9 @@ describe('AddressController', () => {
             city: 'Recife',
         }
 
-        addressServiceMock.createAddress.mockRejectedValue(new Error('Missing required field'))
 
         await addressController.createAddress(req as Request, res as Response);
-        expect(res.status).toHaveBeenCalledWith(500);
-        expect(res.json).toHaveBeenCalledWith({error: 'Missing required field'})
+        expect(res.status).toHaveBeenCalledWith(400);
+        expect(res.json).toHaveBeenCalledWith({error: 'Missing a required field'})
     });
 });

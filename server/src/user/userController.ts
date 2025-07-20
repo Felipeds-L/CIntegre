@@ -8,12 +8,17 @@ export class UserController {
         this.userService = new UserService();
     }
 
-    public async createUser(req: Request, res: Response): Promise<void> {
+    public async createUser(req: Request, res: Response): Promise<Response> {
+        const { username, name, email, password, address_id, phone_number } = req.body;
+
+        if (!username || !name || !email || !password || !address_id || !phone_number) {
+            return res.status(400).json({ error: 'Missing a required field' });
+        }
         try {
             const user = await this.userService.createUser(req.body);
-            res.status(201).json(user);
+            return res.status(201).json(user);
         } catch (error: any) {
-            res.status(500).json({ error: error.message });
+            return res.status(500).json({ error: error.message });
         }
     }
 

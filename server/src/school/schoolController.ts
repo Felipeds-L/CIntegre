@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import SchoolService from './schoolService';
+import {SchoolService} from './schoolService';
 
 export class SchoolController {
     private schoolService: SchoolService;
@@ -8,13 +8,17 @@ export class SchoolController {
         this.schoolService = new SchoolService();
     }
 
-    public async createSchool(req: Request, res: Response): Promise<void> {
+    public async createSchool(req: Request, res: Response): Promise<Response> {
+        const {cnpj, student_number, score} = req.body;
+        if(!cnpj || !student_number || !score) {
+            return res.status(400).json({error: "Missing a required field"})
+        }
         try {
             const schoolData = req.body;
             const newSchool = await this.schoolService.createSchool(schoolData);
-            res.status(201).json(newSchool);
-        } catch (error) {
-            res.status(500).json({ error: error.message });
+            return res.status(201).json(newSchool);
+        } catch (error: any) {
+            return res.status(500).json({ error: error.message });
         }
     }
 
@@ -27,7 +31,7 @@ export class SchoolController {
             } else {
                 res.status(404).json({ message: 'School not found' });
             }
-        } catch (error) {
+        } catch (error: any) {
             res.status(500).json({ error: error.message });
         }
     }
@@ -42,7 +46,7 @@ export class SchoolController {
             } else {
                 res.status(404).json({ message: 'School not found' });
             }
-        } catch (error) {
+        } catch (error: any) {
             res.status(500).json({ error: error.message });
         }
     }
@@ -56,7 +60,7 @@ export class SchoolController {
             } else {
                 res.status(404).json({ message: 'School not found' });
             }
-        } catch (error) {
+        } catch (error: any) {
             res.status(500).json({ error: error.message });
         }
     }
@@ -65,7 +69,7 @@ export class SchoolController {
         try {
             const schools = await this.schoolService.getAllSchools();
             res.status(200).json(schools);
-        } catch (error) {
+        } catch (error: any) {
             res.status(500).json({ error: error.message });
         }
     }

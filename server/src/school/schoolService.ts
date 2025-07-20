@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { School } from './schoolDto'; 
 
-class SchoolService {
+export class SchoolService {
     private prisma: PrismaClient;
 
     constructor() {
@@ -37,5 +37,3 @@ class SchoolService {
         return await this.prisma.school.findMany();
     }
 }
-
-export default SchoolService;

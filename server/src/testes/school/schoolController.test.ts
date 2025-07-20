@@ -1,5 +1,5 @@
 import { SchoolController } from '../../school/schoolController';
-import SchoolService from '../../school/schoolService';
+import {SchoolService} from '../../school/schoolService';
 import { Response, Request } from 'express';
 
 jest.mock('../../school/schoolService');
@@ -18,9 +18,10 @@ describe('SchoolController', () => {
 
         req = {
             body: {
+                id: 1,
                 cnpj: '12345678',
-                numero_estudantes: 150,
-                pontos_acumulados: 0
+                student_number: 150,
+                score: 1
             }
         };
         
@@ -35,29 +36,26 @@ describe('SchoolController', () => {
         const mockSchool = {
             id: 1,
             cnpj: '12345678',
-            numero_estudantes: 150,
-            pontos_acumulados: 0
+            student_number: 150,
+            score: 1
         }
 
-        schoolServiceMock.createSchool.mockRejectedValue(mockSchool);
+        schoolServiceMock.createSchool.mockResolvedValue(mockSchool);
 
         await schoolController.createSchool(req as Request, res as Response);
         expect(schoolServiceMock.createSchool).toHaveBeenCalledWith(req.body);
         expect(res.status).toHaveBeenCalledWith(201);
-        expect(res.json).toHaveBeenCalledWith(mockSchool)
+        expect(res.json).toHaveBeenCalledWith(mockSchool);
     });
 
-    it('Should return 500 if some school data is missing', () => {
+    it('Should return 400 if some school data is missing',async () => {
         req.body = {
             id: 1,
             cnpj: '12345678',
-            pontos_acumulados: 0
         }
 
-        schoolServiceMock.createSchool.mockRejectedValue(new Error('Missing required field'))
-
         await schoolController.createSchool(req as Request, res as Response);
-        expect(res.status).toHaveBeenCalledWith(500);
-        expect(res.json).toHaveBeenCalledWith({error: 'Missing required field'})
+        expect(res.status).toHaveBeenCalledWith(400);
+        expect(res.json).toHaveBeenCalledWith({error: 'Missing a required field'})
     });
 });

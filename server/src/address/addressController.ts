@@ -8,12 +8,16 @@ export class AddressController {
         this.addressService = new AddressService();
     }
 
-    public async createAddress(req: Request, res: Response): Promise<void> {
+    public async createAddress(req: Request, res: Response): Promise<Response> {
+        const { street, house_number, city, state, cep} = req.body;
+        if (!street || !house_number || !city || !state || !cep ){
+            return res.status(400).json({ error: 'Missing a required field' })
+        }
         try {
             const address = await this.addressService.createAddress(req.body);
-            res.status(201).json(address);
+            return res.status(201).json(address);
         } catch (error: any) {
-            res.status(500).json({ error: error.message });
+            return res.status(500).json({ error: error.message });
         }
     }
 

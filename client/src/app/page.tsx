@@ -11,7 +11,7 @@ const mockedData = {
   date: "01/01/2001",
   description:
     "Participe de uma emocionante escalada no Monte Fuji, para arrecadar fundos para projetos de conservação ambiental.",
-  tags: ["#aventura", "#natureza", "#conservacao"],
+  tags: ["aventura", "natureza", "conservacao"],
   imageUrl:
     "https://images.unsplash.com/photo-1736108870630-db883da3cdf2?q=80&w=230&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==",
 };
@@ -23,7 +23,7 @@ const mockedData2 = {
   date: "02/02/2002",
   description:
     "Junte-se a nós em uma corrida emocioante para arrecadar fundos para a preservação da Floresta Amazônica.",
-  tags: ["#aventura", "#natureza", "#conservacao"],
+  tags: ["aventura", "natureza", "conservacao"],
   imageUrl:
     "https://images.unsplash.com/photo-1736108870630-db883da3cdf2?q=80&w=230&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==",
 };

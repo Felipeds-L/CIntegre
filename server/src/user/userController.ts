@@ -28,7 +28,7 @@ export class UserController {
             if (user) {
                 res.status(200).json(user);
             } else {
-                res.status(404).json({ message: 'User not found' });
+                res.status(404).json({ error: 'User not found' });
             }
         } catch (error: any) {
             res.status(500).json({ error: error.message });
@@ -41,7 +41,7 @@ export class UserController {
             if (updatedUser) {
                 res.status(200).json(updatedUser);
             } else {
-                res.status(404).json({ message: 'User not found' });
+                res.status(404).json({ error: 'User not found' });
             }
         } catch (error: any) {
             res.status(500).json({ error: error.message });
@@ -54,7 +54,7 @@ export class UserController {
             if (deletedUser) {
                 res.status(204).send();
             } else {
-                res.status(404).json({ message: 'User not found' });
+                res.status(404).json({ error: 'User not found' });
             }
         } catch (error: any) {
             res.status(500).json({ error: error.message });

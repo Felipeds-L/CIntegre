@@ -4,8 +4,10 @@
 	"private": true,
 	"scripts": {
 		"dev": "tsx watch src/app.ts",
-		"test": "jest"
+		"test": "jest",
+		"test-coverage": "jest --coverage"
 	},
+	
 	"dependencies": {
 		"@prisma/client": "^6.11.1",
 		"bcryptjs": "^3.0.2",

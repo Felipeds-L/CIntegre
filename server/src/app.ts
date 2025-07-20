@@ -8,6 +8,8 @@ const PORT = process.env.PORT || 3000;
 var cors = require('cors')
 
 app.use(cors());
+app.use(express.json());
+
 
 setUserRoutes(app);
 setSchoolRoutes(app);

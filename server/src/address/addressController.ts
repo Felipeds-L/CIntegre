@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { AddressService } from './addressService';
 
+
 export class AddressController {
     private addressService: AddressService;
 
@@ -34,7 +35,7 @@ export class AddressController {
         try {
             const address = await this.addressService.getAddress(Number(req.params.id));
             if (!address) {
-                res.status(404).json({ message: 'Address not found' });
+                res.status(404).json({ error: 'Address not found' });
                 return;
             }
             res.status(200).json(address);
@@ -47,7 +48,7 @@ export class AddressController {
         try {
             const updatedAddress = await this.addressService.updateAddress(Number(req.params.id), req.body);
             if (!updatedAddress) {
-                res.status(404).json({ message: 'Address not found' });
+                res.status(404).json({ error: 'Address not found' });
                 return;
             }
             res.status(200).json(updatedAddress);
@@ -60,7 +61,7 @@ export class AddressController {
         try {
             const deleted = await this.addressService.deleteAddress(Number(req.params.id));
             if (!deleted) {
-                res.status(404).json({ message: 'Address not found' });
+                res.status(404).json({ error: 'Address not found' });
                 return;
             }
             res.status(204).send();

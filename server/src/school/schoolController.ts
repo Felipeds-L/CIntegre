@@ -29,7 +29,7 @@ export class SchoolController {
             if (school) {
                 res.status(200).json(school);
             } else {
-                res.status(404).json({ message: 'School not found' });
+                res.status(404).json({ error: 'School not found' });
             }
         } catch (error: any) {
             res.status(500).json({ error: error.message });
@@ -44,33 +44,33 @@ export class SchoolController {
             if (updatedSchool) {
                 res.status(200).json(updatedSchool);
             } else {
-                res.status(404).json({ message: 'School not found' });
+                res.status(404).json({ error: 'School not found' });
             }
         } catch (error: any) {
             res.status(500).json({ error: error.message });
         }
     }
 
-    public async deleteSchool(req: Request, res: Response): Promise<void> {
+    public async deleteSchool(req: Request, res: Response): Promise<Response> {
         try {
             const schoolId = Number(req.params.id);
             const deletedSchool = await this.schoolService.deleteSchool(schoolId);
             if (deletedSchool) {
-                res.status(204).send();
+                return res.status(204).send();
             } else {
-                res.status(404).json({ message: 'School not found' });
+                return res.status(404).json({ error: 'School not found' });
             }
         } catch (error: any) {
-            res.status(500).json({ error: error.message });
+            return res.status(500).json({ error: error.message });
         }
     }
 
-    public async getAllSchools(req: Request, res: Response): Promise<void> {
+    public async getAllSchools(req: Request, res: Response): Promise<Response> {
         try {
             const schools = await this.schoolService.getAllSchools();
-            res.status(200).json(schools);
+            return res.status(200).json(schools);
         } catch (error: any) {
-            res.status(500).json({ error: error.message });
+            return res.status(500).json({ error: error.message });
         }
     }
 }

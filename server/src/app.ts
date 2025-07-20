@@ -5,6 +5,9 @@ import { setAddressRoutes } from './address/addressRoutes';
 import { setOngRoutes } from './ong/ongRoutes';
 import { setPhotoRoutes } from './photo/photoRoutes';
 import {setSocialMediasRoutes} from './socialMedias/socialMediasRoutes';
+import { setCausesRoutes } from './causes/causesRoutes';
+import { setSchoolActionRoutes } from './schoolAction/schoolActionRoutes';
+import { setSocialActionRoutes } from './socialAction/socialActionRoutes';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,6 +23,9 @@ setAddressRoutes(app);
 setOngRoutes(app);
 setPhotoRoutes(app);
 setSocialMediasRoutes(app);
+setCausesRoutes(app);
+setSchoolActionRoutes(app);
+setSocialActionRoutes(app);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

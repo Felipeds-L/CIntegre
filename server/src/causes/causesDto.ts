@@ -13,11 +13,11 @@ export interface Causes {
 }
 
 export interface CausesCreateDTO {
-  id: number;
+  //id: number;
   ong_id: number;
-  ong: Ong;
+  //ong: Ong;
   name: string;
   description: string;
-  school_action?: SchoolAction[];
-  social_action?: SocialAction[];
+  //school_action?: SchoolAction[];
+  //social_action?: SocialAction[];
 }

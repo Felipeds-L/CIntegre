@@ -1,5 +1,8 @@
 import { School } from "../school/schoolDto";
 import { Causes } from "../causes/causesDto";
+import { Status } from "@prisma/client";
+
+type SchoolActionStatus = Status;
 
 export interface SchoolAction {
   id: number;
@@ -7,18 +10,18 @@ export interface SchoolAction {
   school: School;
   causes_id: number;
   causes: Causes;
-  status: string[]; 
+  status: SchoolActionStatus[]; 
   registers: string;
   pontuation: number; // ong avalia 
 }
 
 export interface SchoolActionCreateDTO {
-  id: number;
+  //id: number;
   school_id: number;
-  school: School;
+  //school: School;
   causes_id: number;
-  causes: Causes;
-  status: string[]; 
+  //causes: Causes;
+  status: SchoolActionStatus[]; 
   registers: string;
   pontuation: number; // ong avalia 
 }

@@ -5,7 +5,7 @@
 	"scripts": {
 		"dev": "tsx watch src/app.ts",
 		"test": "jest",
-		"test-coverage": "jest --coverage"
+		"cov": "jest --coverage"
 	},
 	
 	"dependencies": {

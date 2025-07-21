@@ -5,5 +5,5 @@ export interface School {
     cnpj: string;
     student_number: number;
     score: number;
-    schoolAction?: SchoolAction;
+    //schoolAction?: SchoolAction;
 }

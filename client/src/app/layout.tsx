@@ -24,9 +24,11 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={afacad.className}>
       <body className={`antialiased`}>
-        <Header />
-        {children}
-        <Footer />
+        <div className="App">
+          <Header />
+          <main className="AppBody">{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

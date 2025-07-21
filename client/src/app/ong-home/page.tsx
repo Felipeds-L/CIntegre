@@ -1,23 +1,68 @@
 "use client";
 
 import { useState } from "react";
-import LargeButton from '@/components/buttons/LargeButton';
+import LargeButton from "@/components/buttons/LargeButton";
 import ActivityCard from "@/components/general/ActivityCard";
 
 const sampleActions = [
-  { id: 1, title: "Ação de Reflorestamento", ngoName: "ONG Verde", date: "10/07/2025", description: "Plantio de 1000 árvores na serra.", imageUrl: "/miku.jpg", tags: ["educacao"], status: "open" },
-  { id: 2, title: "Campanha do Agasalho", ngoName: "ONG Aquece", date: "11/07/2025", description: "Arrecadação de roupas de frio.", imageUrl: "/miku.jpg", tags: ["social"], status: "open" },
-  { id: 3, title: "Limpeza da Praia", ngoName: "ONG Mar Limpo", date: "01/06/2025", description: "Mutirão de limpeza na praia.", imageUrl: "/miku.jpg", tags: ["meio-ambiente"], status: "finished" },
-  { id: 4, title: "Aula de Reforço", ngoName: "ONG Aprender", date: "15/05/2025", description: "Aulas para crianças carentes.", imageUrl: "/miku.jpg", tags: ["educacao"], status: "finished" },
+  {
+    id: 1,
+    title: "Ação de Reflorestamento",
+    ngoName: "ONG Verde",
+    date: "10/07/2025",
+    description:
+      "Plantio de 1000 árvores na serra. Plantio de 1000 árvores na serra. Plantio de 1000 árvores na serra.",
+    imageUrl:
+      "https://images.unsplash.com/photo-1736108870630-db883da3cdf2?q=80&w=230&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==",
+    tags: ["educacao"],
+    status: "open",
+  },
+  {
+    id: 2,
+    title: "Campanha do Agasalho",
+    ngoName: "ONG Aquece",
+    date: "11/07/2025",
+    description:
+      "Arrecadação de roupas de frio. Arrecadação de roupas de frio. Arrecadação de roupas de frio. Arrecadação de roupas de frio.",
+    imageUrl:
+      "https://images.unsplash.com/photo-1736108870630-db883da3cdf2?q=80&w=230&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==",
+    tags: ["social"],
+    status: "open",
+  },
+  {
+    id: 3,
+    title: "Limpeza da Praia",
+    ngoName: "ONG Mar Limpo",
+    date: "01/06/2025",
+    description:
+      "Mutirão de limpeza na praia. Mutirão de limpeza na praia. Mutirão de limpeza na praia.",
+    imageUrl:
+      "https://images.unsplash.com/photo-1736108870630-db883da3cdf2?q=80&w=230&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==",
+    tags: ["meio-ambiente"],
+    status: "finished",
+  },
+  {
+    id: 4,
+    title: "Aula de Reforço",
+    ngoName: "ONG Aprender",
+    date: "15/05/2025",
+    description:
+      "Aulas para crianças carentes. Aulas para crianças carentes. Aulas para crianças carentes. Aulas para crianças carentes.",
+    imageUrl:
+      "https://images.unsplash.com/photo-1736108870630-db883da3cdf2?q=80&w=230&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==",
+    tags: ["educacao"],
+    status: "finished",
+  },
 ];
 
 export default function OngHomePage() {
   const ongName = "Nome da ONG";
   const [activeTab, setActiveTab] = useState<"todos" | "finalizados">("todos");
 
-  const filteredActions = activeTab === "todos"
-    ? sampleActions
-    : sampleActions.filter((action) => action.status === "finished");
+  const filteredActions =
+    activeTab === "todos"
+      ? sampleActions
+      : sampleActions.filter((action) => action.status === "finished");
 
   return (
     <>
@@ -60,10 +105,7 @@ export default function OngHomePage() {
         <div className="flex justify-center">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
             {filteredActions.map((action) => (
-              <ActivityCard
-                key={action.id}
-                apiData={action}
-              />
+              <ActivityCard key={action.id} apiData={action} />
             ))}
           </div>
         </div>

@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import cintegreHeader from "../../public/CIntegreHeader.svg";
-import profile from "../../public/miku.jpg";
 
 const loggedIn = true;
 const ongLogged = false;
@@ -36,7 +35,9 @@ export default function Header() {
               <Link href="/profile">
                 <Image
                   className="border border-[#0A3A80] rounded-[9999px] w-[50px] h-[50px]"
-                  src={profile}
+                  src={
+                    "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=60&w=50&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  }
                   alt="Profile picture"
                   height={50}
                   width={50}

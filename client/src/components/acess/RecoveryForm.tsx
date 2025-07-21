@@ -42,7 +42,9 @@ export default function RecoveryForm() {
           required
         />
 
-        <LargeButton type="submit">Enviar</LargeButton>
+        <LargeButton className="w-full" type="submit">
+          Enviar
+        </LargeButton>
       </form>
 
       {message && (

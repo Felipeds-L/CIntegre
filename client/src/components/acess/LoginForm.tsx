@@ -61,7 +61,9 @@ export default function LoginForm() {
           onChange={handlePasswordChange}
         />
 
-        <LargeButton type="submit">Entrar</LargeButton>
+        <LargeButton className="w-full" type="submit">
+          Entrar
+        </LargeButton>
       </form>
       {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 

@@ -56,7 +56,7 @@ const sampleActions = [
 ];
 
 export default function OngHomePage() {
-  const ongName = "Nome da ONG";
+  const ongName = "ONG dos Dias";
   const [activeTab, setActiveTab] = useState<"todos" | "finalizados">("todos");
 
   const filteredActions =
@@ -67,19 +67,19 @@ export default function OngHomePage() {
   return (
     <>
       <section className="bg-gradient-to-r from-[#EBF3FF] to-[#85B6FF] px-8 py-12 text-black">
-        <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-4xl font-bold">
+        <div className="container mx-auto flex justify-between items-end">
+          <h1 className="text-7xl font-bold">
             <span className="block">Bem-Vinda,</span>
             <span className="block">{ongName}!</span>
           </h1>
-          <LargeButton className="w-28 bg-blue-500 text-white hover:bg-blue-800 rounded-sm">
+          <LargeButton className="hover:bg-blue-800 rounded-sm text-lg">
             Criar uma nova ação
           </LargeButton>
         </div>
       </section>
 
       <div className="container mx-auto p-8">
-        <div className="mb-4 mt-6">
+        <div className="mb-4 mt-6 flex justify-center">
           <button
             onClick={() => setActiveTab("todos")}
             className={`text-xl font-bold pb-1 mr-4 border-b-2 ${

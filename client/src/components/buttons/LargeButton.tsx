@@ -1,17 +1,23 @@
-import React from 'react';
+import React from "react";
 
-interface LargeButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+interface LargeButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
-export default function LargeButton({ children, className, ...props }: LargeButtonProps) {
+export default function LargeButton({
+  children,
+  className,
+  ...props
+}: LargeButtonProps) {
+  const baseClasses =
+    "py-1.5 px-[6.25rem] text-white bg-[#0F57BF] rounded-md hover:bg-blue-700";
 
-    const baseClasses = "w-full p-2 text-white bg-[#0F57BF] rounded-md hover:bg-blue-700";
-
-    return (
-        <button
-            className={`${baseClasses} ${className ? className : ''}`}
-            {...props}
-        >
-            {children}
-        </button>
-    );
-};
+  return (
+    <button
+      className={`${baseClasses} ${className ? className : ""}`}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+}

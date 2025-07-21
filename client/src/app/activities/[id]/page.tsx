@@ -23,7 +23,8 @@ const mockedData = {
   tags: ["#educacao", "#educacao", "#educacao"],
   ngo: {
     name: "ONG de Exemplo",
-    image: "/miku.jpg",
+    image:
+      "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=60&w=50&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     description:
       "Dedicated to protecting marine ecosystems through community action and education.",
     email: "ongemail@gmail.com",
@@ -34,11 +35,11 @@ const mockedData = {
 
 export default function ActionPage() {
   return (
-    <section className="min-h-screen mb-16">
+    <section className="mb-16">
       {/* Header Section */}
-      <div className="flex relative mb-8">
+      <div className="flex relative h-80 mb-8">
         <Image
-          className="w-full h-80 object-cover"
+          className="w-full object-cover"
           src={mockedData.photoUrl}
           width={1440}
           height={330}

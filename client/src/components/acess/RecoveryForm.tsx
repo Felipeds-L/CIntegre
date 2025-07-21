@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
 import LargeInput from "../input/LargeInput";
 import LargeButton from "../buttons/LargeButton";
 
@@ -18,22 +17,20 @@ export default function RecoveryForm() {
     }
 
     alert(`(Simulação) Pedido de recuperação para o e-mail:\n${email}`);
-    
+
     setMessage(
       "Caso seu email esteja vinculado a uma conta já existente, enviaremos um e-mail de redefinição de senha dentro de alguns minutos."
     );
   }
   function handleEmailChange(event: React.ChangeEvent<HTMLInputElement>) {
-      setEmail(event.target.value);
-    }
+    setEmail(event.target.value);
+  }
 
   return (
     <>
       <form onSubmit={handleSubmit} className="mb-8">
-        <p className="mb-8 text-3xl font-black">
-          Esqueci minha senha:
-        </p>
-        
+        <p className="mb-8 text-3xl font-black">Esqueci minha senha:</p>
+
         <LargeInput
           label="E-mail"
           id="email"
@@ -45,7 +42,7 @@ export default function RecoveryForm() {
           required
         />
 
-        <LargeButton type="submit">
+        <LargeButton className="w-full" type="submit">
           Enviar
         </LargeButton>
       </form>
@@ -55,12 +52,6 @@ export default function RecoveryForm() {
           {message}
         </p>
       )}
-
-      <div className="mt-6 text-center">
-        <Link href="/login" className="text-sm text-blue-600 underline">
-          Lembrou a senha? Voltar para o login
-        </Link>
-      </div>
     </>
   );
 }

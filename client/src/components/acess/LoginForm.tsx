@@ -37,9 +37,9 @@ export default function LoginForm() {
   return (
     <>
       {/*react fragment*/}
-      
-      <form onSubmit={Submit} className="mb-8">
 
+      <h1 className="text-2xl font-bold mb-3">Faça seu Login</h1>
+      <form onSubmit={Submit} className="mb-8">
         {/*executar submit*/}
         <LargeInput
           label="E-mail"
@@ -61,19 +61,17 @@ export default function LoginForm() {
           onChange={handlePasswordChange}
         />
 
-        <LargeButton type="submit">
+        <LargeButton className="w-full" type="submit">
           Entrar
         </LargeButton>
-
       </form>
-      {error && (
-        <p className="text-red-500 text-center mb-4">
-          {error}
-        </p>
-      )}
+      {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
       <div className="text-center">
-        <Link href="/login/recovery" className="text-sm text-blue-600 underline">
+        <Link
+          href="/login/recovery"
+          className="text-sm text-blue-600 underline"
+        >
           Esqueceu a senha?
         </Link>
 
@@ -83,7 +81,6 @@ export default function LoginForm() {
             Crie agora!
           </Link>
         </p>
-
       </div>
     </>
   );

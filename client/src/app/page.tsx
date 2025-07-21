@@ -47,7 +47,7 @@ const placement = [
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen">
+    <section>
       {/* Hero Section */}
       <section className="bg-white pb-8">
         <div className="container flex flex-wrap items-center justify-between">
@@ -163,6 +163,6 @@ export default function HomePage() {
           </ul>
         </div>
       </section>
-    </main>
+    </section>
   );
 }

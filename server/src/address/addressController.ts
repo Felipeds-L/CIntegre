@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { AddressService } from './addressService';
 
+
 export class AddressController {
     private addressService: AddressService;
 
@@ -8,11 +9,24 @@ export class AddressController {
         this.addressService = new AddressService();
     }
 
-    public async createAddress(req: Request, res: Response): Promise<void> {
+    public async createAddress(req: Request, res: Response): Promise<Response> {
+        const { street, house_number, city, state, cep} = req.body;
+        if (!street || !house_number || !city || !state || !cep ){
+            return res.status(400).json({ error: 'Missing a required field' })
+        }
         try {
             const address = await this.addressService.createAddress(req.body);
-            res.status(201).json(address);
-        } catch (error) {
+            return res.status(201).json(address);
+        } catch (error: any) {
+            return res.status(500).json({ error: error.message });
+        }
+    }
+
+    public async getAllAddress(req: Request, res: Response): Promise<void>{
+        try {
+            const address = await this.addressService.getAllAddresses();
+            res.status(200).json(address);
+        } catch (error: any) {
             res.status(500).json({ error: error.message });
         }
     }
@@ -21,11 +35,11 @@ export class AddressController {
         try {
             const address = await this.addressService.getAddress(Number(req.params.id));
             if (!address) {
-                res.status(404).json({ message: 'Address not found' });
+                res.status(404).json({ error: 'Address not found' });
                 return;
             }
             res.status(200).json(address);
-        } catch (error) {
+        } catch (error: any) {
             res.status(500).json({ error: error.message });
         }
     }
@@ -34,11 +48,11 @@ export class AddressController {
         try {
             const updatedAddress = await this.addressService.updateAddress(Number(req.params.id), req.body);
             if (!updatedAddress) {
-                res.status(404).json({ message: 'Address not found' });
+                res.status(404).json({ error: 'Address not found' });
                 return;
             }
             res.status(200).json(updatedAddress);
-        } catch (error) {
+        } catch (error: any) {
             res.status(500).json({ error: error.message });
         }
     }
@@ -47,11 +61,11 @@ export class AddressController {
         try {
             const deleted = await this.addressService.deleteAddress(Number(req.params.id));
             if (!deleted) {
-                res.status(404).json({ message: 'Address not found' });
+                res.status(404).json({ error: 'Address not found' });
                 return;
             }
             res.status(204).send();
-        } catch (error) {
+        } catch (error: any) {
             res.status(500).json({ error: error.message });
         }
     }

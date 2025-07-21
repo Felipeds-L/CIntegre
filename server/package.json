@@ -3,8 +3,11 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "tsx watch src/app.ts"
+		"dev": "tsx watch src/app.ts",
+		"test": "jest",
+		"cov": "jest --coverage"
 	},
+	
 	"dependencies": {
 		"@prisma/client": "^6.11.1",
 		"bcryptjs": "^3.0.2",
@@ -16,11 +19,17 @@
 		"prisma": "^6.9.0"
 	},
 	"devDependencies": {
+		"@jest/types": "^30.0.1",
 		"@types/bcryptjs": "^2.4.6",
 		"@types/express": "^5.0.3",
+		"@types/jest": "^30.0.0",
 		"@types/jsonwebtoken": "^9.0.10",
 		"@types/ms": "^2.1.0",
 		"@types/node": "^24.0.13",
+		"jest": "^30.0.4",
+		"jest-circus": "^30.0.4",
+		"ts-jest": "^29.4.0",
+		"ts-node": "^10.9.2",
 		"tsx": "^4.20.3",
 		"typescript": "^5.8.3"
 	}

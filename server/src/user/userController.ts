@@ -8,12 +8,17 @@ export class UserController {
         this.userService = new UserService();
     }
 
-    public async createUser(req: Request, res: Response): Promise<void> {
+    public async createUser(req: Request, res: Response): Promise<Response> {
+        const { username, name, email, password, address_id, phone_number } = req.body;
+
+        if (!username || !name || !email || !password || !address_id || !phone_number) {
+            return res.status(400).json({ error: 'Missing a required field' });
+        }
         try {
             const user = await this.userService.createUser(req.body);
-            res.status(201).json(user);
-        } catch (error) {
-            res.status(500).json({ error: error.message });
+            return res.status(201).json(user);
+        } catch (error: any) {
+            return res.status(500).json({ error: error.message });
         }
     }
 
@@ -23,9 +28,9 @@ export class UserController {
             if (user) {
                 res.status(200).json(user);
             } else {
-                res.status(404).json({ message: 'User not found' });
+                res.status(404).json({ error: 'User not found' });
             }
-        } catch (error) {
+        } catch (error: any) {
             res.status(500).json({ error: error.message });
         }
     }
@@ -36,9 +41,9 @@ export class UserController {
             if (updatedUser) {
                 res.status(200).json(updatedUser);
             } else {
-                res.status(404).json({ message: 'User not found' });
+                res.status(404).json({ error: 'User not found' });
             }
-        } catch (error) {
+        } catch (error: any) {
             res.status(500).json({ error: error.message });
         }
     }
@@ -49,9 +54,9 @@ export class UserController {
             if (deletedUser) {
                 res.status(204).send();
             } else {
-                res.status(404).json({ message: 'User not found' });
+                res.status(404).json({ error: 'User not found' });
             }
-        } catch (error) {
+        } catch (error: any) {
             res.status(500).json({ error: error.message });
         }
     }
@@ -60,7 +65,7 @@ export class UserController {
         try {
             const users = await this.userService.getAllUsers();
             res.status(200).json(users);
-        } catch (error) {
+        } catch (error: any) {
             res.status(500).json({ error: error.message });
         }
     }

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 
 export default function RegisterForm() {
   const [nome, setNome] = useState("");
@@ -8,11 +9,18 @@ export default function RegisterForm() {
   const [cnpj, setCnpj] = useState("");
   const [senha, setSenha] = useState("");
 
+  const [error, setError] = useState<string | null>(null);
+  const registeredEmailOrCNPJ = email === "teste@teste" || cnpj === "12345678901234";
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+    if (registeredEmailOrCNPJ){
+      setError("Email ou CNPJ já cadastrado. Tente novamente ou, ");
+    }
+    else{
     alert(
       `Cadastro enviado:\nNome: ${nome}\nEmail: ${email}\nCNPJ: ${cnpj}\nSenha: ${senha}`
-    );
+    );}
   };
 
   return (
@@ -84,6 +92,15 @@ export default function RegisterForm() {
         >
           Enviar
         </button>
+
+        {error && (
+          <p className="mt-4">
+            {error}{""}
+            <Link href="/login" className="font-bold text-blue-600">
+              realize seu login.
+            </Link>
+          </p>
+        )}
       </form>
     </>
   );

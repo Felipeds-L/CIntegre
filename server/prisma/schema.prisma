@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,103 +7,91 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id            Int    @id @default(autoincrement())
+  name          String
+  email         String @unique
+  password      String
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+}
+
 model School {
-  id        Int    @id @default(autoincrement())
-  cnpj      String
-  student_number  Int
-  score  Int
-  schoolAction  SchoolAction[]
+  id                Int    @id @default(autoincrement())
+  name              String @unique
+  student_quantity  Int
+  score             Int
+  phone_number      String
+
+  address_id        Int
+  address           Address? @relation(fields: [address_id], references: [id])
+  
+  // Relations
+  schoolActivity      SchoolActivity[]
 }
 
 model Ong {
-  id   Int    @id @default(autoincrement())
-  description String
-  starting_year   Int
-  ong_sustainable  Boolean
-  social_medias SocialMedias[]
-  cause Causes[]
-  social_action SocialAction[]
+  id                Int    @id @default(autoincrement())
+  name              String
+  description       String
+  start_year        Int
+  phone_number      String
+  social_medias     String[]
+
+  // Relations
+  Activity     Activity[]
 }
 
 model Address {
-  id   Int    @id @default(autoincrement())
-  street String
-  house_number  Int
-  cep  String
-  complement  String?
-  city    String
-  state    String
-  user User[]
+  id            Int    @id @default(autoincrement())
+  street        String
+  house_number  String
+  cep           String
+  complement    String?
+  city          String
+  state         String
+
+  school        School[]
 }
 
-model User {
-  id   Int    @id @default(autoincrement())
-  username String
-  name  String
-  email  String @unique
-  password String
-  address_id Int
-  address  Address   @relation(fields: [address_id], references: [id])
-  phone_number  String
+model Activity {
+  id              Int      @id @default(autoincrement())
+  title           String
+  photos          String[] //url
+  description     String
+  category        Category
+  area_expertise  AreaExpertise[]
+  status          Status
+  pontuation      Int // 100/200 nao mostrar
+  
+  // Relations
+  ong_id           Int
+  ong              Ong      @relation(fields: [ong_id], references: [id])
+  schoolActivities SchoolActivity[]
 }
 
-model Photo {
-  id   Int    @id @default(autoincrement())
-  photo_url String
-}
+model SchoolActivity {
+  id                Int       @id @default(autoincrement())
+  status            Status
+  pontuation        Int    //　ong avalia + porcentagem da doacao
 
-model SocialMedias {
-  id   Int    @id @default(autoincrement())
-  ong_id  Int
-  ong    Ong      @relation(fields: [ong_id], references: [id])
-  link_social_media  String
-}
-
-model Causes {
-  id   Int    @id @default(autoincrement())
-  ong_id  Int
-  ong    Ong      @relation(fields: [ong_id], references: [id])
-  name  String
-  description  String
-  school_action SchoolAction[]
-  social_action SocialAction[]
-}
-
-model SchoolAction {
-  id   Int    @id @default(autoincrement())
-  school_id  Int
-  school    School      @relation(fields: [school_id], references: [id])
-  causes_id   Int
-  causes   Causes      @relation(fields: [causes_id], references: [id])
-  status Status[]
-  registers  String
-  pontuation  Int //ong avalia + porcentagem da doacao
+  // Relations
+  activity_id       Int
+  activity          Activity  @relation(fields: [activity_id], references: [id])
+  
+  school_id         Int
+  school            School    @relation(fields: [school_id], references: [id])
 }
 
 enum Status {
   open
-  close
-  other
-}
-
-model SocialAction {
-  id     Int      @id @default(autoincrement())
-  causes_id   Int
-  causes   Causes      @relation(fields: [causes_id], references: [id])
-  ong_id  Int
-  ong    Ong      @relation(fields: [ong_id], references: [id])
-  cover_photo  String //url
-  title  String
-  descricao String
-  category  Category[]
-  area_expertise AreaExpertise[]
-  status Status[]
-  pontuation Int // 100/200 nao mostrar
+  in_progress
+  closed
 }
 
 enum Category {
   donation
-  volunteer_work
+  volunteer
 }
 
 enum AreaExpertise {

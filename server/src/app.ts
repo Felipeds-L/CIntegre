@@ -4,18 +4,18 @@ import { setSchoolRoutes } from './school/schoolRoutes';
 import { setAddressRoutes } from './address/addressRoutes';
 import { setOngRoutes } from './ong/ongRoutes';
 import { setPhotoRoutes } from './photo/photoRoutes';
-import {setSocialMediasRoutes} from './socialMedias/socialMediasRoutes';
+import { setSocialMediasRoutes } from './socialMedias/socialMediasRoutes';
 import { setCausesRoutes } from './causes/causesRoutes';
 import { setSchoolActionRoutes } from './schoolAction/schoolActionRoutes';
 import { setSocialActionRoutes } from './socialAction/socialActionRoutes';
+import { setAuthRoutes } from './auth/authRoutes';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
-var cors = require('cors')
+const PORT = process.env.PORT || 3333;
+var cors = require('cors');
 
 app.use(cors());
 app.use(express.json());
-
 
 setUserRoutes(app);
 setSchoolRoutes(app);
@@ -26,7 +26,8 @@ setSocialMediasRoutes(app);
 setCausesRoutes(app);
 setSchoolActionRoutes(app);
 setSocialActionRoutes(app);
+setAuthRoutes(app);
 
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });

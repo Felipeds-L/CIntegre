@@ -2,8 +2,10 @@ import { SchoolAction } from '../schoolAction/schoolActionDto';
 
 export interface School {
     id: number;
-    cnpj: string;
-    student_number: number;
+    name: string;
+    student_quantity: number;
     score: number;
-    //schoolAction?: SchoolAction;
+    phone_number: string
+    address_id: number;
+    schoolAction?: SchoolAction[];
 }

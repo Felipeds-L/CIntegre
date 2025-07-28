@@ -1,4 +1,4 @@
-import { SchoolAction } from '../schoolAction/schoolActionDto';
+import { Causes } from '../causes/causesDto';
 
 export interface School {
     id: number;
@@ -7,5 +7,5 @@ export interface School {
     score: number;
     phone_number: string
     address_id: number;
-    schoolAction?: SchoolAction[];
+    schoolAcivity?: Causes[];
 }

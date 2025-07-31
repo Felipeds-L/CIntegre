@@ -1,4 +1,3 @@
-import { Causes } from '../causes/causesDto';
 import { Ong } from '../ong/ongDto';
 import { Status, AreaExpertise, Category } from '@prisma/client';
 import { SchoolAction } from '../schoolAction/schoolActionDto';

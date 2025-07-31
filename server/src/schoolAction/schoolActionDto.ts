@@ -1,5 +1,4 @@
 import { School } from '../school/schoolDto';
-import { Causes } from '../causes/causesDto';
 import { Status } from '@prisma/client';
 import SocialActionService from '../socialAction/socialActionService';
 

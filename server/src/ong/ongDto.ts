@@ -1,4 +1,4 @@
-import { Causes } from '../causes/causesDto';
+import { SocialAction } from '../socialAction/socialActionDto';
 
 export interface Ong {
   id: number;
@@ -8,8 +8,7 @@ export interface Ong {
   phone_number: string;
   social_medias: string[];
 
-  cause?: Causes[];
-  // social_action: SocialAction; - Causes is the SocialAction
+  activity?: SocialAction[];
 }
 
 export interface OngCreateDTO {
@@ -18,7 +17,4 @@ export interface OngCreateDTO {
   start_year: number;
   phone_number: string;
   social_medias: string[];
-  //social_medias: SocialMedias;
-  //cause: Causes;
-  //social_action: SocialAction;
 }

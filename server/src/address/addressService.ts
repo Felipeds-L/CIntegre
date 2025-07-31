@@ -12,7 +12,7 @@ export class AddressService {
     return await this.prisma.address.create({
       data: {
         street: data.street,
-        house_number: String(data.house_number),
+        house_number: data.house_number,
         complement: data?.complement,
         cep: data.cep,
         city: data.city,
@@ -29,7 +29,7 @@ export class AddressService {
 
   async updateAddress(
     id: number,
-    data: Partial<Omit<AddressCreateDTO, 'id'>>,
+    data: Partial<AddressCreateDTO>,
   ): Promise<Address> {
     return await this.prisma.address.update({
       where: { id },

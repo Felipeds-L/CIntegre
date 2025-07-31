@@ -1,6 +1,6 @@
-import { SocialAction } from '../socialAction/socialActionDto';
+import { Activity } from '@prisma/client';
 
-export interface Ong {
+export interface OngDTO {
   id: number;
   name: string;
   description: string;
@@ -8,7 +8,7 @@ export interface Ong {
   phone_number: string;
   social_medias: string[];
 
-  activity?: SocialAction[];
+  activity?: Activity[];
 }
 
 export interface OngCreateDTO {

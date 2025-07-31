@@ -10,3 +10,5 @@ export function setUserRoutes(app: Router) {
   app.put('/users/:id', userController.updateUser.bind(userController));
   app.delete('/users/:id', userController.deleteUser.bind(userController));
 }
+
+console.log('teste');

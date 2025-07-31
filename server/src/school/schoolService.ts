@@ -9,14 +9,16 @@ export class SchoolService {
   }
 
   async createSchool(data: CreateSchoolDto): Promise<School> {
+    const { address, ...schoolData } = data;
+
     return await this.prisma.school.create({
       data: {
-        name: data.name,
-        student_quantity: data.student_quantity,
-        score: data.score,
-        phone_number: data.phone_number,
+        name: schoolData.name,
+        phone_number: schoolData.phone_number,
+        score: schoolData.score,
+        student_quantity: schoolData.student_quantity,
         address: {
-          connect: { id: data.address_id },
+          create: address,
         },
       },
       include: {
@@ -36,8 +38,10 @@ export class SchoolService {
 
   async updateSchool(
     id: number,
-    data: Partial<Omit<School, 'id'>>,
+    data: Partial<CreateSchoolDto>,
   ): Promise<School> {
+    const { address, ...schoolData } = data;
+
     return await this.prisma.school.update({
       where: { id },
       data: {
@@ -45,9 +49,11 @@ export class SchoolService {
         student_quantity: data.student_quantity,
         score: data.score,
         phone_number: data.phone_number,
-        address: {
-          connect: { id: data.address_id },
-        },
+        address: address
+          ? {
+              update: address,
+            }
+          : undefined,
       },
       include: {
         address: true,

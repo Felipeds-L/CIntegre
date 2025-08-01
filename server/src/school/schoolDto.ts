@@ -1,5 +1,5 @@
 import { Address } from '../address/addressDto';
-import { SchoolAction } from '../schoolAction/schoolActionDto';
+import { SchoolActivityDTO } from '../schoolActivity/schoolActivityDto';
 
 export interface School {
   id: number;
@@ -9,7 +9,7 @@ export interface School {
   phone_number: string;
   address: Address | null;
   address_id: number;
-  schoolActivity?: SchoolAction[];
+  schoolActivity?: SchoolActivityDTO[];
 }
 
 export interface CreateSchoolDto {
@@ -17,5 +17,5 @@ export interface CreateSchoolDto {
   student_quantity: number;
   score: number;
   phone_number: string;
-  address_id: number;
+  address: Address;
 }

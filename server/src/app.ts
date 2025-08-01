@@ -3,10 +3,8 @@ import { setUserRoutes } from './user/userRoutes';
 import { setSchoolRoutes } from './school/schoolRoutes';
 import { setAddressRoutes } from './address/addressRoutes';
 import { setOngRoutes } from './ong/ongRoutes';
-import { setPhotoRoutes } from './photo/photoRoutes';
-import { setSocialMediasRoutes } from './socialMedias/socialMediasRoutes';
-import { setSchoolActionRoutes } from './schoolAction/schoolActionRoutes';
-import { setSocialActionRoutes } from './socialAction/socialActionRoutes';
+import { setSchoolActivityRoutes } from './schoolActivity/schoolActivityRoutes';
+import { setActivityRoutes } from './activity/activityRoutes';
 import { setAuthRoutes } from './auth/authRoutes';
 
 const app = express();
@@ -20,10 +18,8 @@ setUserRoutes(app);
 setSchoolRoutes(app);
 setAddressRoutes(app);
 setOngRoutes(app);
-setPhotoRoutes(app);
-setSocialMediasRoutes(app);
-setSchoolActionRoutes(app);
-setSocialActionRoutes(app);
+setSchoolActivityRoutes(app);
+setActivityRoutes(app);
 setAuthRoutes(app);
 
 app.listen(PORT, () => {

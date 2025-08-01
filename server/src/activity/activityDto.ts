@@ -1,32 +1,32 @@
-import { Ong } from '../ong/ongDto';
+import { OngDTO } from '../ong/ongDto';
 import { Status, AreaExpertise, Category } from '@prisma/client';
-import { SchoolAction } from '../schoolAction/schoolActionDto';
+import { SchoolActivityDTO } from '../schoolActivity/schoolActivityDto';
 
 type SocialActionStatus = Status;
 type SocialActionCategory = Category;
 type SocialActionAreaExpertise = AreaExpertise;
 
-export interface SocialAction {
+export interface ActivityDTO {
   id: number;
   title: string;
   photos: string[]; //url
-  descricao: string;
+  description: string;
   category: SocialActionCategory; //
   area_expertise: SocialActionAreaExpertise[];
   status: SocialActionStatus;
   pontuation: number; // 100/200 nao mostrar
   ong_id: number;
-  ong: Ong;
-  schoolActivities: SchoolAction[];
+  ong: OngDTO;
+  schoolActivities?: SchoolActivityDTO[];
 }
 
-export interface SocialActionCreateDTO {
+export interface CreateActivityDTO {
   ong_id: number;
-  cover_photo: string; //url
   title: string;
-  descricao: string;
+  photos: string[]; //url
+  description: string;
   category: SocialActionCategory; //
   area_expertise: SocialActionAreaExpertise[];
-  status: SocialActionStatus[];
+  status: SocialActionStatus;
   pontuation: number; // 100/200 nao mostrar
 }

@@ -9,9 +9,8 @@ export class SchoolController {
   }
 
   public async createSchool(req: Request, res: Response): Promise<Response> {
-    const { name, student_quantity, score, phone_number, address_id } =
-      req.body;
-    if (!name || !student_quantity || !score || !phone_number || !address_id) {
+    const { name, student_quantity, score, phone_number, address } = req.body;
+    if (!name || !student_quantity || !score || !phone_number || !address) {
       return res.status(400).json({ error: 'Missing a required field' });
     }
     try {

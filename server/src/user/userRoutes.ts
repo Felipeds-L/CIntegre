@@ -7,7 +7,6 @@ const userController = new UserController();
 export function setUserRoutes(app: Router) {
   app.post(
     '/users',
-    authenticate,
     userController.createUser.bind(userController),
   );
   app.get(

@@ -63,7 +63,7 @@ export default function HomePage() {
             <div className="flex gap-5 mt-5">
               <Link
                 className="bg-[#0F57BF] px-6 py-2.5 rounded-sm text-white"
-                href={"/login"}
+                href={"/login?type=ong"}
               >
                 Sou ONG
               </Link>

@@ -5,12 +5,17 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import LargeInput from "../input/LargeInput";
 import LargeButton from "../buttons/LargeButton";
+import { useSearchParams } from 'next/navigation';
 
 export default function LoginForm() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+
+  const searchParams = useSearchParams();
+  const userType = searchParams.get('type');
+  const isOng = userType === 'ong';
 
   const loginCorrect = email === "teste@teste" && password === "123456";
 
@@ -68,12 +73,23 @@ export default function LoginForm() {
       {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
       <div className="text-center">
+        {!isOng && (
         <Link
           href="/login/recovery"
           className="text-sm text-blue-600 underline"
         >
           Esqueceu a senha?
         </Link>
+        )}
+
+        {isOng ? (
+        <p className="mt-4">
+         É uma ONG nova?{" "}
+        <Link href="https://conecta.recife.pe.gov.br/acesso" className="font-bold text-blue-600">
+          Crie sua conta!
+        </Link>
+        </p>
+        ) : (
 
         <p className="mt-4">
           Ainda não criou sua conta?{" "}
@@ -81,6 +97,7 @@ export default function LoginForm() {
             Crie agora!
           </Link>
         </p>
+        )}
       </div>
     </>
   );

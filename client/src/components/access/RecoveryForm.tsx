@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import LargeInput from "../input/LargeInput";
 import LargeButton from "../buttons/LargeButton";
+import Link from "next/link";
 
 export default function RecoveryForm() {
   const [email, setEmail] = useState("");
@@ -46,6 +47,15 @@ export default function RecoveryForm() {
           Enviar
         </LargeButton>
       </form>
+
+      <div className="text-center mt-6">
+        <p className="mt-4">
+          Lembrou sua senha?{" "}
+          <Link href="/login" className="font-bold text-blue-600">
+            Voltar para a tela de login.
+          </Link>
+        </p>
+        </div>
 
       {message && (
         <p className="mt-4 rounded-md bg-green-100 p-3 text-center text-sm mb-4">

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+import LayoutManager from "./layoutmanager";
 import { Afacad } from "next/font/google";
 
 const afacad = Afacad({
@@ -25,9 +24,9 @@ export default function RootLayout({
     <html lang="pt-BR" className={afacad.className}>
       <body className={`antialiased`}>
         <div className="App">
-          <Header />
-          <main className="AppBody">{children}</main>
-          <Footer />
+          <LayoutManager>
+            {children}
+          </LayoutManager>
         </div>
       </body>
     </html>

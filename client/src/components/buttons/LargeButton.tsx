@@ -10,7 +10,7 @@ export default function LargeButton({
   ...props
 }: LargeButtonProps) {
   const baseClasses =
-    "py-1.5 px-[6.25rem] text-white bg-[#0F57BF] rounded-md hover:bg-blue-700";
+    "py-1.5 px-[6.25rem] text-white bg-[#0F57BF] rounded-md hover:bg-blue-700 cursor-pointer";
 
   return (
     <button

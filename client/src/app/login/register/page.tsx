@@ -1,4 +1,4 @@
-import RegisterForm from "@/components/acess/RegisterForm";
+import RegisterForm from "@/components/access/RegisterForm";
 
 export default async function Register() {
   return (

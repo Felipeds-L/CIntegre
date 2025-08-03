@@ -95,6 +95,15 @@ export default function RegisterForm() {
           Registrar-se
         </button>
 
+        <div className="text-center mt-6">
+          <p className="mt-4">
+            Lembrou sua conta?{" "}
+            <Link href="/login" className="font-bold text-blue-600">
+              Voltar para a tela de login.
+            </Link>
+          </p>
+        </div>
+
         {error && (
           <p className="mt-4">
             {error}

@@ -1,4 +1,4 @@
-import RecoveryForm from "@/components/acess/RecoveryForm";
+import RecoveryForm from "@/components/access/RecoveryForm";
 
 export default async function Recovery() {
   return (

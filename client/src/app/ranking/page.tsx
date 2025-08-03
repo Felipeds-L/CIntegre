@@ -12,21 +12,21 @@ interface SchoolRanking {
 
 //exemplo
 const rankingData: SchoolRanking[] = [
-    { rank: 1, name: 'Escola A', points: 1000, avatarUrl: '/avatar-placeholder.png' },
-    { rank: 2, name: 'Escola B', points: 800, avatarUrl: '/avatar-placeholder.png' },
-    { rank: 3, name: 'Escola C', points: 600, avatarUrl: '/avatar-placeholder.png' },
-    { rank: 4, name: 'Escola D', points: 400, avatarUrl: '/avatar-placeholder.png' },
-    { rank: 5, name: 'Escola E', points: 300, avatarUrl: '/avatar-placeholder.png' },
-    { rank: 6, name: 'Escola F', points: 250, avatarUrl: '/avatar-placeholder.png' },
-    { rank: 7, name: 'Escola G', points: 150, avatarUrl: '/avatar-placeholder.png' },
-    { rank: 8, name: 'Escola H', points: 150, avatarUrl: '/avatar-placeholder.png' },
-    { rank: 9, name: 'Escola I', points: 150, avatarUrl: '/avatar-placeholder.png' },
-    { rank: 10, name: 'Escola J', points: 150, avatarUrl: '/avatar-placeholder.png' },
-    { rank: 11, name: 'Escola K', points: 150, avatarUrl: '/avatar-placeholder.png' },
-    { rank: 12, name: 'Escola L', points: 150, avatarUrl: '/avatar-placeholder.png' },
-    { rank: 13, name: 'Escola M', points: 150, avatarUrl: '/avatar-placeholder.png' },
-    { rank: 14, name: 'Escola N', points: 150, avatarUrl: '/avatar-placeholder.png' },
-    { rank: 15, name: 'Escola O', points: 150, avatarUrl: '/avatar-placeholder.png' },
+    { rank: 1, name: 'Escola A', points: 1000, avatarUrl: '/miku.jpg' },
+    { rank: 2, name: 'Escola B', points: 800, avatarUrl: '/miku.jpg' },
+    { rank: 3, name: 'Escola C', points: 600, avatarUrl: '/miku.jpg' },
+    { rank: 4, name: 'Escola D', points: 400, avatarUrl: '/miku.jpg' },
+    { rank: 5, name: 'Escola E', points: 300, avatarUrl: '/miku.jpg' },
+    { rank: 6, name: 'Escola F', points: 250, avatarUrl: '/miku.jpg' },
+    { rank: 7, name: 'Escola G', points: 150, avatarUrl: '/miku.jpg' },
+    { rank: 8, name: 'Escola H', points: 150, avatarUrl: '/miku.jpg' },
+    { rank: 9, name: 'Escola I', points: 150, avatarUrl: '/miku.jpg' },
+    { rank: 10, name: 'Escola J', points: 150, avatarUrl: '/miku.jpg' },
+    { rank: 11, name: 'Escola K', points: 150, avatarUrl: '/miku.jpg' },
+    { rank: 12, name: 'Escola L', points: 150, avatarUrl: '/miku.jpg' },
+    { rank: 13, name: 'Escola M', points: 150, avatarUrl: '/miku.jpg' },
+    { rank: 14, name: 'Escola N', points: 150, avatarUrl: '/miku.jpg' },
+    { rank: 15, name: 'Escola O', points: 150, avatarUrl: '/miku.jpg' },
 
 ];
 
@@ -38,9 +38,9 @@ function StatCard({ value, label, period, colorClass }: { value: number, label: 
         <div className={`w-3 h-3 rounded-full ${colorClass}`}></div>
         
         <div>
-            <span className="text-3xl font-bold">{value}</span>
-            <span className="ml-1 font-semibold text-gray-700">{label}</span>
-            <p className="text-sm text-gray-500">{period}</p>
+            <span className="text-3xl font-bold mb-1">{value}</span>
+            <span className="ml-1 font-semibold mb-1">{label}</span>
+            <p className="text-sm mb-1">{period}</p>
         </div>
         </div>
     );
@@ -128,39 +128,44 @@ export default function RankingPage() {
             </div>
 
             {/* Restante */}
-            <div className="bg-white p-4 rounded-lg shadow-md h-[600px] overflow-y-auto ">
+            <div className="bg-white p-4 rounded-lg shadow-md h-[600px] flex flex-col ">
             <LargeInput
               label="Buscar no Ranking"
               value={searchTerm}
               onChange={function(e) { setSearchTerm(e.target.value); }}
               placeholder="Digite o nome da escola..."
             />
-                <table className="w-full text-left">
-                <thead>
-                    <tr className="border-b">
-                    <th className="p-2">RANK</th>
-                    <th className="p-2">NOME</th>
-                    <th className="p-2">PONTOS</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {restOfRanking.map(school => (
-                    <tr key={school.rank} className="border-b hover:bg-gray-50">
-                        <td className="p-3 font-semibold">{String(school.rank).padStart(2, '0')}</td>
-                        <td className="p-3 flex items-center gap-3">
-                        <div className="relative w-8 h-8">
-                            <Image src={school.avatarUrl} alt={""} fill className="rounded-full object-cover" />
+            {/* Cabeçalho*/}
+                <div className="grid grid-cols-[60px_1fr_100px] gap-10 p-3 border-b mt-4 text-sm font-bold mb-1">
+                    <div>RANK</div>
+                    <div>ESCOLA</div>
+                    <div className="text-right">PONTOS</div>
+                </div>
+
+                <div className="overflow-y-scroll flex-grow">
+                    {restOfRanking.length > 0 && restOfRanking.map(function(school) {
+                        return(
+                            <div key={school.rank} className="grid grid-cols-[60px_1fr_100px] gap-10 p-3 border-b hover:bg-gray-50 items-center">
+                                <div className="font-semibold">{String(school.rank).padStart(2, '0')}</div>
+                                <div className="flex items-center gap-3">
+                                <div className="relative w-8 h-8 flex-shrink-0">
+                                    <Image src={school.avatarUrl} alt={""} fill className="rounded-full object-cover" />
+                                </div>
+                                <span>{school.name}</span>
+                                </div>
+                                <div className="text-right font-bold text-blue-600">{school.points}</div>
+                            </div>
+                        );    
+                    })}
+                    {restOfRanking.length === 0 && (
+                        <div className="text-center p-10 mb-1">
+                            <p>Nenhuma escola encontrada.</p>
                         </div>
-                        <span>{school.name}</span>
-                        </td>
-                        <td className="p-3 font-bold text-blue-600">{school.points}</td>
-                    </tr>
-                    ))}
-                </tbody>
-                </table>
+                        )}
             </div>
             </div>
+        </div>
         </div>
         </div>
     );
-    }
+}

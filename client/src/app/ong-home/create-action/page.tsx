@@ -130,7 +130,7 @@ export default function CreateActionPage() {
 
           <div>
             <label htmlFor="description" className="block font-medium mb-1">Descrição</label>
-            <textarea id="description" rows={7} name="description" value={formData.description} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded-md" placeholder="Descreva os objetivos da ação." required />
+            <textarea id="description" rows={6} name="description" value={formData.description} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded-md h-auto max-h-48" placeholder="Descreva os objetivos da ação." required />
           </div>
           
           <div>

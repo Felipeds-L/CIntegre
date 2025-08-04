@@ -114,7 +114,7 @@ export default function ValidationPopup(
                 value={comment}
                 onChange={handleCommentChange}
                 placeholder="Digite seu comentário..."
-                className="w-full mt-2 p-2 border rounded-md focus:ring-2 focus:ring-blue-500"
+                className="w-full mt-2 p-2 border rounded-md focus:ring-2 focus:ring-blue-500 h-auto max-h-48"
                 rows={3}
               />
             )}
@@ -127,7 +127,7 @@ export default function ValidationPopup(
                   value={problem}
                   onChange={handleProblemChange}
                   placeholder="Descreva o problema ocorrido..."
-                  className="w-full mt-2 p-2 border rounded-md focus:ring-2 focus:ring-red-500"
+                  className="w-full mt-2 p-2 border rounded-md focus:ring-2 focus:ring-red-500 h-auto max-h-48"
                   rows={3}
                 />
               )}

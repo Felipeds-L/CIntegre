@@ -46,3 +46,9 @@ export function LOGIN_POST() {
     url: `${API_URL}/login`,
   };
 }
+
+export function AUTH_USER_GET() {
+  return {
+    url: `${API_URL}/users/me`,
+  };
+}

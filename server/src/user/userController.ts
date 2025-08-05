@@ -8,27 +8,54 @@ export class UserController {
     this.userService = new UserService();
   }
 
-  public async createUser(req: Request, res: Response): Promise<Response> {
-    
-
+  public async createUser(
+    req: Request,
+    res: Response,
+  ): Promise<Response> {
     try {
-
       const { name, email, password } = req.body;
 
       if (!name || !email || !password) {
-        return res.status(400).json({ error: 'Missing a required field' });
+        return res
+          .status(400)
+          .json({ error: 'Missing a required field' });
       }
 
-      const createdUser = await this.userService.createUser(req.body);
+      const createdUser = await this.userService.createUser(
+        req.body,
+      );
       return res.status(201).json(createdUser);
     } catch (error: any) {
       return res.status(500).json({ error: error.message });
     }
   }
 
-  public async getUser(req: Request, res: Response): Promise<void> {
+  public async getAuthUser(
+    req: Request,
+    res: Response,
+  ): Promise<void> {
     try {
-      const user = await this.userService.getUser(Number(req.params.id));
+      const user = req.user;
+
+      if (!user) {
+        res.status(401).json({ error: 'Unauthorized' });
+        return;
+      }
+
+      res.status(200).json(user);
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+
+  public async getUser(
+    req: Request,
+    res: Response,
+  ): Promise<void> {
+    try {
+      const user = await this.userService.getUser(
+        Number(req.params.id),
+      );
 
       if (!user) {
         res.status(404).json({ error: 'User not found' });
@@ -40,7 +67,10 @@ export class UserController {
     }
   }
 
-  public async getAllUsers(req: Request, res: Response): Promise<void> {
+  public async getAllUsers(
+    req: Request,
+    res: Response,
+  ): Promise<void> {
     try {
       const users = await this.userService.getAllUsers();
       res.status(200).json(users);
@@ -49,7 +79,10 @@ export class UserController {
     }
   }
 
-  public async updateUser(req: Request, res: Response): Promise<void> {
+  public async updateUser(
+    req: Request,
+    res: Response,
+  ): Promise<void> {
     try {
       const updatedUser = await this.userService.updateUser(
         Number(req.params.id),
@@ -65,7 +98,10 @@ export class UserController {
     }
   }
 
-  public async deleteUser(req: Request, res: Response): Promise<void> {
+  public async deleteUser(
+    req: Request,
+    res: Response,
+  ): Promise<void> {
     try {
       const deletedUser = await this.userService.deleteUser(
         Number(req.params.id),

@@ -1,23 +1,18 @@
 import SettingsCard from "@/components/settings/SettingsCard";
 import Image from "next/image";
-import { MdOutlineSettings, MdOutlineReportProblem } from "react-icons/md";
+import { X } from 'lucide-react';
 
 export default function SettingsPage() {
   return (
     <main className="container mx-auto my-8 min-h-screen p-4">
-      <h1 className="text-4xl font-bold my-8">Configurações</h1>
+      <h1 className="text-4xl font-bold my-8">Perfil</h1>
       <div className="flex flex-col md:flex-row gap-8">
        
         <aside className="w-full md:w-1/4 flex flex-col gap-4">
           <SettingsCard
             href="/settings"
-            text="Relatar um problema"
-            icon={MdOutlineReportProblem}
-          />
-          <SettingsCard
-            href="/settings"
-            text="Configurações"
-            icon={MdOutlineSettings}
+            text="Sair da conta"
+            icon={X}
           />
         </aside>
 

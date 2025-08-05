@@ -39,7 +39,7 @@ export default function LoginForm() {
 
   React.useEffect(() => {
     if (state.ok) {
-      window.location.href = "/settings";
+      window.location.href = "/profile";
     }
   }, [state.ok]);
 

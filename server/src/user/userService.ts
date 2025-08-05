@@ -50,7 +50,7 @@ export class UserService {
   async getAllUsers(): Promise<UserWithoutPassword[]> {
     const users = await this.prisma.user.findMany({ orderBy: { id: 'asc' } });
 
-    return users.map((user) => this.hidePassword(user));
+    return users.map((user: User) => this.hidePassword(user));
   }
 
   async updateUser(

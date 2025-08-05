@@ -4,19 +4,22 @@ import { SchoolService } from './schoolService';
 export class SchoolController {
   private schoolService: SchoolService;
 
-  constructor() {
-    this.schoolService = new SchoolService();
+  constructor(schollService?: SchoolService) {
+    this.schoolService = schollService ?? new SchoolService();
   }
 
   public async createSchool(req: Request, res: Response): Promise<Response> {
-    const { name, student_quantity, score, phone_number, address } = req.body;
-    if (!name || !student_quantity || !score || !phone_number || !address) {
-      return res.status(400).json({ error: 'Missing a required field' });
-    }
+    
     try {
-      const schoolData = req.body;
-      console.log(schoolData);
-      const newSchool = await this.schoolService.createSchool(schoolData);
+
+      const { name, student_quantity, score, phone_number, address } = req.body;
+
+      if (!name || !student_quantity || !score || !phone_number || !address) {
+        return res.status(400).json({ error: 'Missing a required field' });
+      }
+
+
+      const newSchool = await this.schoolService.createSchool(req.body);
       return res.status(201).json(newSchool);
     } catch (error: any) {
       return res.status(500).json({ error: error.message });

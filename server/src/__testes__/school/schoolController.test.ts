@@ -12,9 +12,16 @@ describe('SchoolController', () => {
     let res: Partial<Response>
 
     beforeEach(() => {
+        // Crie uma nova instância do mock antes de cada teste
+        // `as jest.Mocked<SchoolService>` garante que os métodos mockados estão disponíveis
         schoolServiceMock = new SchoolService() as jest.Mocked<SchoolService>;
-        schoolController = new SchoolController();
-        (schoolController as any).schoolService = schoolServiceMock;
+        
+        // Injete o mock diretamente no construtor.
+        // O construtor do SchoolController agora aceita um SchoolService opcional.
+        schoolController = new SchoolController(schoolServiceMock);
+        
+        // A linha a seguir foi removida:
+        // (schoolController as any).schoolService = schoolServiceMock;
 
         req = {
             body: {
@@ -23,11 +30,18 @@ describe('SchoolController', () => {
                 student_quantity: 150,
                 phone_number: '282827282',
                 address_id: 1,
-                address: null,
+                address: {
+                    id: 1,
+                    street: 'Rua x',
+                    house_number: 5,
+                    cep: '50740587',
+                    complement:  null,
+                    city: 'Recife',
+                    state: 'Pernambuco'
+                },
                 score: 1
             }
         };
-        
 
         res = {
             status: jest.fn().mockReturnThis(),
@@ -38,12 +52,20 @@ describe('SchoolController', () => {
     it('Should create a School', async () => {
         const mockSchool = {
             id: 1,
-            name: 'Escola x',
-            student_quantity: 150,
-            phone_number: '282827282',
-            address_id: 1,
-            address: null,
-            score: 1
+                name: 'Escola x',
+                student_quantity: 150,
+                phone_number: '282827282',
+                address_id: 1,
+                address: {
+                    id: 1,
+                    street: 'Rua x',
+                    house_number: '5',
+                    cep: '50740587',
+                    complement:  null,
+                    city: 'Recife',
+                    state: 'Pernambuco'
+                },
+                score: 1
         }
 
         schoolServiceMock.createSchool.mockResolvedValue(mockSchool);

@@ -20,7 +20,7 @@ describe('AddressController', () => {
             body: {
                 id: 1,
                 street: 'Rua x',
-                house_number: 5,
+                house_number: '5',
                 cep: '50740587',
                 complement:  null,
                 city: 'Recife',
@@ -58,7 +58,7 @@ describe('AddressController', () => {
         req.body = {
             id: 1,
             street: 'Rua x',
-            house_number: 5,
+            house_number: '5',
             cep: '50740587',
             complement:  null,
             city: 'Recife',

@@ -10,6 +10,11 @@ export function setUserRoutes(app: Router) {
     userController.createUser.bind(userController),
   );
   app.get(
+    '/users/me',
+    authenticate,
+    userController.getAuthUser.bind(userController),
+  );
+  app.get(
     '/users',
     authenticate,
     userController.getAllUsers.bind(userController),

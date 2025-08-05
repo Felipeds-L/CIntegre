@@ -1,5 +1,6 @@
 import express from 'express';
 import { setUserRoutes } from './user/userRoutes';
+import cors from 'cors';
 import { setSchoolRoutes } from './school/schoolRoutes';
 import { setAddressRoutes } from './address/addressRoutes';
 import { setOngRoutes } from './ong/ongRoutes';
@@ -8,10 +9,13 @@ import { setActivityRoutes } from './activity/activityRoutes';
 import { setAuthRoutes } from './auth/authRoutes';
 
 const app = express();
-const PORT = process.env.PORT || 3333;
-var cors = require('cors');
+const PORT = process.env.PORT;
+const corsOptions = {
+  origin: process.env.CORS_ORIGIN,
+  credentials: true,
+};
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 setUserRoutes(app);
@@ -23,5 +27,7 @@ setActivityRoutes(app);
 setAuthRoutes(app);
 
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(
+    `Server is running on http://localhost:${PORT}`,
+  );
 });

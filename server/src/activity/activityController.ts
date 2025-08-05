@@ -10,6 +10,11 @@ export class ActivityController {
 
   public async createActivity(req: Request, res: Response): Promise<void> {
     try {
+      const {title, photos, description, category, area_expertise, status, pontuation, ong_id, ong} = req.body
+
+      if (!title || !photos || !description || !category || !area_expertise || !status || !pontuation || !ong_id || !ong){
+        res.status(400).json({error: 'Missing a required field'})
+      }
       const activityData = req.body;
 
       const newActivity = await this.activityService.createActivity(
@@ -29,7 +34,7 @@ export class ActivityController {
       if (activity) {
         res.status(200).json(activity);
       } else {
-        res.status(404).json({ message: 'Social action not found' });
+        res.status(404).json({ error: 'Social action not found' });
       }
     } catch (error: any) {
       res.status(500).json({ error: error.message });

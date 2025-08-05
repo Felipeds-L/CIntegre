@@ -43,6 +43,6 @@ export function USERS_DELETE(id: string) {
 // Login
 export function LOGIN_POST() {
   return {
-    url: `${API_URL}/auth/login`,
+    url: `${API_URL}/login`,
   };
 }

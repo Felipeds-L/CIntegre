@@ -27,6 +27,12 @@ export default function RegisterForm() {
     data: null,
   });
 
+  React.useEffect(() => {
+    if (state.ok) {
+      window.location.href = "/settings";
+    }
+  }, [state.ok]);
+
   return (
     <>
       <h1 className="text-2xl font-bold mb-3">Registre-se</h1>

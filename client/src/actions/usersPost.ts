@@ -1,10 +1,11 @@
 import { USERS_POST } from "@/lib/api";
-import { redirect } from "next/navigation";
+import login from "./login";
+import apiError from "@/lib/apiError";
 
 interface RegisterState {
   ok: boolean;
   error: string;
-  data: null | any;
+  data: null;
 }
 
 export default async function usersPost(
@@ -15,35 +16,43 @@ export default async function usersPost(
   const email = formdata.get("email") as string | null;
   const password = formdata.get("password") as string | null;
 
-  if (!name || !email || !password) {
-    return {
-      ok: false,
-      error: "Preencha todos os campos obrigatórios.",
-      data: null,
-    };
+  try {
+    if (!name || !email || !password) {
+      return {
+        ok: false,
+        error: "Preencha todos os campos obrigatórios.",
+        data: null,
+      };
+    }
+
+    const { url } = USERS_POST();
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email, password }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return {
+        ok: false,
+        error: data.error || "Erro ao cadastrar usuário.",
+        data: null,
+      };
+    }
+
+    const { ok } = await login({ data, ok: true, error: "" }, formdata);
+
+    if (!ok) {
+      throw new Error("Erro ao logar usuário.");
+    }
+
+    return { data: null, ok: true, error: "" };
+  } catch (err: unknown) {
+    return apiError(err);
   }
-
-  const { url } = USERS_POST();
-
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ name, email, password }),
-  });
-
-  const data = await response.json();
-
-  console.log("Response from USERS_POST:", data);
-
-  if (!response.ok) {
-    return {
-      ok: false,
-      error: data.error || "Erro ao cadastrar usuário.",
-      data: null,
-    };
-  }
-
-  redirect("/settings");
 }

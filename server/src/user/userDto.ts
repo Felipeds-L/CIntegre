@@ -9,13 +9,7 @@ export interface User {
   updated_at: Date;
 }
 
-export interface UserWithoutPassword {
-  id: number;
-  name: string;
-  email: string;
-  created_at: Date;
-  updated_at: Date;
-}
+export type UserWithoutPassword = Omit<User, 'password'>
 
 export interface UserCreateDTO {
   name: string;

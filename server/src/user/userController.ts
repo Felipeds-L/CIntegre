@@ -9,11 +9,18 @@ export class UserController {
   }
 
   public async createUser(req: Request, res: Response): Promise<Response> {
-    const { body } = req;
+    
 
     try {
-      const user = await this.userService.createUser(body);
-      return res.status(201).json(user);
+
+      const { name, email, password } = req.body;
+
+      if (!name || !email || !password) {
+        return res.status(400).json({ error: 'Missing a required field' });
+      }
+
+      const createdUser = await this.userService.createUser(req.body);
+      return res.status(201).json(createdUser);
     } catch (error: any) {
       return res.status(500).json({ error: error.message });
     }

@@ -1,4 +1,3 @@
-import { School } from '@prisma/client';
 import { SchoolController } from '../../school/schoolController';
 import {SchoolService} from '../../school/schoolService';
 import { Response, Request } from 'express';
@@ -13,19 +12,36 @@ describe('SchoolController', () => {
     let res: Partial<Response>
 
     beforeEach(() => {
+        // Crie uma nova instância do mock antes de cada teste
+        // `as jest.Mocked<SchoolService>` garante que os métodos mockados estão disponíveis
         schoolServiceMock = new SchoolService() as jest.Mocked<SchoolService>;
-        schoolController = new SchoolController();
-        (schoolController as any).schoolService = schoolServiceMock;
+        
+        // Injete o mock diretamente no construtor.
+        // O construtor do SchoolController agora aceita um SchoolService opcional.
+        schoolController = new SchoolController(schoolServiceMock);
+        
+        // A linha a seguir foi removida:
+        // (schoolController as any).schoolService = schoolServiceMock;
 
         req = {
             body: {
                 id: 1,
-                cnpj: '12345678',
-                student_number: 150,
+                name: 'Escola x',
+                student_quantity: 150,
+                phone_number: '282827282',
+                address_id: 1,
+                address: {
+                    id: 1,
+                    street: 'Rua x',
+                    house_number: 5,
+                    cep: '50740587',
+                    complement:  null,
+                    city: 'Recife',
+                    state: 'Pernambuco'
+                },
                 score: 1
             }
         };
-        
 
         res = {
             status: jest.fn().mockReturnThis(),
@@ -36,9 +52,20 @@ describe('SchoolController', () => {
     it('Should create a School', async () => {
         const mockSchool = {
             id: 1,
-            cnpj: '12345678',
-            student_number: 150,
-            score: 1
+                name: 'Escola x',
+                student_quantity: 150,
+                phone_number: '282827282',
+                address_id: 1,
+                address: {
+                    id: 1,
+                    street: 'Rua x',
+                    house_number: '5',
+                    cep: '50740587',
+                    complement:  null,
+                    city: 'Recife',
+                    state: 'Pernambuco'
+                },
+                score: 1
         }
 
         schoolServiceMock.createSchool.mockResolvedValue(mockSchool);
@@ -52,7 +79,7 @@ describe('SchoolController', () => {
     it('Should return 400 if some school data is missing',async () => {
         req.body = {
             id: 1,
-            cnpj: '12345678',
+            name: '12345678',
         }
 
         await schoolController.createSchool(req as Request, res as Response);
@@ -63,8 +90,11 @@ describe('SchoolController', () => {
     it('Should return 200 if it can looking for a school', async() =>{
         const mockSchool = {
             id: 1,
-            cnpj: '12345678',
-            student_number: 150,
+            name: 'Escola x',
+            student_quantity: 150,
+            phone_number: '282827282',
+            address_id: 1,
+            address: null,
             score: 1
         }
 
@@ -97,8 +127,11 @@ describe('SchoolController', () => {
         const mockSchool = [
             {
                 id: 1,
-                cnpj: '12345678',
-                student_number: 150,
+                name: 'Escola x',
+                student_quantity: 150,
+                phone_number: '282827282',
+                address_id: 1,
+                address: null,
                 score: 1
             }
         ]
@@ -121,16 +154,22 @@ describe('SchoolController', () => {
     it('Should return 200 if it School is updated', async()=> {
         const mockSchool = {
             id: 1,
-            cnpj: '12345',
-            student_number: 1200,
-            score: 10
+            name: 'Escola x',
+            student_quantity: 150,
+            phone_number: '282827282',
+            address_id: 1,
+            address: null,
+            score: 1
         }
 
         req.params = {id: '1'}
         req.body = {
-            cnpj: '12345',
-            student_number: 1200,
-            score: 10
+            name: 'Escola x',
+            student_quantity: 150,
+            phone_number: '282827282',
+            address_id: 1,
+            address: null,
+            score: 1
         }
 
         schoolServiceMock.updateSchool.mockResolvedValue(mockSchool);
@@ -144,12 +183,15 @@ describe('SchoolController', () => {
     it('Should return 404 if school to update is not found', async () => {
         req.params = { id: '99' };
         req.body = {
-            cnpj: '00000000',
-            student_number: 0,
-            score: 0
+            name: 'Escola x',
+            student_quantity: 150,
+            phone_number: '282827282',
+            address_id: 1,
+            address: null,
+            score: 1
         };
 
-        schoolServiceMock.updateSchool.mockResolvedValue(null as unknown as School);
+        schoolServiceMock.updateSchool.mockResolvedValue(null as unknown as any);
 
         await schoolController.updateSchool(req as Request, res as Response);
 
@@ -161,8 +203,11 @@ describe('SchoolController', () => {
     it('Should return 200 if school is deleted', async() => {
         const mockSchool = {
             id: 1,
-            cnpj: '12345678',
-            student_number: 150,
+            name: 'Escola x',
+            student_quantity: 150,
+            phone_number: '282827282',
+            address_id: 1,
+            address: null,
             score: 1
         }
 
@@ -182,7 +227,7 @@ describe('SchoolController', () => {
     it('Should return 404 if School not found to delete', async() =>{
         req.params = { id: '99'};
         
-        schoolServiceMock.deleteSchool.mockResolvedValue(null as unknown as School);
+        schoolServiceMock.deleteSchool.mockResolvedValue(null as unknown as any);
 
         await schoolController.deleteSchool(req as Request, res as Response);
 

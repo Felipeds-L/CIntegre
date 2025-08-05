@@ -1,4 +1,3 @@
-import { User } from "@prisma/client";
 import { UserController } from "../../user/userController";
 import { UserService } from "../../user/userService";
 import { Request, Response } from 'express';
@@ -8,9 +7,9 @@ jest.mock('../../user/userService');
 describe('UserController', () => {
     let userController: UserController;
     let userServiceMock: jest.Mocked<UserService>;
+
     let req: Partial<Request>;
     let res: Partial<Response>;
-
 
     beforeEach(() => {
         userServiceMock = new UserService() as jest.Mocked<UserService>;
@@ -20,11 +19,8 @@ describe('UserController', () => {
         req = {
             body: {
                 id: 1,
-                username: "Milk",
                 name: "Felipe",
                 email: "teste@teste.com",
-                address_id: 1,
-                phone_number: "99279927",
                 password: "1234"
             }
         };
@@ -38,12 +34,11 @@ describe('UserController', () => {
     it('Should Create a User', async () => {
         const mockUser = {
             id: 1,
-            username: "Milk",
             name: "Felipe",
             email: "teste@teste.com",
-            address_id: 1,
-            phone_number: "99279927",
-            password: "1234"
+            password: "1234",
+            created_at: new Date(),
+            updated_at: new Date()
         };
 
         userServiceMock.createUser.mockResolvedValue(mockUser);
@@ -65,12 +60,13 @@ describe('UserController', () => {
     it('Should return 400 if a user data is missing', async () => {
         req.body = {
             id: 1,
-            username: "Milk",
             name: "Felipe",
-            email: "teste@teste.com",
-            address_id: 1,
-            phone_number: "99279927"
+            password: "1234",
+            created_at: new Date(),
+            updated_at: new Date()
         }
+
+        userServiceMock.createUser.mockRejectedValue(new Error('required fields are missing'));
 
         await userController.createUser(req as Request, res as Response);
         expect(res.status).toHaveBeenCalledWith(400);
@@ -79,13 +75,12 @@ describe('UserController', () => {
 
     it('Should return 200 if it can looking for a User', async () => {
         const mockUser = {
-            id: 1,
-            username: "Milk",
+           id: 1,
             name: "Felipe",
             email: "teste@teste.com",
-            address_id: 1,
-            phone_number: "99279927",
-            password: "1234"
+            password: "1234",
+            created_at: new Date(),
+            updated_at: new Date()
         };
 
         req.params = {
@@ -116,12 +111,11 @@ describe('UserController', () => {
     it('Should return 200 if all Users are found', async () => {
         const mockUser = [{
             id: 1,
-            username: "Milk",
             name: "Felipe",
             email: "teste@teste.com",
-            address_id: 1,
-            phone_number: "99279927",
-            password: "1234"
+            password: "1234",
+            created_at: new Date(),
+            updated_at: new Date()
         }];
 
         userServiceMock.getAllUsers.mockResolvedValue(mockUser);
@@ -142,22 +136,21 @@ describe('UserController', () => {
     it('Should return 200 if it User is updated', async () => {
         const mockUser = {
             id: 1,
-            username: "Milk",
             name: "Felipe",
             email: "teste@teste.com",
-            address_id: 1,
-            phone_number: "99279927",
-            password: "1234"
+            password: "1234",
+            created_at: new Date(),
+            updated_at: new Date()
         };
 
         req.params = { id: '1' }
         req.body = {
             id: 1,
-            username: "Milk",
             name: "Felipe",
             email: "teste@teste.com",
-            address_id: 1,
-            phone_number: "99279927"
+            password: "1234",
+            created_at: new Date(),
+            updated_at: new Date()
         }
 
         userServiceMock.updateUser.mockResolvedValue(mockUser);
@@ -172,14 +165,14 @@ describe('UserController', () => {
         req.params = { id: '99' };
         req.body = {
             id: 1,
-            username: "Milk",
             name: "Felipe",
             email: "teste@teste.com",
-            address_id: 1,
-            phone_number: "99279927"
+            password: "1234",
+            created_at: new Date(),
+            updated_at: new Date()
         }
 
-        userServiceMock.updateUser.mockResolvedValue(null as unknown as User);
+        userServiceMock.updateUser.mockResolvedValue(null as unknown as any);
 
         await userController.updateUser(req as Request, res as Response);
 
@@ -189,21 +182,11 @@ describe('UserController', () => {
     });
 
     it('Should return 200 if User is deleted', async () => {
-        const mockUser = {
-            id: 1,
-            username: "Milk",
-            name: "Felipe",
-            email: "teste@teste.com",
-            address_id: 1,
-            phone_number: "99279927",
-            password: "1234"
-        };
-
         req.params = {
             id: '1'
         }
 
-        userServiceMock.deleteUser.mockResolvedValue(mockUser);
+        userServiceMock.deleteUser.mockResolvedValue(true);
 
         await userController.deleteUser(req as Request, res as Response);
 
@@ -215,7 +198,7 @@ describe('UserController', () => {
     it('Should return 404 if User not found to delete', async () => {
         req.params = { id: '99' };
 
-        userServiceMock.deleteUser.mockResolvedValue(null as unknown as User);
+        userServiceMock.deleteUser.mockResolvedValue(null as unknown as any);
 
         await userController.deleteUser(req as Request, res as Response);
 

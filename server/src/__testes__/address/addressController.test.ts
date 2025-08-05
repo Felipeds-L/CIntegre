@@ -1,4 +1,3 @@
-import { Address } from '@prisma/client';
 import { AddressController } from '../../address/addressController';
 import {AddressService} from '../../address/addressService';
 import { Response, Request } from 'express';
@@ -21,7 +20,7 @@ describe('AddressController', () => {
             body: {
                 id: 1,
                 street: 'Rua x',
-                house_number: 5,
+                house_number: '5',
                 cep: '50740587',
                 complement:  null,
                 city: 'Recife',
@@ -40,7 +39,7 @@ describe('AddressController', () => {
         const mockAddress = {
             id: 1,
             street: 'Rua x',
-            house_number: 5,
+            house_number: '5',
             cep: '50740587',
             complement:  null,
             city: 'Recife',
@@ -59,7 +58,7 @@ describe('AddressController', () => {
         req.body = {
             id: 1,
             street: 'Rua x',
-            house_number: 5,
+            house_number: '5',
             cep: '50740587',
             complement:  null,
             city: 'Recife',
@@ -75,7 +74,7 @@ describe('AddressController', () => {
             const mockAddress = {
                 id: 1,
                 street: 'Rua x',
-                house_number: 5,
+                house_number: '5',
                 cep: '50740587',
                 complement:  null,
                 city: 'Recife',
@@ -111,7 +110,7 @@ describe('AddressController', () => {
             const mockAddress = [{
                 id: 1,
                 street: 'Rua x',
-                house_number: 5,
+                house_number: '5',
                 cep: '50740587',
                 complement:  null,
                 city: 'Recife',
@@ -137,7 +136,7 @@ describe('AddressController', () => {
             const mockAddress = {
                 id: 1,
                 street: 'Rua x',
-                house_number: 5,
+                house_number: '5',
                 cep: '50740587',
                 complement:  null,
                 city: 'Recife',
@@ -148,7 +147,7 @@ describe('AddressController', () => {
             req.body = {
                 id: 1,
                 street: 'Rua x',
-                house_number: 5,
+                house_number: '5',
                 cep: '50740587',
                 complement:  null,
                 city: 'Recife',
@@ -167,13 +166,13 @@ describe('AddressController', () => {
             req.body = {
                 id: 1,
                 street: 'Rua x',
-                house_number: 5,
+                house_number: '5',
                 cep: '50740587',
                 complement:  null,
                 city: 'Recife',
             }
     
-            addressServiceMock.updateAddress.mockResolvedValue(null as unknown as Address);
+            addressServiceMock.updateAddress.mockResolvedValue(null as unknown as any);
     
             await addressController.updateAddress(req as Request, res as Response);
     
@@ -186,7 +185,7 @@ describe('AddressController', () => {
             const mockAddress = {
                 id: 1,
                 street: 'Rua x',
-                house_number: 5,
+                house_number: '5',
                 cep: '50740587',
                 complement:  null,
                 city: 'Recife',
@@ -209,7 +208,7 @@ describe('AddressController', () => {
         it('Should return 404 if Address not found to delete', async() =>{
             req.params = { id: '99'};
             
-            addressServiceMock.deleteAddress.mockResolvedValue(null as unknown as Address);
+            addressServiceMock.deleteAddress.mockResolvedValue(null as unknown as any);
     
             await addressController.deleteAddress(req as Request, res as Response);
     

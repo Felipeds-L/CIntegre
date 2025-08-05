@@ -48,9 +48,8 @@ const placement = [
 export default function HomePage() {
   return (
     <section>
-      {/* Hero Section */}
       <section className="bg-white pb-8">
-        <div className="container flex flex-wrap items-center justify-between">
+        <div className="container flex flex-col-reverse items-center justify-center gap-6 text-center sm:flex-row sm:justify-between sm:text-left">
           <div>
             <h1 className="font-semibold text-7xl max-w-[600px]">
               Juntos, construindo pontes entre educação e solidariedade
@@ -60,7 +59,7 @@ export default function HomePage() {
               metus et risus efficitur fermentum sed eget sem.
             </p>
 
-            <div className="flex gap-5 mt-5">
+            <div className="flex justify-center gap-5 mt-5 sm:justify-start">
               <Link
                 className="bg-[#0F57BF] px-6 py-2.5 rounded-sm text-white"
                 href={"/login?type=ong"}
@@ -78,14 +77,13 @@ export default function HomePage() {
 
           <Image
             src={"/CIntegreHero.svg"}
-            height={532}
-            width={543}
+            height={400}
+            width={400}
             alt="CIntegre Logo"
           />
         </div>
       </section>
 
-      {/* Ranking Section */}
       <section className="bg-[#F4F4F5] py-8">
         <div className="container flex flex-col items-center gap-5">
           <h2 className="font-medium text-5xl text-center">
@@ -103,7 +101,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Activities Section */}
       <section className="bg-white py-8">
         <div className="container flex flex-col items-center gap-5">
           <h2 className="font-medium text-5xl text-center">
@@ -121,7 +118,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* About Section */}
       <section className="bg-[#F4F4F5] pt-8 pb-16">
         <div className="container flex flex-col items-center gap-5">
           <h2 className="font-medium text-5xl text-center">

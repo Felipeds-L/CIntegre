@@ -1,41 +1,11 @@
+'use client';
 import ActivityCard from "@/components/general/ActivityCard";
 import { CarouselCard } from "@/components/general/CarouselCard";
 import RankingSmall from "@/components/general/RankingSmall";
 import Image from "next/image";
 import Link from "next/link";
-
-const mockedData = {
-  id: 1,
-  title: "Escalada no Monte Fuji",
-  ngoName: "ONG Aventura Solidária",
-  date: "01/01/2001",
-  description:
-    "Participe de uma emocionante escalada no Monte Fuji, para arrecadar fundos para projetos de conservação ambiental.",
-  tags: ["aventura", "natureza", "conservacao"],
-  imageUrl:
-    "https://images.unsplash.com/photo-1736108870630-db883da3cdf2?q=80&w=230&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==",
-};
-
-const mockedData2 = {
-  id: 2,
-  title: "Corrida Amazônica de cria msm",
-  ngoName: "ONG Verde Vida",
-  date: "02/02/2002",
-  description:
-    "Junte-se a nós em uma corrida emocioante para arrecadar fundos para a preservação da Floresta Amazônica.",
-  tags: ["aventura", "natureza", "conservacao"],
-  imageUrl:
-    "https://images.unsplash.com/photo-1736108870630-db883da3cdf2?q=80&w=230&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==",
-};
-
-const lotsOfCards = [
-  <ActivityCard key={mockedData.id} apiData={mockedData} />,
-  <ActivityCard key={mockedData2.id} apiData={mockedData2} />,
-  <ActivityCard key={mockedData2.id + 1} apiData={mockedData2} />,
-  <ActivityCard key={mockedData2.id + 2} apiData={mockedData2} />,
-  <ActivityCard key={mockedData2.id + 4} apiData={mockedData2} />,
-  <ActivityCard key={mockedData2.id + 222} apiData={mockedData2} />,
-];
+import { useEffect, useState } from 'react';
+import getActivities, { Activity } from '@/actions/getActivities';
 
 const placement = [
   { position: "1", school: "Escola A", points: "100", activities: "5" },
@@ -46,6 +16,16 @@ const placement = [
 ];
 
 export default function HomePage() {
+  const [activities, setActivities] = useState<Activity[] | null>([]);
+  
+  useEffect(() => {
+    const fetchActivities = async () => {
+      const response = await getActivities();
+      setActivities(response.data);
+    }
+    fetchActivities();
+  }, []);
+
   return (
     <section>
       <section className="bg-white pb-8">
@@ -107,7 +87,7 @@ export default function HomePage() {
             Atividades Recentes das ONGs
           </h2>
 
-          <CarouselCard cards={lotsOfCards} />
+          <CarouselCard cards={activities} />
 
           <Link
             href={"/activities"}

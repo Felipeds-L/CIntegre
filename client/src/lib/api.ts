@@ -11,6 +11,13 @@ export function USERS_POST() {
   };
 }
 
+// Criação de usuário com Escola
+export function USERS_SCHOOL_POST() {
+  return {
+    url: `${API_URL}/users-with-school`,
+  };
+}
+
 // Listagem de usuários
 export function USERS_GET() {
   return {

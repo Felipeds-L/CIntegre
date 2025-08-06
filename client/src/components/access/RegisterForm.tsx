@@ -38,6 +38,20 @@ export default function RegisterForm() {
       <h1 className="text-2xl font-bold mb-3">Registre-se</h1>
       <form action={action} className="space-y-4">
         <div>
+          <label htmlFor="name" className="block font-medium mb-1">
+            Nome
+          </label>
+          <input
+            id="name"
+            type="text"
+            name="name"
+            placeholder="Nome"
+            required
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+
+        <div>
           <label htmlFor="email" className="block font-medium mb-1">
             E-mail
           </label>
@@ -46,33 +60,6 @@ export default function RegisterForm() {
             type="email"
             name="email"
             placeholder="E-mail"
-            required
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-        </div>
-
-        {/* <div>
-          <label htmlFor="cnpj" className="block font-medium mb-1">
-            CNPJ
-          </label>
-          <input
-            id="cnpj"
-            type="text"
-            placeholder="000.000.000/0000-00"
-            name="cnpj"
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-        </div> */}
-
-        <div>
-          <label htmlFor="nome" className="block font-medium mb-1">
-            Nome da Instituição
-          </label>
-          <input
-            id="nome"
-            type="text"
-            name="name"
-            placeholder="Nome da Instituição"
             required
             className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
@@ -87,6 +74,118 @@ export default function RegisterForm() {
             type="password"
             placeholder="Senha"
             name="password"
+            required
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="institute" className="block font-medium mb-1">
+            Nome da Instituição
+          </label>
+          <input
+            id="institute"
+            type="text"
+            name="institute"
+            placeholder="Nome da Instituição"
+            required
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="students" className="block font-medium mb-1">
+            Quantidade de Alunos
+          </label>
+          <input
+            id="students"
+            type="number"
+            name="students"
+            placeholder="0"
+            required
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="phone" className="block font-medium mb-1">
+            Número de Telefone
+          </label>
+          <input
+            id="phone"
+            type="text"
+            name="phone"
+            placeholder="(81) 99999-9999"
+            required
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="street" className="block font-medium mb-1">
+            Rua
+          </label>
+          <input
+            id="street"
+            type="text"
+            name="street"
+            placeholder="Avenida exemplo"
+            required
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="number" className="block font-medium mb-1">
+            Número
+          </label>
+          <input
+            id="number"
+            type="text"
+            name="number"
+            placeholder="Número"
+            required
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="cep" className="block font-medium mb-1">
+            CEP
+          </label>
+          <input
+            id="cep"
+            type="text"
+            name="cep"
+            placeholder="00000-000"
+            required
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="city" className="block font-medium mb-1">
+            Cidade
+          </label>
+          <input
+            id="city"
+            type="text"
+            name="city"
+            placeholder="Cidade"
+            required
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="state" className="block font-medium mb-1">
+            Estado
+          </label>
+          <input
+            id="state"
+            type="text"
+            name="state"
+            placeholder="Estado"
             required
             className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
           />

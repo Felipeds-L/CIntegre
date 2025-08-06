@@ -9,6 +9,12 @@ export function setUserRoutes(app: Router) {
     '/users',
     userController.createUser.bind(userController),
   );
+  app.post(
+    '/users-with-school',
+    userController.createUserWithSchool.bind(
+      userController,
+    ),
+  );
   app.get(
     '/users/me',
     authenticate,

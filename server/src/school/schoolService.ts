@@ -8,7 +8,9 @@ export class SchoolService {
     this.prisma = new PrismaClient();
   }
 
-  async createSchool(data: CreateSchoolDto): Promise<School> {
+  async createSchool(
+    data: CreateSchoolDto,
+  ): Promise<School> {
     const { address, ...schoolData } = data;
 
     return await this.prisma.school.create({

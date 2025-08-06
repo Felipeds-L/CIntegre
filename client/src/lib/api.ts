@@ -52,3 +52,9 @@ export function AUTH_USER_GET() {
     url: `${API_URL}/users/me`,
   };
 }
+
+export function ACTIVITIES_GET() {
+  return {
+    url: `${API_URL}/activities`,
+  };
+}

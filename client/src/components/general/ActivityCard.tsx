@@ -1,16 +1,9 @@
+import { Activity } from "@/actions/getActivities";
 import Image from "next/image";
 import Link from "next/link";
 
 interface CardProps {
-  apiData: {
-    id: number;
-    title: string;
-    ngoName: string;
-    date: string;
-    description: string;
-    tags: string[];
-    imageUrl: string;
-  };
+  apiData: Activity | null
 }
 
 export default function ActivityCard({ apiData }: CardProps) {
@@ -21,7 +14,7 @@ export default function ActivityCard({ apiData }: CardProps) {
   return (
     <div className="w-full max-w-xl bg-white shadow-md rounded-sm flex flex-col sm:flex-row gap-4 p-4">
       <Image
-        src={apiData.imageUrl}
+        src={'/miku.jpg'}
         width={300}
         height={300}
         alt=""
@@ -35,9 +28,9 @@ export default function ActivityCard({ apiData }: CardProps) {
               <h3 className="text-xl font-medium break-words line-clamp-2">
                 {apiData.title}
               </h3>
-              <span className="text-sm break-words">{apiData.ngoName}</span>
+              <span className="text-sm break-words">{apiData.ong.name}</span>
             </div>
-            <span className="text-sm whitespace-nowrap">{apiData.date}</span>
+            <span className="text-sm whitespace-nowrap">{apiData.ong.name}</span>
           </div>
 
           <p className="text-sm break-words line-clamp-3">{apiData.description}</p>
@@ -45,7 +38,7 @@ export default function ActivityCard({ apiData }: CardProps) {
 
         <div className="flex justify-between items-center flex-wrap gap-2">
           <span className="bg-[#4f97ff] text-white px-3 py-1 rounded-3xl text-sm">
-            #{apiData.tags[0]}
+            #{apiData.area_expertise[0]}
           </span>
 
           <Link

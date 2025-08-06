@@ -1,3 +1,4 @@
+'use client';
 import {
   Carousel,
   CarouselContent,
@@ -5,18 +6,18 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import ActivityCard from '@/components/general/ActivityCard';
+import { useEffect, useState } from 'react';
+import getActivities, { Activity } from '@/actions/getActivities';
 
-interface CarouselCardProps {
-  cards: React.ReactNode[];
-}
+export function CarouselCard({cards}: { cards: Activity[] | null}) {
 
-export function CarouselCard({ cards }: CarouselCardProps) {
   return (
     <Carousel className="w-full">
       <CarouselContent>
-        {cards.map((card, index) => (
-          <CarouselItem key={index} className="basis-1/2 max-lg:basis-full">
-            {card}
+        {cards && cards.map((card) => (
+          <CarouselItem key={card.id} className="basis-1/2 max-lg:basis-full">
+            <ActivityCard apiData={card} />
           </CarouselItem>
         ))}
       </CarouselContent>

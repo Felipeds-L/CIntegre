@@ -58,10 +58,10 @@ export class UserService {
 
     const user = await this.prisma.user.create({
       data: {
-        name,
-        email,
+        name: data.name,
+        email: data.email,
         password: hashedPassword,
-        ...(school_id !== undefined ? { school_id } : {}),
+        school_id: data.school_id, // aqui associa o user à escola
       },
       include: {
         school: true,

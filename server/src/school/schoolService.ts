@@ -12,7 +12,7 @@ export class SchoolService {
   async createSchool(
     data: CreateSchoolDto,
   ): Promise<School> {
-    const { address, user_id, ...schoolData } = data;
+    const { address, ...schoolData } = data;
 
     return await this.prisma.school.create({
       data: {
@@ -23,15 +23,9 @@ export class SchoolService {
         address: {
           create: address,
         },
-        user: user_id
-          ? {
-              connect: { id: user_id },
-            }
-          : undefined,
       },
       include: {
         address: true,
-        user: true,
       },
     });
   }

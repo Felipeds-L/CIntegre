@@ -2,6 +2,7 @@
 import * as React from "react";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { cn } from "@/lib/utils";
+import SetLoading from "@/components/setLoading/setLoading";
 
 const faqData = [
   {
@@ -148,6 +149,7 @@ export { Tabs, TabsList, TabsTrigger, TabsContent };
 export default function Faq() {
   return (
     <div className="flex flex-row mt-20 w-full gap-2 max-w-4xl mx-auto">
+      <SetLoading />
       <Tabs defaultValue="0" className="flex flex-row w-full">
         <TabsList className="border w-[160px] mt-4 ">
           {faqData.map((item, idx) => (

@@ -1,6 +1,7 @@
 import getActivity from "@/actions/getActivity";
 import ActivitySection from "@/components/activity/ActivitySection";
 import Tag from "@/components/general/Tag";
+import SetLoading from "@/components/setLoading/setLoading";
 import Image from "next/image";
 
 type ActivityIdParams = {
@@ -17,6 +18,7 @@ export default async function ActionPage({ params }: ActivityIdParams) {
   if (!data) return <div className="text-center mt-10">{error}</div>;
   return (
     <section className="mb-16">
+      <SetLoading/>
       {/* Header Section */}
       <div className="flex relative h-80 mb-8">
         <Image

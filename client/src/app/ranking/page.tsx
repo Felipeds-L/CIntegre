@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 import LargeInput from '@/components/input/LargeInput';
+import SetLoading from '@/components/setLoading/setLoading';
 
 interface SchoolRanking {
     rank: number;
@@ -108,6 +109,7 @@ export default function RankingPage() {
 
     return (
         <div className="bg-gray-50 min-h-screen p-4 sm:p-6 md:p-8">
+        <SetLoading />
         <div className="max-w-7xl mx-auto">
     
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">

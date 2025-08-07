@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useEffect, useState } from 'react';
 import getActivities, { Activity } from '@/actions/getActivities';
 import PhraseCarousel from "@/components/phraseCarousel/phraseCarousel";
+import SetLoading from "@/components/setLoading/setLoading";
 
 const placement = [
   { position: "1", school: "Escola A", points: "100", activities: "5" },
@@ -29,6 +30,7 @@ export default function HomePage() {
 
   return (
     <section>
+      <SetLoading />
       <section className="bg-white pb-8">
         <div className="container flex flex-col-reverse items-center justify-center gap-6 text-center sm:flex-row sm:justify-between sm:text-left">
           <div>

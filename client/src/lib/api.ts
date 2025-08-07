@@ -65,3 +65,9 @@ export function ACTIVITIES_GET() {
     url: `${API_URL}/activities`,
   };
 }
+
+export function SCHOOLS_GET(){
+  return {
+    url: `${API_URL}/schools`,
+  }
+}

@@ -26,7 +26,6 @@ export function setSchoolRoutes(app: Router) {
   );
   app.get(
     '/schools',
-    authenticate,
     schoolController.getAllSchools.bind(schoolController),
   );
 }

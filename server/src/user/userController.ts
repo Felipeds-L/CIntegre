@@ -1,11 +1,14 @@
 import { Request, Response } from 'express';
 import { UserService } from './userService';
+import { SchoolService } from '../school/schoolService';
 
 export class UserController {
   private userService: UserService;
+  private schoolService: SchoolService;
 
   constructor() {
     this.userService = new UserService();
+    this.schoolService = new SchoolService();
   }
 
   public async createUser(
@@ -25,6 +28,36 @@ export class UserController {
         req.body,
       );
       return res.status(201).json(createdUser);
+    } catch (error: any) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
+
+  public async createUserWithSchool(
+    req: Request,
+    res: Response,
+  ): Promise<Response> {
+    try {
+      const { userData, schoolData } = req.body;
+
+      if (!userData || !schoolData) {
+        return res
+          .status(400)
+          .json({ error: 'Missing user or school data' });
+      }
+
+      const newUser = await this.userService.createUser(
+        userData,
+      );
+      const newSchool =
+        await this.schoolService.createSchool({
+          ...schoolData,
+          userId: newUser.id, // Relaciona o usuário à escola
+        });
+
+      return res
+        .status(201)
+        .json({ user: newUser, school: newSchool });
     } catch (error: any) {
       return res.status(500).json({ error: error.message });
     }

@@ -9,6 +9,8 @@ import LargeButton from '@/components/buttons/LargeButton';
 import SmallButton from '@/components/buttons/SmallButton';
 import TagDisplay from '@/components/tags/TagDisplay';
 import actionPost from '@/actions/actionPost';
+import SetLoading from '@/components/setLoading/setLoading';
+
 
 interface ActionFormData {
   title: string;
@@ -122,7 +124,7 @@ export default function CreateActionPage() {
 
   return (
     <div className="max-w-6xl mx-auto bg-white p-6 sm:p-8 rounded-lg shadow-lg">
-
+      <SetLoading/>
       <header className="mb-8 text-center">
         <h1 className="text-3xl font-bold">Crie sua próxima ação</h1>
         <p className="text-md text-gray-500 mt-2">

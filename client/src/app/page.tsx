@@ -6,6 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from 'react';
 import getActivities, { Activity } from '@/actions/getActivities';
+import PhraseCarousel from "@/components/phraseCarousel/phraseCarousel";
+import SetLoading from "@/components/setLoading/setLoading";
 
 const placement = [
   { position: "1", school: "Escola A", points: "100", activities: "5" },
@@ -28,16 +30,14 @@ export default function HomePage() {
 
   return (
     <section>
+      <SetLoading />
       <section className="bg-white pb-8">
         <div className="container flex flex-col-reverse items-center justify-center gap-6 text-center sm:flex-row sm:justify-between sm:text-left">
           <div>
             <h1 className="font-semibold text-7xl max-w-[600px]">
               Juntos, construindo pontes entre educação e solidariedade
             </h1>
-            <p className="font-semibold text-[#1b1f26c2] max-w-[500px]">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut
-              metus et risus efficitur fermentum sed eget sem.
-            </p>
+            <PhraseCarousel />
 
             <div className="flex justify-center gap-5 mt-5 sm:justify-start">
               <Link

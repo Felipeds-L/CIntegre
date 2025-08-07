@@ -3,6 +3,7 @@
 import { useState } from "react";
 import LargeButton from "@/components/buttons/LargeButton";
 import ActivityCard from "@/components/general/ActivityCard";
+import SetLoading from "@/components/setLoading/setLoading";
 
 const sampleActions = [
   {
@@ -66,6 +67,7 @@ export default function OngHomePage() {
 
   return (
     <>
+    <SetLoading/>
       <section className="bg-gradient-to-r from-[#EBF3FF] to-[#85B6FF] px-8 py-12 text-black">
         <div className="container mx-auto flex justify-between items-end">
           <h1 className="text-7xl font-bold">

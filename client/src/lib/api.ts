@@ -74,3 +74,11 @@ export function ACTIVITIES_GET_BY_ID(id: string) {
     url: `${API_URL}/activities/${id}`,
   };
 }
+
+// --- School ---
+// Get all Schools
+export function SCHOOLS_GET(){
+  return {
+    url: `${API_URL}/schools`,
+  }
+}

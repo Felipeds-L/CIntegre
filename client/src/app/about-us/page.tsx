@@ -1,3 +1,4 @@
+import SetLoading from "@/components/setLoading/setLoading";
 import Image from "next/image";
 
 const sectionsData = [
@@ -51,6 +52,7 @@ export default function AboutSection() {
 
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8">
+      <SetLoading/>
       <div className="max-w-6xl mx-auto space-y-24">{renderedSections}</div>
     </section>
   );

@@ -1,4 +1,5 @@
 import ActivityCard from "@/components/general/ActivityCard";
+import SetLoading from "@/components/setLoading/setLoading";
 
 const sampleActivities = [
   {
@@ -51,6 +52,7 @@ export default function SchoolHomePage() {
   const schoolName = "Nome da Escola";
   return (
     <>
+      <SetLoading />
       <section className="bg-gradient-to-r from-blue-30 to-blue-200 px-8 py-16 text-slate-800">
         <div className="container mx-auto">
           <h1 className="text-5xl font-bold">

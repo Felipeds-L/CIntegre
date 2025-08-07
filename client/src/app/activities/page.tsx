@@ -2,6 +2,7 @@
 import ActivityCard from '@/components/general/ActivityCard';
 import { useEffect, useState } from 'react';
 import getActivities, { Activity } from '@/actions/getActivities';
+import SetLoading from '@/components/setLoading/setLoading';
 
 export default function SchoolRequestsPage() {
   const [activities, setActivities] = useState<Activity[] | null>([]);
@@ -16,6 +17,7 @@ export default function SchoolRequestsPage() {
   
   return (
     <>
+      <SetLoading />
           <div className="h-5"></div>
           <div className="container mx-auto px-4 py-12 mt-8 mb-5">
             <h2 className="text-3xl font-bold text-center mb-10 text-gray-800">

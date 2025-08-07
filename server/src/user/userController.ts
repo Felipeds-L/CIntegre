@@ -46,14 +46,15 @@ export class UserController {
           .json({ error: 'Missing user or school data' });
       }
 
-      const newUser = await this.userService.createUser(
-        userData,
-      );
+      // Cria a escola primeiro
       const newSchool =
-        await this.schoolService.createSchool({
-          ...schoolData,
-          userId: newUser.id, // Relaciona o usuário à escola
-        });
+        await this.schoolService.createSchool(schoolData);
+
+      // Cria o usuário associando a school criada
+      const newUser = await this.userService.createUser({
+        ...userData,
+        school_id: newSchool.id,
+      });
 
       return res
         .status(201)

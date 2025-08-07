@@ -54,7 +54,7 @@ export default function ActionPage() {
       </div>
 
       {/* Content Section */}
-      <div className="container grid grid-cols-3 gap-8">
+      <div className="w-full pl-6 flex gap-8">
         {/* Left Column */}
         <div className="col-span-2 flex flex-col gap-5">
           {/* Description Section */}
@@ -68,10 +68,11 @@ export default function ActionPage() {
               {mockedData.schedule.map((item, index) => (
                 <li
                   key={index}
-                  className="text-gray-700 flex items-center gap-5"
+                  className="text-gray-700 flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-5"
                 >
-                  <strong>{item.time}</strong>
-                  <p>{item.activity}</p>
+                  <strong className="whitespace-nowrap">{item.time}</strong>
+                  <p className="leading-snug">{item.activity}</p>
+                  <br></br>
                 </li>
               ))}
             </ul>
@@ -193,7 +194,6 @@ export default function ActionPage() {
           </ActivitySection>
 
           {/* Buttons */}
-
           <button className="flex w-full rounded-[4px] justify-center items-center bg-[#0f57bf] gap-2.5 text-white px-6 py-3 hover:cursor-pointer">
             <Image
               src={"/assets/personButton.svg"}

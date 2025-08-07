@@ -18,6 +18,7 @@ export const AuthController = {
         email: user.email,
         nome: user.name,
         token,
+        school: user.school,
       });
     } catch (error: any) {
       res.status(401).json({ message: error.message });

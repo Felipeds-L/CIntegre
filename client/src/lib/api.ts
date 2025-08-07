@@ -60,8 +60,17 @@ export function AUTH_USER_GET() {
   };
 }
 
+// --- ATIVIDADES ---
+// Get all activities
 export function ACTIVITIES_GET() {
   return {
     url: `${API_URL}/activities`,
+  };
+}
+
+// Get activity by ID
+export function ACTIVITIES_GET_BY_ID(id: string) {
+  return {
+    url: `${API_URL}/activities/${id}`,
   };
 }

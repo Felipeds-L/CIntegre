@@ -1,55 +1,36 @@
+import getActivity from "@/actions/getActivity";
 import ActivitySection from "@/components/activity/ActivitySection";
 import Tag from "@/components/general/Tag";
 import Image from "next/image";
 
-const mockedData = {
-  title: "Pedido Exemplo",
-  date: "01/01/2001",
-  timeSpan: "25:00 - 26:00",
-  address: "Av. Bla bla bla, Recife, numero 1, bla bla bla",
-  volunteers: 3,
-  totalVolunteers: 25,
-  photoUrl:
-    "https://plus.unsplash.com/premium_photo-1661878091370-4ccb8763756a?q=80&w=1440&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  description:
-    "Lorem ipsum dolor sit amet, consectetur adipisicing. Lorem ipsum dolor sit amet, consectetur adipisicing. Lorem ipsum dolor sit amet, consectetur adipisicing. Lorem ipsum dolor sit amet, consectetur adipisicing. Lorem ipsum dolor sit amet, consectetur adipisicing. Lorem ipsum dolor sit amet, consectetur adipisicing. ",
-  schedule: [
-    { time: "25:00", activity: "Introdução e explicação da Atividade" },
-    { time: "25:00", activity: "Introdução e explicação da Atividade" },
-    { time: "25:00", activity: "Introdução e explicação da Atividade" },
-    { time: "25:00", activity: "Introdução e explicação da Atividade" },
-  ],
-  experiences: ["#TrabalhoEmEquipe", "#Comunicação", "#Atividade Física"],
-  tags: ["#educacao", "#educacao", "#educacao"],
-  ngo: {
-    name: "ONG de Exemplo",
-    image:
-      "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=60&w=50&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    description:
-      "Dedicated to protecting marine ecosystems through community action and education.",
-    email: "ongemail@gmail.com",
-    site: "www.ongsite.com",
-    phone: "(81) 91234-5678",
-  },
+type ActivityIdParams = {
+  params: {
+    id: string;
+  };
 };
 
-export default function ActionPage() {
+export default async function ActionPage({ params }: ActivityIdParams) {
+  const { id } = await params;
+
+  const { data, error } = await getActivity(id);
+
+  if (!data) return <div className="text-center mt-10">{error}</div>;
   return (
     <section className="mb-16">
       {/* Header Section */}
       <div className="flex relative h-80 mb-8">
         <Image
           className="w-full object-cover"
-          src={mockedData.photoUrl}
+          src={"/miku.jpg"}
           width={1440}
           height={330}
           alt="image"
         />
 
         <div className="absolute bottom-5 left-5 right-0">
-          <Tag>{mockedData.tags[0]}</Tag>
-          <h1 className="text-white text-4xl">{mockedData.title}</h1>
-          <p className="text-gray-300 text-3xl">{mockedData.ngo.name}</p>
+          <Tag>{data.area_expertise[0]}</Tag>
+          <h1 className="text-white text-4xl">{data.title}</h1>
+          <p className="text-gray-300 text-3xl">{data.ong.name}</p>
         </div>
       </div>
 
@@ -59,13 +40,13 @@ export default function ActionPage() {
         <div className="col-span-2 flex flex-col gap-5">
           {/* Description Section */}
           <ActivitySection title="Descrição">
-            <p className="text-gray-700">{mockedData.description}</p>
+            <p className="text-gray-700">{data.description}</p>
           </ActivitySection>
 
           {/* Schedule Section */}
-          <ActivitySection title="Cronograma da Atividade">
+          {/* <ActivitySection title="Cronograma da Atividade">
             <ul>
-              {mockedData.schedule.map((item, index) => (
+              {data.schedule.map((item, index) => (
                 <li
                   key={index}
                   className="text-gray-700 flex items-center gap-5"
@@ -75,12 +56,12 @@ export default function ActionPage() {
                 </li>
               ))}
             </ul>
-          </ActivitySection>
+          </ActivitySection> */}
 
           {/* Experiences and Skills Section */}
           <ActivitySection title="Experiências e Habilidades">
             <ul className="flex flex-wrap gap-2">
-              {mockedData.experiences.map((item, index) => (
+              {data.area_expertise.map((item, index) => (
                 <Tag key={index}>{item}</Tag>
               ))}
             </ul>
@@ -99,7 +80,7 @@ export default function ActionPage() {
                   height={24}
                   alt=""
                 />
-                <span>{mockedData.date}</span>
+                <span>{data.status}</span>
               </li>
 
               <li className="text-gray-600 flex items-center gap-2.5">
@@ -109,7 +90,7 @@ export default function ActionPage() {
                   height={24}
                   alt=""
                 />
-                <span>{mockedData.timeSpan}</span>
+                <span>{data.category}</span>
               </li>
 
               <li className="text-gray-600 flex items-center gap-2.5">
@@ -119,7 +100,7 @@ export default function ActionPage() {
                   height={24}
                   alt=""
                 />
-                <span>{mockedData.address}</span>
+                <span>{data.area_expertise}</span>
               </li>
 
               <li className="text-gray-600 flex items-center gap-2.5">
@@ -130,8 +111,7 @@ export default function ActionPage() {
                   alt=""
                 />
                 <span>
-                  {mockedData.volunteers}/{mockedData.totalVolunteers}{" "}
-                  Voluntários
+                  {data.category}/{data.category} Voluntários
                 </span>
               </li>
             </ul>
@@ -141,18 +121,18 @@ export default function ActionPage() {
           <ActivitySection title="Sobre a ONG">
             <div className="flex gap-4 items-center">
               <Image
-                src={mockedData.ngo.image}
+                src={"/miku.jpg"}
                 width={48}
                 height={48}
                 alt="ONG Logo"
                 className="rounded-full mb-2.5 w-[48px] h-[48px] object-cover border border-gray-300"
               />
 
-              <p className="text-[1rem] font-bold">{mockedData.ngo.name}</p>
+              <p className="text-[1rem] font-bold">{data.ong.name}</p>
             </div>
 
             <p className="text-gray-600 pb-2.5 border-b border-[#E4E4E7]">
-              {mockedData.ngo.description}
+              {data.ong.description}
             </p>
 
             <ul className="flex flex-col gap-2 pt-2.5">
@@ -164,7 +144,7 @@ export default function ActionPage() {
                     height={24}
                     alt=""
                   />
-                  {mockedData.ngo.site}
+                  {data.ong.social_medias[0]}
                 </span>
               </li>
               <li>
@@ -175,7 +155,7 @@ export default function ActionPage() {
                     height={24}
                     alt=""
                   />
-                  {mockedData.ngo.email}
+                  {data.ong.social_medias[1]}
                 </span>
               </li>
               <li>
@@ -186,7 +166,7 @@ export default function ActionPage() {
                     height={24}
                     alt=""
                   />
-                  {mockedData.ngo.phone}
+                  {data.ong.phone_number}
                 </span>
               </li>
             </ul>
@@ -212,7 +192,7 @@ export default function ActionPage() {
           {/* Tags Section */}
           <ActivitySection title="Tags">
             <ul className="flex flex-wrap gap-2.5">
-              {mockedData.tags.map((tag, index) => (
+              {data.area_expertise.map((tag, index) => (
                 <Tag key={index}>{tag}</Tag>
               ))}
             </ul>

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import LayoutManager from "./layoutmanager";
 import { Afacad } from "next/font/google";
 import getAuthUser from "@/actions/getAuthUser";
 import { UserProvider } from "@/context/userContext";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const afacad = Afacad({
   subsets: ["latin"],
@@ -28,9 +29,9 @@ export default async function RootLayout({
     <html lang="pt-BR" className={afacad.className}>
       <body className={`antialiased`}>
         <UserProvider user={user}>
-          <div className="App">
-            <LayoutManager>{children}</LayoutManager>
-          </div>
+          <Header />
+          <div className="App">{children}</div>
+          <Footer />
         </UserProvider>
       </body>
     </html>

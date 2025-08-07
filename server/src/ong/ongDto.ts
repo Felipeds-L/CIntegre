@@ -12,6 +12,7 @@ export interface OngDTO {
 }
 
 export interface OngCreateDTO {
+  id: number | undefined;
   name: string;
   description: string;
   start_year: number;

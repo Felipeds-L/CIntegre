@@ -1,5 +1,4 @@
-import { School } from '@prisma/client';
-import { Address } from '../address/addressDto';
+import { School, Ong } from '@prisma/client';
 
 export interface User {
   id: number;
@@ -8,8 +7,12 @@ export interface User {
   password: string;
   created_at: Date;
   updated_at: Date;
+
   school?: School | null;
-  school_id: number;
+  school_id?: number | null;
+
+  ong?: Ong | null;
+  ong_id?: number | null;
 }
 
 export type UserWithoutPassword = Omit<User, 'password'>;
@@ -18,4 +21,6 @@ export interface UserCreateDTO {
   name: string;
   email: string;
   password: string;
+  school_id?: number;
+  ong_id?: number;
 }

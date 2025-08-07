@@ -14,20 +14,29 @@ export class UserService {
   }
 
   async createUser(
-    data: UserCreateDTO & { school_id?: number },
+    data: UserCreateDTO & {
+      school_id?: number;
+      ong_id?: number;
+    },
   ): Promise<UserWithoutPassword> {
-    const { name, email, password, school_id } = data;
+    const { name, email, password, school_id, ong_id } =
+      data;
 
     if (!name || !email || !password) {
       throw new Error('required fields are missing');
     }
 
+    // Regra XOR — apenas um dos dois
+    if ((school_id && ong_id) || (!school_id && !ong_id)) {
+      throw new Error(
+        'O usuário deve estar associado a apenas uma School OU uma Ong.',
+      );
+    }
+
     const emailExists = await this.prisma.user.findUnique({
       where: { email },
     });
-    if (emailExists) {
-      throw new Error('user already exists');
-    }
+    if (emailExists) throw new Error('user already exists');
 
     if (password.length < 6) {
       throw new Error(
@@ -35,36 +44,54 @@ export class UserService {
       );
     }
 
-    if (school_id !== undefined) {
+    // Verifica se school existe (se fornecido)
+    if (school_id) {
       const schoolExists =
         await this.prisma.school.findUnique({
           where: { id: school_id },
         });
-      if (!schoolExists) {
+      if (!schoolExists)
         throw new Error('school does not exist');
-      }
+
       const userWithSchool =
         await this.prisma.user.findUnique({
           where: { school_id },
         });
-      if (userWithSchool) {
+      if (userWithSchool)
         throw new Error(
           'school is already assigned to another user',
         );
-      }
+    }
+
+    // Verifica se ong existe (se fornecida)
+    if (ong_id) {
+      const ongExists = await this.prisma.ong.findUnique({
+        where: { id: ong_id },
+      });
+      if (!ongExists) throw new Error('ong does not exist');
+
+      const userWithOng = await this.prisma.user.findUnique(
+        { where: { ong_id } },
+      );
+      if (userWithOng)
+        throw new Error(
+          'ong is already assigned to another user',
+        );
     }
 
     const hashedPassword = await hashPassword(password);
 
     const user = await this.prisma.user.create({
       data: {
-        name: data.name,
-        email: data.email,
+        name,
+        email,
         password: hashedPassword,
-        school_id: data.school_id, // aqui associa o user à escola
+        school_id,
+        ong_id,
       },
       include: {
         school: true,
+        ong: true,
       },
     });
 
@@ -95,15 +122,31 @@ export class UserService {
 
   async updateUser(
     id: number,
-    data: Partial<UserCreateDTO & { school_id?: number }>,
+    data: Partial<
+      UserCreateDTO & {
+        school_id?: number;
+        ong_id?: number;
+      }
+    >,
   ): Promise<UserWithoutPassword> {
     const verifiedId = await this.verifyIdParam(id);
 
     const userExists = await this.prisma.user.findUnique({
       where: { id: verifiedId },
     });
-    if (!userExists) {
-      throw new Error('user not found');
+    if (!userExists) throw new Error('user not found');
+
+    // Regra XOR no update
+    if (
+      (data.school_id && data.ong_id) ||
+      ((data.school_id !== undefined ||
+        data.ong_id !== undefined) &&
+        !data.school_id &&
+        !data.ong_id)
+    ) {
+      throw new Error(
+        'O usuário deve estar associado a apenas uma School OU uma Ong.',
+      );
     }
 
     if (data.password && data.password.length < 6) {
@@ -125,14 +168,14 @@ export class UserService {
       }
     }
 
-    if (data.school_id !== undefined) {
+    if (data.school_id) {
       const schoolExists =
         await this.prisma.school.findUnique({
           where: { id: data.school_id },
         });
-      if (!schoolExists) {
+      if (!schoolExists)
         throw new Error('school does not exist');
-      }
+
       const userWithSchool =
         await this.prisma.user.findUnique({
           where: { school_id: data.school_id },
@@ -147,10 +190,28 @@ export class UserService {
       }
     }
 
+    if (data.ong_id) {
+      const ongExists = await this.prisma.ong.findUnique({
+        where: { id: data.ong_id },
+      });
+      if (!ongExists) throw new Error('ong does not exist');
+
+      const userWithOng = await this.prisma.user.findUnique(
+        {
+          where: { ong_id: data.ong_id },
+        },
+      );
+      if (userWithOng && userWithOng.id !== verifiedId) {
+        throw new Error(
+          'ong is already assigned to another user',
+        );
+      }
+    }
+
     const updatedUser = await this.prisma.user.update({
       where: { id: verifiedId },
       data,
-      include: { school: true },
+      include: { school: true, ong: true },
     });
 
     return this.hidePassword(updatedUser);

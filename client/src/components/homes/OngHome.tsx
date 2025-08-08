@@ -8,7 +8,6 @@ import Link from "next/link";
 import { AuthUser } from "@/actions/getAuthUser";
 
 export default function OngHome({ authUser }: { authUser: AuthUser }) {
-  const ongName = "ONG dos Dias";
   const [activeTab, setActiveTab] = useState<"todos" | "finalizados">("todos");
 
   // const filteredActions =
@@ -16,6 +15,7 @@ export default function OngHome({ authUser }: { authUser: AuthUser }) {
   //     ? sampleActions
   //     : sampleActions.filter((action) => action.status === "finished");
 
+  if (!authUser.ong) return null;
   return (
     <>
       <SetLoading />
@@ -23,7 +23,7 @@ export default function OngHome({ authUser }: { authUser: AuthUser }) {
         <div className="container mx-auto flex justify-between items-end">
           <h1 className="text-7xl font-bold">
             <span className="block">Bem-Vinda,</span>
-            <span className="block">{ongName}!</span>
+            <span className="block">{authUser.ong.name}!</span>
           </h1>
           <Link
             href={"/home/create-activity"}

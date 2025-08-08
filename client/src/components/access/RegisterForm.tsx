@@ -29,7 +29,7 @@ export default function RegisterForm() {
 
   React.useEffect(() => {
     if (state.ok) {
-      window.location.href = "/profile";
+      window.location.href = "/home";
     }
   }, [state.ok]);
 

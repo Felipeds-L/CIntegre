@@ -29,6 +29,14 @@ export type AuthUser = {
       state: string;
     };
   };
+  ong?: {
+    id: number;
+    name: string;
+    description: string;
+    start_year: number;
+    phone_number: string;
+    social_medias: string[];
+  };
 };
 
 export default async function getAuthUser() {
@@ -52,6 +60,8 @@ export default async function getAuthUser() {
     if (!response.ok) throw new Error("Failed to fetch user");
 
     const data = (await response.json()) as AuthUser;
+
+    console.log("Fetched auth user:", data);
 
     return { data, ok: true, error: "" };
   } catch (err: unknown) {

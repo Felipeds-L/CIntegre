@@ -24,7 +24,7 @@ export default async function Header() {
         {user ? (
           <>
             <nav className="flex gap-[1.875rem] items-center">
-              <Link href="/activities">Pedidos Disponíveis</Link>
+              <Link href="/activities">Todas as Atividades</Link>
               <Link href="/ranking">Ranking</Link>
             </nav>
 
@@ -34,7 +34,7 @@ export default async function Header() {
                   {user.school.name} | {user.school.score} Pontos
                 </Link>
               ) : (
-                <Link href="/profile">Nome da ONG</Link>
+                <Link href="/profile">{user.ong?.name}</Link>
               )}
             </div>
           </>

@@ -37,7 +37,7 @@ export default function SettingsPage() {
               />
             </div>
             <h2 className="mt-6 text-3xl font-semibold">
-              {user?.school?.name}
+              {user?.school ? user?.school?.name : user?.ong?.name}
             </h2>
           </div>
         </section>

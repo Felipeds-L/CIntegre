@@ -106,7 +106,7 @@ function TabsList({
     <TabsPrimitive.List
       data-slot="tabs-list"
       className={cn(
-        "bg-white border-white inline-flex flex-col h-fit w-48 items-center justify-start rounded-lg p-[3px] gap-1",
+        "bg-white border-white inline-flex flex-row md:flex-col flex-wrap md:h-fit items-center justify-start rounded-lg p-[3px] gap-1 overflow-x-auto md:overflow-visible",
         className
       )}
       {...props}
@@ -123,7 +123,7 @@ function TabsTrigger({
       data-slot="tabs-trigger"
       className={cn(
         "bg-white text-black data-[state=active]:bg-gray-100 data-[state=active]:text-blue-900",
-        "data-[state=active]:shadow-sm border border-transparent rounded-md px-3 py-1 text-sm font-medium transition-colors w-[150px]",
+        "data-[state=active]:shadow-sm border border-transparent rounded-md px-3 py-1 text-sm font-medium transition-colors w-[120px] md:w-[150px]",
         className
       )}
       {...props}
@@ -148,13 +148,12 @@ export { Tabs, TabsList, TabsTrigger, TabsContent };
 
 export default function Faq() {
   return (
-    <div className="flex flex-row mt-20 w-full gap-2 max-w-4xl mx-auto">
-      <SetLoading />
-      <Tabs defaultValue="0" className="flex flex-row w-full">
-        <TabsList className="border w-[160px] mt-4 ">
+    <div className="flex flex-col md:flex-row mt-10 md:mt-20 w-full gap-4 max-w-6xl px-4 md:px-0 mx-auto">
+      <Tabs defaultValue="0" className="flex flex-col md:flex-row w-full gap-4">
+        <TabsList className="md:border md:w-[160px]">
           {faqData.map((item, idx) => (
             <TabsTrigger
-              className="text-2xl font-bold text-black"
+              className="text-md md:text-2xl font-bold text-black"
               key={idx}
               value={String(idx)}
             >
@@ -162,34 +161,34 @@ export default function Faq() {
             </TabsTrigger>
           ))}
         </TabsList>
-        <div className="flex h-screen p-6 ml-8">
+        <div className="flex flex-1 overflow-y-auto md:h-screen p-4 md:p-6 md:ml-8">
           {faqData.map((item, idx) => (
             <TabsContent key={idx} value={String(idx)}>
               <div className="flex flex-col gap-4">
-                <h2 className="text-2xl font-bold text-blue-900 ">
+                <h2 className="text-xl md:text-2xl font-bold text-blue-900 ">
                   {item.tituloGeral}
                 </h2>
                 <div>
-                  <h3 className="text-2xl font-bold text-blue-900">
+                  <h3 className="text-lg md:text-2xl font-bold text-blue-900">
                     {item.titulo1}
                   </h3>
-                  <p className="text-xl font-semibold text-black">
+                  <p className="text-base md:text-xl font-semibold text-black">
                     {item.texto1}
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-blue-900">
+                  <h3 className="text-lg md:text-2xl font-bold text-blue-900">
                     {item.titulo2}
                   </h3>
-                  <p className="text-xl font-semibold text-black">
+                  <p className="text-base md:text-xl font-semibold text-black">
                     {item.texto2}
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-blue-900">
+                  <h3 className="text-lg md:text-2xl font-bold text-blue-900">
                     {item.titulo3}
                   </h3>
-                  <p className="text-xl font-semibold text-black">
+                  <p className="text-base md:text-xl font-semibold text-black">
                     {item.texto3}
                   </p>
                 </div>

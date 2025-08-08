@@ -10,8 +10,8 @@ export function setUserRoutes(app: Router) {
     userController.createUser.bind(userController),
   );
   app.post(
-    '/users-with-school',
-    userController.createUserWithSchool.bind(
+    '/users-full',
+    userController.createUserWithSchoolOrOng.bind(
       userController,
     ),
   );

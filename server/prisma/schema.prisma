@@ -8,38 +8,46 @@ datasource db {
 }
 
 model User {
-  id            Int    @id @default(autoincrement())
-  name          String
-  email         String @unique
-  password      String
-  created_at    DateTime @default(now())
-  updated_at    DateTime @updatedAt
+  id         Int      @id @default(autoincrement())
+  name       String
+  email      String   @unique
+  password   String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  school_id  Int?     @unique
+  school     School?  @relation(fields: [school_id], references: [id])
+
+  ong_id     Int?     @unique
+  ong        Ong?     @relation(fields: [ong_id], references: [id])
 }
 
 model School {
-  id                Int    @id @default(autoincrement())
-  name              String @unique
-  student_quantity  Int
-  score             Int
-  phone_number      String
+  id               Int     @id @default(autoincrement())
+  name             String  @unique
+  student_quantity Int
+  score            Int
+  phone_number     String
 
-  address_id        Int
-  address           Address? @relation(fields: [address_id], references: [id])
-  
-  // Relations
-  schoolActivity      SchoolActivity[]
+  address_id       Int
+  address          Address? @relation(fields: [address_id], references: [id])
+
+  // Relações
+  schoolActivity   SchoolActivity[]
+  user             User?
 }
 
 model Ong {
-  id                Int    @id @default(autoincrement())
-  name              String
-  description       String
-  start_year        Int
-  phone_number      String
-  social_medias     String[]
+  id            Int    @id @default(autoincrement())
+  name          String
+  description   String
+  start_year    Int
+  phone_number  String
+  social_medias String[]
 
-  // Relations
-  Activity     Activity[]
+  // Relações
+  Activity      Activity[]
+  user          User?
 }
 
 model Address {

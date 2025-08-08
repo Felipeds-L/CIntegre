@@ -8,6 +8,7 @@ export class AuthService {
   async login(loginData: LoginDto) {
     const user = await prisma.user.findFirst({
       where: { email: loginData.email },
+      include: { school: true, ong: true },
     });
 
     if (!user) {

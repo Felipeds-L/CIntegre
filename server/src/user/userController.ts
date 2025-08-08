@@ -1,14 +1,17 @@
 import { Request, Response } from 'express';
 import { UserService } from './userService';
+import { OngService } from '../ong/ongService';
 import { SchoolService } from '../school/schoolService';
 
 export class UserController {
   private userService: UserService;
   private schoolService: SchoolService;
+  private ongService: OngService;
 
   constructor() {
     this.userService = new UserService();
     this.schoolService = new SchoolService();
+    this.ongService = new OngService();
   }
 
   public async createUser(
@@ -16,12 +19,23 @@ export class UserController {
     res: Response,
   ): Promise<Response> {
     try {
-      const { name, email, password } = req.body;
+      const { name, email, password, school_id, ong_id } =
+        req.body;
 
       if (!name || !email || !password) {
         return res
           .status(400)
           .json({ error: 'Missing a required field' });
+      }
+
+      if (
+        (school_id && ong_id) ||
+        (!school_id && !ong_id)
+      ) {
+        return res.status(400).json({
+          error:
+            'O usuário deve estar associado a apenas uma School OU uma Ong.',
+        });
       }
 
       const createdUser = await this.userService.createUser(
@@ -33,31 +47,50 @@ export class UserController {
     }
   }
 
-  public async createUserWithSchool(
+  public async createUserWithSchoolOrOng(
     req: Request,
     res: Response,
   ): Promise<Response> {
     try {
-      const { userData, schoolData } = req.body;
+      const { userData, schoolData, ongData } = req.body;
 
-      if (!userData || !schoolData) {
-        return res
-          .status(400)
-          .json({ error: 'Missing user or school data' });
+      if (!userData || (!schoolData && !ongData)) {
+        return res.status(400).json({
+          error:
+            'Missing user data or organization data (schoolData or ongData)',
+        });
       }
 
-      const newUser = await this.userService.createUser(
-        userData,
-      );
-      const newSchool =
-        await this.schoolService.createSchool({
-          ...schoolData,
-          userId: newUser.id, // Relaciona o usuário à escola
-        });
+      let newUser;
+      let createdEntity;
 
-      return res
-        .status(201)
-        .json({ user: newUser, school: newSchool });
+      // Criação de escola
+      if (schoolData) {
+        const newSchool =
+          await this.schoolService.createSchool(schoolData);
+        newUser = await this.userService.createUser({
+          ...userData,
+          school_id: newSchool.id,
+        });
+        createdEntity = { school: newSchool };
+      }
+
+      // Criação de ONG
+      else if (ongData) {
+        const newOng = await this.ongService.createOng(
+          ongData,
+        );
+        newUser = await this.userService.createUser({
+          ...userData,
+          ong_id: newOng.id,
+        });
+        createdEntity = { ong: newOng };
+      }
+
+      return res.status(201).json({
+        user: newUser,
+        ...createdEntity,
+      });
     } catch (error: any) {
       return res.status(500).json({ error: error.message });
     }

@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { CreateSchoolDto, School } from './schoolDto';
+import { connect } from 'http2';
 
 export class SchoolService {
   private prisma: PrismaClient;
@@ -34,6 +35,7 @@ export class SchoolService {
       where: { id },
       include: {
         address: true,
+        user: true,
       },
     });
   }
@@ -42,7 +44,7 @@ export class SchoolService {
     id: number,
     data: Partial<CreateSchoolDto>,
   ): Promise<School> {
-    const { address, ...schoolData } = data;
+    const { address, user_id, ...schoolData } = data;
 
     return await this.prisma.school.update({
       where: { id },
@@ -56,9 +58,15 @@ export class SchoolService {
               update: address,
             }
           : undefined,
+        user: user_id
+          ? {
+              connect: { id: user_id },
+            }
+          : undefined,
       },
       include: {
         address: true,
+        user: true,
       },
     });
   }
@@ -68,6 +76,7 @@ export class SchoolService {
       where: { id },
       include: {
         address: true,
+        user: true,
       },
     });
   }
@@ -76,6 +85,7 @@ export class SchoolService {
     return await this.prisma.school.findMany({
       include: {
         address: true,
+        user: true,
       },
     });
   }

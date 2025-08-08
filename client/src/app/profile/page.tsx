@@ -8,7 +8,7 @@ import { useUser } from "@/context/userContext";
 import SetLoading from "@/components/setLoading/setLoading";
 
 export default function SettingsPage() {
-  const { setUser } = useUser();
+  const { user, setUser } = useUser();
 
   async function handleLogout() {
     await logout();
@@ -30,13 +30,15 @@ export default function SettingsPage() {
           <div className="flex flex-col items-center">
             <div className="relative h-40 w-40 overflow-hidden rounded-full border-2 border-gray-300">
               <Image
-                src="/miku.jpg"
+                src="/no.jpg"
                 alt="Avatar da Escola"
                 fill
                 style={{ objectFit: "cover" }}
               />
             </div>
-            <h2 className="mt-6 text-3xl font-semibold">Nome da Escola</h2>
+            <h2 className="mt-6 text-3xl font-semibold">
+              {user?.school?.name}
+            </h2>
           </div>
         </section>
       </div>

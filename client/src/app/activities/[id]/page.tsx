@@ -37,10 +37,10 @@ export default async function ActionPage({ params }: ActivityIdParams) {
           alt="image"
         />
 
-        <div className="absolute bottom-5 left-5 right-0">
+        <div className="absolute bottom-5 left-5 right-0 bg-[#333] w-max p-3 rounded-sm">
           <Tag>#{data.area_expertise[0]}</Tag>
-          <h1 className="text-4xl font-extralight">{data.title}</h1>
-          <p className="text-gray-600 text-3xl">{data.ong.name}</p>
+          <h1 className="text-4xl text-white font-extralight">{data.title}</h1>
+          <p className="text-gray-200 text-3xl">{data.ong.name}</p>
         </div>
       </div>
 

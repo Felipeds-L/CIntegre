@@ -109,7 +109,7 @@ export default function RankingPage() {
     <div className="bg-gray-50 min-h-screen p-4 sm:p-6 md:p-8">
       <SetLoading />
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
+        {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
           <StatCard
             value={12}
             label="ONGs"
@@ -128,7 +128,7 @@ export default function RankingPage() {
             period="Auxiliadas no ano"
             colorClass="bg-black"
           />
-        </div>
+        </div> */}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           {/* Top 3 */}

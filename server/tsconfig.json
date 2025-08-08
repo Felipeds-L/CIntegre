@@ -1,14 +1,15 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",  // Módulos compatíveis com Node.js
-    "target": "ES6",       // Configuração de compilação para ES6
+    "module": "CommonJS", // Módulos compatíveis com Node.js
+    "target": "ES6", // Configuração de compilação para ES6
     "moduleResolution": "node", // Resolver módulos de acordo com o Node
-    "esModuleInterop": true,  // Permitir interoperabilidade entre ES e CommonJS
-    "skipLibCheck": true,  // Ignorar verificação de tipos nas bibliotecas
-    "strict": true,        // Habilitar checagem rigorosa de tipos
-    "noEmit": true,        // Não gerar arquivos JS, apenas verificar os tipos
-    "types": ["jest"]      // Incluir os tipos do Jest
+    "esModuleInterop": true, // Permitir interoperabilidade entre ES e CommonJS
+    "skipLibCheck": true, // Ignorar verificação de tipos nas bibliotecas
+    "strict": true, // Habilitar checagem rigorosa de tipos
+    "noEmit": true, // Não gerar arquivos JS, apenas verificar os tipos
+    "types": ["jest"], // Incluir os tipos do Jest
+    "lib": ["esnext", "dom"]
   },
-  "include": ["**/*.ts", "**/*.tsx"],  // Incluir arquivos .ts e .tsx
-  "exclude": ["node_modules"]          // Excluir node_modules
+  "include": ["**/*.ts", "**/*.tsx"], // Incluir arquivos .ts e .tsx
+  "exclude": ["node_modules"] // Excluir node_modules
 }

@@ -57,7 +57,7 @@ export default function OngHome({ authUser }: { authUser: AuthUser }) {
                 : "text-gray-500 hover:text-blue-600 border-transparent"
             } transition-colors`}
           >
-            Minhas Atividades
+            Atividades
           </button>
           <button
             onClick={() => setActiveTab("finalizados")}

@@ -1,9 +1,24 @@
+"use client";
+
+import getActivities, { Activity } from "@/actions/getActivities";
 import { AuthUser } from "@/actions/getAuthUser";
 import ActivityCard from "@/components/general/ActivityCard";
 import SetLoading from "@/components/setLoading/setLoading";
+import React, { useState } from "react";
 
 export default function SchoolHome({ authUser }: { authUser: AuthUser }) {
   if (!authUser.school) return null;
+
+  const [activities, setActivities] = useState<Activity[] | null>([]);
+
+  React.useEffect(() => {
+    const fetchActivities = async () => {
+      const response = await getActivities();
+      setActivities(response.data);
+    };
+    fetchActivities();
+  }, []);
+
   return (
     <>
       <SetLoading />
@@ -23,11 +38,11 @@ export default function SchoolHome({ authUser }: { authUser: AuthUser }) {
         </h2>
 
         <div className="flex justify-center">
-          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {sampleActivities.map((activity) => (
-              <ActivityCard key={activity.id} apiData={activity} />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {activities?.map((activityB) => (
+              <ActivityCard key={activityB.id} apiData={activityB} />
             ))}
-          </div> */}
+          </div>
         </div>
       </div>
 

@@ -54,6 +54,12 @@ export function LOGIN_POST() {
   };
 }
 
+export function ACTION_POST(){
+  return {
+    url: `${API_URL}/action`,
+  }
+}
+
 export function AUTH_USER_GET() {
   return {
     url: `${API_URL}/users/me`,

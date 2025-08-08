@@ -1,8 +1,9 @@
+import { AuthUser } from "@/actions/getAuthUser";
 import ActivityCard from "@/components/general/ActivityCard";
 import SetLoading from "@/components/setLoading/setLoading";
 
-export default function SchoolHome() {
-  const schoolName = "Nome da Escola";
+export default function SchoolHome({ authUser }: { authUser: AuthUser }) {
+  if (!authUser.school) return null;
   return (
     <>
       <SetLoading />
@@ -10,7 +11,7 @@ export default function SchoolHome() {
         <div className="container mx-auto">
           <h1 className="text-5xl font-bold">
             <span className="block">Boas Vindas,</span>
-            <span className="block">{schoolName}</span>
+            <span className="block">{authUser.school.name}</span>
           </h1>
           <p className="mt-2 text-lg">Veja os últimos pedidos de ONGs!</p>
         </div>
@@ -18,7 +19,7 @@ export default function SchoolHome() {
       <div className="h-5"></div>
       <div className="container mx-auto px-4 py-12 mt-8 mb-5">
         <h2 className="text-3xl font-bold text-center mb-10 text-gray-800">
-          Todos os Pedidos
+          Todas as Minhas Atividades
         </h2>
 
         <div className="flex justify-center">

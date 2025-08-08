@@ -3,7 +3,7 @@
 import React, { useActionState } from "react";
 import Link from "next/link";
 import { useFormStatus } from "react-dom";
-import usersPost from "@/actions/usersPost";
+import schoolUsersPost from "@/actions/schoolUsersPost";
 
 function FormStatus() {
   const { pending } = useFormStatus();
@@ -21,7 +21,7 @@ function FormStatus() {
 }
 
 export default function RegisterForm() {
-  const [state, action] = useActionState(usersPost, {
+  const [state, action] = useActionState(schoolUsersPost, {
     ok: false,
     error: "",
     data: null,

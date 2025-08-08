@@ -27,7 +27,6 @@ export default async function getActivity(id: string) {
     }
 
     const data = (await response.json()) as Activity;
-    console.log("Fetched activity data:", data);
 
     return { data, ok: true, error: "" };
   } catch (err) {

@@ -5,8 +5,9 @@ import LargeButton from "@/components/buttons/LargeButton";
 import ActivityCard from "@/components/general/ActivityCard";
 import SetLoading from "@/components/setLoading/setLoading";
 import Link from "next/link";
+import { AuthUser } from "@/actions/getAuthUser";
 
-export default function OngHome() {
+export default function OngHome({ authUser }: { authUser: AuthUser }) {
   const ongName = "ONG dos Dias";
   const [activeTab, setActiveTab] = useState<"todos" | "finalizados">("todos");
 

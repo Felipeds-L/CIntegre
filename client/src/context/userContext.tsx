@@ -1,16 +1,11 @@
 "use client";
 
+import { AuthUser } from "@/actions/getAuthUser";
 import React from "react";
 
-interface User {
-  id: number;
-  name: string;
-  email: string;
-}
-
 interface UserContextType {
-  user: User | null;
-  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+  user: AuthUser | null;
+  setUser: React.Dispatch<React.SetStateAction<AuthUser | null>>;
 }
 
 const UserContext = React.createContext<UserContextType | null>(null);
@@ -28,9 +23,9 @@ export function UserProvider({
   user,
 }: {
   children: React.ReactNode;
-  user: User | null;
+  user: AuthUser | null;
 }) {
-  const [userState, setUser] = React.useState<User | null>(user);
+  const [userState, setUser] = React.useState<AuthUser | null>(user);
 
   return (
     <UserContext.Provider value={{ user: userState, setUser }}>

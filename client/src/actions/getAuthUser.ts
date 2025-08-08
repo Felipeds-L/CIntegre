@@ -4,10 +4,31 @@ import { AUTH_USER_GET } from "@/lib/api";
 import apiError from "@/lib/apiError";
 import { cookies } from "next/headers";
 
-export type User = {
-  id: number;
-  name: string;
-  email: string;
+export type AuthUser = {
+  user: {
+    id: number;
+    name: string;
+    email: string;
+    school_id: number | null;
+    ong_id: number | null;
+  };
+  school?: {
+    id: number;
+    name: string;
+    student_quantity: number;
+    score: number;
+    phone_number: string;
+    address_id: number;
+    address: {
+      id: number;
+      street: string;
+      number: string;
+      cep: string;
+      complement: string | null;
+      city: string;
+      state: string;
+    };
+  };
 };
 
 export default async function getAuthUser() {
@@ -30,7 +51,7 @@ export default async function getAuthUser() {
 
     if (!response.ok) throw new Error("Failed to fetch user");
 
-    const data = (await response.json()) as User;
+    const data = (await response.json()) as AuthUser;
 
     return { data, ok: true, error: "" };
   } catch (err: unknown) {

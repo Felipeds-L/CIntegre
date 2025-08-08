@@ -1,9 +1,16 @@
+import getAuthUser from "@/actions/getAuthUser";
 import OngHome from "@/components/homes/OngHome";
 import SchoolHome from "@/components/homes/SchoolHome";
 
 export default async function HomePage() {
-  const userType = "ong"; // This should be dynamically determined based on the logged-in user
+  const { data: authUser } = await getAuthUser();
 
-  if (userType === "ong") return <OngHome />;
-  if (userType === "school") return <SchoolHome />;
+  if (!authUser) {
+    return <div>Loading...</div>; // Handle loading state or redirect to login
+  }
+
+  const userType = authUser?.school ? "school" : "ong";
+
+  if (userType === "ong") return <OngHome authUser={authUser} />;
+  if (userType === "school") return <SchoolHome authUser={authUser} />;
 }

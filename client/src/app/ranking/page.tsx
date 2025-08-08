@@ -1,151 +1,190 @@
 "use client";
-import Image from 'next/image';
-import React, { useState } from 'react';
-import LargeInput from '@/components/input/LargeInput';
-import SetLoading from '@/components/setLoading/setLoading';
-import { useEffect } from 'react';
-import getSchools, { School } from '@/actions/getSchools';
+import Image from "next/image";
+import React, { useState } from "react";
+import LargeInput from "@/components/input/LargeInput";
+import SetLoading from "@/components/setLoading/setLoading";
+import { useEffect } from "react";
+import getSchools, { School } from "@/actions/getSchools";
 
-function StatCard({ value, label, period, colorClass }: { value: number, label: string, period: string, colorClass: string }) {
-    return (
-        <div className="bg-white p-4 rounded-lg shadow-md flex items-center gap-4">
+function StatCard({
+  value,
+  label,
+  period,
+  colorClass,
+}: {
+  value: number;
+  label: string;
+  period: string;
+  colorClass: string;
+}) {
+  return (
+    <div className="bg-white p-4 rounded-lg shadow-md flex items-center gap-4">
+      <div className={`w-3 h-3 rounded-full ${colorClass}`}></div>
 
-        <div className={`w-3 h-3 rounded-full ${colorClass}`}></div>
-        
-        <div>
-            <span className="text-3xl font-bold mb-1">{value}</span>
-            <span className="ml-1 font-semibold mb-1">{label}</span>
-            <p className="text-sm mb-1">{period}</p>
-        </div>
-        </div>
-    );
+      <div>
+        <span className="text-3xl font-bold mb-1">{value}</span>
+        <span className="ml-1 font-semibold mb-1">{label}</span>
+        <p className="text-sm mb-1">{period}</p>
+      </div>
+    </div>
+  );
 }
 
-function PodiumCard({ rank, score, name }: { rank: number, name: string, score: number }) {
-    const rankStyles = {
-      1: { height: 'h-80', order: 'order-2 md:order-2' },
-      2: { height: 'h-72', order: 'order-1 md:order-1' },
-      3: { height: 'h-64', order: 'order-3 md:order-3' },
-    };
-  
-    const styles = rankStyles[rank as keyof typeof rankStyles];
-  
-    return (
-        <div className={`bg-blue-600 text-white rounded-2xl shadow-xl flex flex-col justify-center items-center p-6 text-center transform hover:scale-105 transition-transform duration-300 ${styles.height} ${styles.order}`}>
-        
-        <div className="mb-2 font-bold text-2xl w-10 h-10 flex items-center justify-center bg-white/20 rounded-full">
-          {rank}
-        </div>
-        <p className='text-4xl font-bold'>{name}</p>
-        <p className="text-4xl font-bold">{score}</p>
-        <p className="font-semibold">PONTOS</p>
+function PodiumCard({
+  rank,
+  score,
+  name,
+}: {
+  rank: number;
+  name: string;
+  score: number;
+}) {
+  const rankStyles = {
+    1: { height: "h-80", order: "order-2 md:order-2" },
+    2: { height: "h-72", order: "order-1 md:order-1" },
+    3: { height: "h-64", order: "order-3 md:order-3" },
+  };
+
+  const styles = rankStyles[rank as keyof typeof rankStyles];
+
+  return (
+    <div
+      className={`bg-blue-600 text-white rounded-2xl shadow-xl flex flex-col justify-center items-center p-6 text-center transform hover:scale-105 transition-transform duration-300 ${styles.height} ${styles.order}`}
+    >
+      <div className="mb-2 font-bold text-2xl w-10 h-10 flex items-center justify-center bg-white/20 rounded-full">
+        {rank}
       </div>
-    );
-  }
+      <p className="text-4xl font-bold">{name}</p>
+      <p className="text-4xl font-bold">{score}</p>
+      <p className="font-semibold">PONTOS</p>
+    </div>
+  );
+}
 
 export default function RankingPage() {
+  useEffect(() => {
+    const fetchSchools = async () => {
+      const response = await getSchools();
+      setSchools(response.data);
+    };
+    fetchSchools();
+  }, []);
 
-    useEffect(() => {
-        const fetchSchools = async () => {
-          const response = await getSchools();
-          setSchools(response.data);
-        }
-        fetchSchools();
-      }, []);
+  const [schools, setSchools] = useState<School[] | null>([]);
 
-    const [schools, setSchools] = useState<School[] | null>([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
-    const [searchTerm, setSearchTerm] = useState('');
+  const sorted = schools?.sort(function (a, b) {
+    return b.score - a.score;
+  });
 
-    const sorted = schools?.sort(function(a, b) {
-        return b.score - a.score;
-    });
-  
-    const sortedRanking = schools?.map(function(a:School, index:number) {
-        return {
-            ...a, rank : index + 1
-        } as School
-    });
-    const topThreeSorted = sortedRanking?.slice(0, 3);
+  const sortedRanking = schools?.map(function (a: School, index: number) {
+    return {
+      ...a,
+      rank: index + 1,
+    } as School;
+  });
+  const topThreeSorted = sortedRanking?.slice(0, 3);
 
-    const podiumData = [];
-    const rankOne = topThreeSorted?.find(function(s) {
-        return s.rank === 1;
-    });
-    const rankTwo = topThreeSorted?.find(function(s) {
-        return s.rank === 2;
-    });
-    const rankThree = topThreeSorted?.find(function(s) {
-        return s.rank === 3;
-     });
-  
-    const restOfRanking = sortedRanking?.slice(3)
-        .filter(function(school) {
-            return school.name.toLowerCase().includes(searchTerm.toLowerCase());
-     });
+  const podiumData = [];
+  const rankOne = topThreeSorted?.find(function (s) {
+    return s.rank === 1;
+  });
+  const rankTwo = topThreeSorted?.find(function (s) {
+    return s.rank === 2;
+  });
+  const rankThree = topThreeSorted?.find(function (s) {
+    return s.rank === 3;
+  });
 
-    if (rankTwo) podiumData.push(rankTwo);
-    if (rankOne) podiumData.push(rankOne);
-    if (rankThree) podiumData.push(rankThree);
+  const restOfRanking = sortedRanking?.slice(3).filter(function (school) {
+    return school.name.toLowerCase().includes(searchTerm.toLowerCase());
+  });
 
-    return (
-        <div className="bg-gray-50 min-h-screen p-4 sm:p-6 md:p-8">
-        <SetLoading />
-        <div className="max-w-7xl mx-auto">
-    
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
-            <StatCard value={12} label="ONGs" period="Auxiliadas no dia" colorClass="bg-green-500" />
-            <StatCard value={99} label="ONGs" period="Auxiliadas no mês" colorClass="bg-blue-500" />
-            <StatCard value={123} label="ONGs" period="Auxiliadas no ano" colorClass="bg-black" />
-            </div>
+  if (rankTwo) podiumData.push(rankTwo);
+  if (rankOne) podiumData.push(rankOne);
+  if (rankThree) podiumData.push(rankThree);
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+  return (
+    <div className="bg-gray-50 min-h-screen p-4 sm:p-6 md:p-8">
+      <SetLoading />
+      <div className="max-w-7xl mx-auto">
+        {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
+          <StatCard
+            value={12}
+            label="ONGs"
+            period="Auxiliadas no dia"
+            colorClass="bg-green-500"
+          />
+          <StatCard
+            value={99}
+            label="ONGs"
+            period="Auxiliadas no mês"
+            colorClass="bg-blue-500"
+          />
+          <StatCard
+            value={123}
+            label="ONGs"
+            period="Auxiliadas no ano"
+            colorClass="bg-black"
+          />
+        </div> */}
 
-            {/* Top 3 */}
-            <div className="flex flex-col md:flex-row justify-center items-end gap-4">
-                {podiumData.map(function(school) {
-                    return (
-                        <PodiumCard key={school.rank} {...school} />
-                    );
-                })}
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          {/* Top 3 */}
+          <div className="flex flex-col md:flex-row justify-center items-end gap-4">
+            {podiumData.map(function (school) {
+              return <PodiumCard key={school.rank} {...school} />;
+            })}
+          </div>
 
-            {/* Restante */}
-            <div className="bg-white p-4 rounded-lg shadow-md h-[600px] flex flex-col ">
+          {/* Restante */}
+          <div className="bg-white p-4 rounded-lg shadow-md h-[600px] flex flex-col ">
             <LargeInput
               label="Buscar no Ranking"
               value={searchTerm}
-              onChange={function(e) { setSearchTerm(e.target.value); }}
+              onChange={function (e) {
+                setSearchTerm(e.target.value);
+              }}
               placeholder="Digite o nome da escola..."
             />
             {/* Cabeçalho*/}
-                <div className="grid grid-cols-[60px_1fr_100px] gap-10 p-3 border-b mt-4 text-sm font-bold mb-1">
-                    <div>RANK</div>
-                    <div>ESCOLA</div>
-                    <div className="text-right">PONTOS</div>
-                </div>
+            <div className="grid grid-cols-[60px_1fr_100px] gap-10 p-3 border-b mt-4 text-sm font-bold mb-1">
+              <div>RANK</div>
+              <div>ESCOLA</div>
+              <div className="text-right">PONTOS</div>
+            </div>
 
-                <div className="overflow-y-scroll flex-grow">
-                    {restOfRanking && restOfRanking.length > 0 && restOfRanking?.map(function(school) {
-                        return(
-                            <div key={school.rank} className="grid grid-cols-[60px_1fr_100px] gap-10 p-3 border-b hover:bg-gray-50 items-center">
-                                <div className="font-semibold">{String(school.rank).padStart(2, '0')}</div>
-                                <div className="flex items-center gap-3">
-                                <span>{school.name}</span>
-                                </div>
-                                <div className="text-right font-bold text-blue-600">{school.score}</div>
-                            </div>
-                        );    
-                    })}
-                    {restOfRanking && restOfRanking.length === 0 && (
-                        <div className="text-center p-10 mb-1">
-                            <p>Nenhuma escola encontrada.</p>
-                        </div>
-                        )}
+            <div className="overflow-y-scroll flex-grow">
+              {restOfRanking &&
+                restOfRanking.length > 0 &&
+                restOfRanking?.map(function (school) {
+                  return (
+                    <div
+                      key={school.rank}
+                      className="grid grid-cols-[60px_1fr_100px] gap-10 p-3 border-b hover:bg-gray-50 items-center"
+                    >
+                      <div className="font-semibold">
+                        {String(school.rank).padStart(2, "0")}
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span>{school.name}</span>
+                      </div>
+                      <div className="text-right font-bold text-blue-600">
+                        {school.score}
+                      </div>
+                    </div>
+                  );
+                })}
+              {restOfRanking && restOfRanking.length === 0 && (
+                <div className="text-center p-10 mb-1">
+                  <p>Nenhuma escola encontrada.</p>
+                </div>
+              )}
             </div>
-            </div>
+          </div>
         </div>
-        </div>
-        </div>
-    );
+      </div>
+    </div>
+  );
 }

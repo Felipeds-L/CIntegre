@@ -1,31 +1,55 @@
-'use client';
+"use client";
 import ActivityCard from "@/components/general/ActivityCard";
 import { CarouselCard } from "@/components/general/CarouselCard";
 import RankingSmall from "@/components/general/RankingSmall";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from 'react';
-import getActivities, { Activity } from '@/actions/getActivities';
+import { useEffect, useState } from "react";
+import getActivities, { Activity } from "@/actions/getActivities";
 import PhraseCarousel from "@/components/phraseCarousel/phraseCarousel";
 import SetLoading from "@/components/setLoading/setLoading";
+import getSchools, { School } from "@/actions/getSchools";
 
-const placement = [
-  { position: "1", school: "Escola A", points: "100", activities: "5" },
-  { position: "2", school: "Escola B", points: "90", activities: "4" },
-  { position: "3", school: "Escola C", points: "80", activities: "3" },
-  { position: "4", school: "Escola D", points: "70", activities: "2" },
-  { position: "5", school: "Escola E", points: "60", activities: "1" },
-];
+interface RankingData {
+  position: string;
+  school: string;
+  points: string;
+}
 
 export default function HomePage() {
   const [activities, setActivities] = useState<Activity[] | null>([]);
-  
+  const [rankingData, setRankingData] = useState<RankingData[] | null>([]);
+
   useEffect(() => {
     const fetchActivities = async () => {
       const response = await getActivities();
       setActivities(response.data);
-    }
+    };
     fetchActivities();
+  }, []);
+
+  useEffect(() => {
+    const fetchAndProcessSchools = async () => {
+      const response = await getSchools();
+
+      if (!response.ok || !response.data) return;
+
+      const sortedSchools = [...response.data].sort(
+        (a, b) => b.score - a.score
+      );
+
+      const top5Schools = sortedSchools.slice(0, 5);
+
+      const formattedData = top5Schools.map((school, index) => ({
+        position: String(index + 1),
+        school: school.name,
+        points: String(school.score),
+      }));
+
+      setRankingData(formattedData);
+    };
+
+    fetchAndProcessSchools();
   }, []);
 
   return (
@@ -70,7 +94,7 @@ export default function HomePage() {
             Escolas Mais Contribuintes
           </h2>
 
-          <RankingSmall placement={placement} />
+          <RankingSmall placement={rankingData!} />
 
           <Link
             href={"/ranking"}

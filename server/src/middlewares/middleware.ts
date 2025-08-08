@@ -7,24 +7,41 @@ import { AuthRepository } from '../auth/authRepository';
 declare global {
   namespace Express {
     interface Request {
-      user?: any;
+      user?: {
+        id: number;
+        name: string;
+        email: string;
+        password?: string;
+        school_id: number | null;
+        ong_id: number | null;
+      };
     }
   }
 }
 
-export const authenticate = async (req: Request, res: Response, next: NextFunction) => {
+export const authenticate = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
-    const token = req.header('Authorization')?.replace('Bearer ', '');
+    const token = req
+      .header('Authorization')
+      ?.replace('Bearer ', '');
 
     if (!token) {
-      throw new Error('Token de autenticação não fornecido');
+      throw new Error(
+        'Token de autenticação não fornecido',
+      );
     }
 
     // Verifica token
     const decoded = verifyToken(token);
-    
+
     // Busca usuário no banco
-    const user = await AuthRepository.findUserById(decoded.id);
+    const user = await AuthRepository.findUserById(
+      decoded.id,
+    );
 
     if (!user) {
       throw new Error('Usuário não encontrado');

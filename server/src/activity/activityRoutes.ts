@@ -14,7 +14,6 @@ export function setActivityRoutes(app: Router) {
   );
   app.get(
     '/activities/:id',
-    authenticate,
     activityController.getActivity.bind(activityController),
   );
   app.put(

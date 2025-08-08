@@ -14,7 +14,7 @@ export function USERS_POST() {
 // Criação de usuário com Escola
 export function USERS_SCHOOL_POST() {
   return {
-    url: `${API_URL}/users-with-school`,
+    url: `${API_URL}/users/school`,
   };
 }
 
@@ -68,6 +68,13 @@ export function ACTIVITIES_GET() {
   };
 }
 
+// Create a new activity
+export function ACTIVITIES_POST() {
+  return {
+    url: `${API_URL}/activities`,
+  };
+}
+
 // Get activity by ID
 export function ACTIVITIES_GET_BY_ID(id: string) {
   return {
@@ -77,8 +84,8 @@ export function ACTIVITIES_GET_BY_ID(id: string) {
 
 // --- School ---
 // Get all Schools
-export function SCHOOLS_GET(){
+export function SCHOOLS_GET() {
   return {
     url: `${API_URL}/schools`,
-  }
+  };
 }

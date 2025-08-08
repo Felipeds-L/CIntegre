@@ -13,11 +13,7 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL("/", req.url));
   }
 
-  if (!authenticated && req.nextUrl.pathname.startsWith("/ong-home")) {
-    return NextResponse.redirect(new URL("/", req.url));
-  }
-
-  if (!authenticated && req.nextUrl.pathname.startsWith("/school-home")) {
+  if (!authenticated && req.nextUrl.pathname.startsWith("/home")) {
     return NextResponse.redirect(new URL("/", req.url));
   }
 
@@ -33,7 +29,6 @@ export const config = {
     "/profile/:path*",
     "/login/:path*",
     "/my-activities/:path*",
-    "/ong-home/:path*",
-    "/school-home/:path*",
+    "/home/:path*",
   ],
 };

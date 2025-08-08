@@ -9,9 +9,15 @@ export function setUserRoutes(app: Router) {
     '/users',
     userController.createUser.bind(userController),
   );
+  // app.post(
+  //   '/users-full',
+  //   userController.createUserWithSchoolOrOng.bind(
+  //     userController,
+  //   ),
+  // );
   app.post(
-    '/users-full',
-    userController.createUserWithSchoolOrOng.bind(
+    '/users/school',
+    userController.createUserWithSchool.bind(
       userController,
     ),
   );

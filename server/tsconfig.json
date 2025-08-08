@@ -7,9 +7,20 @@
     "skipLibCheck": true, // Ignorar verificação de tipos nas bibliotecas
     "strict": true, // Habilitar checagem rigorosa de tipos
     "noEmit": true, // Não gerar arquivos JS, apenas verificar os tipos
-    "types": ["jest"], // Incluir os tipos do Jest
-    "lib": ["esnext", "dom"]
+    "types": [
+      "jest",
+      "node"
+    ], // Incluir os tipos do Jest
+    "lib": [
+      "esnext",
+      "dom"
+    ]
   },
-  "include": ["**/*.ts", "**/*.tsx"], // Incluir arquivos .ts e .tsx
-  "exclude": ["node_modules"] // Excluir node_modules
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ], // Incluir arquivos .ts e .tsx
+  "exclude": [
+    "node_modules"
+  ] // Excluir node_modules
 }

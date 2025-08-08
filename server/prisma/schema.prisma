@@ -63,14 +63,20 @@ model Address {
 }
 
 model Activity {
-  id              Int      @id @default(autoincrement())
-  title           String
-  photos          String[] //url
-  description     String
-  category        Category
-  area_expertise  AreaExpertise[]
-  status          Status
-  pontuation      Int // 100/200 nao mostrar
+  id                 Int      @id @default(autoincrement())
+  title              String
+  description        String
+  area_expertise     AreaExpertise[]
+  tags               String[]
+  category           Category 
+  address            String
+  duration           String
+  start_date         DateTime?
+  end_date           DateTime?
+  volunteer_quantity Int?
+  photos             String[] //url
+  status             Status
+  pontuation         Int // 100/200 nao mostrar
   
   // Relations
   ong_id           Int
@@ -103,9 +109,13 @@ enum Category {
 }
 
 enum AreaExpertise {
-  tecnology
-  healty
-  gastronomy
+  education
+  health
+  environment
   social_services
-  fashion
+  technology
+  culture
+  urban_planning
+  human_rights
+  food_security
 }

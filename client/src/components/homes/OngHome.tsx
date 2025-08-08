@@ -6,14 +6,27 @@ import ActivityCard from "@/components/general/ActivityCard";
 import SetLoading from "@/components/setLoading/setLoading";
 import Link from "next/link";
 import { AuthUser } from "@/actions/getAuthUser";
+import getActivities, { Activity } from "@/actions/getActivities";
+import React from "react";
 
 export default function OngHome({ authUser }: { authUser: AuthUser }) {
   const [activeTab, setActiveTab] = useState<"todos" | "finalizados">("todos");
+  const [activities, setActivities] = useState<Activity[] | null>([]);
 
-  // const filteredActions =
-  //   activeTab === "todos"
-  //     ? sampleActions
-  //     : sampleActions.filter((action) => action.status === "finished");
+  React.useEffect(() => {
+    const fetchActivities = async () => {
+      const response = await getActivities();
+      setActivities(response.data);
+    };
+    fetchActivities();
+  }, []);
+
+  if (!activities) return null;
+
+  const filteredActivities =
+    activeTab === "todos"
+      ? activities
+      : activities.filter((activity) => activity.status === "closed");
 
   if (!authUser.ong) return null;
   return (
@@ -44,7 +57,7 @@ export default function OngHome({ authUser }: { authUser: AuthUser }) {
                 : "text-gray-500 hover:text-blue-600 border-transparent"
             } transition-colors`}
           >
-            Todos os Pedidos
+            Minhas Atividades
           </button>
           <button
             onClick={() => setActiveTab("finalizados")}
@@ -54,16 +67,19 @@ export default function OngHome({ authUser }: { authUser: AuthUser }) {
                 : "text-gray-500 hover:text-blue-600 border-transparent"
             } transition-colors`}
           >
-            Pedidos Finalizados
+            Atividades Finalizadas
           </button>
         </div>
 
         <div className="flex justify-center">
-          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
-            {filteredActions.map((action) => (
-              <ActivityCard key={action.id} apiData={action} />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
+            {filteredActivities.map((activityFiltered) => (
+              <ActivityCard
+                key={activityFiltered.id}
+                apiData={activityFiltered}
+              />
             ))}
-          </div> */}
+          </div>
         </div>
       </div>
     </>

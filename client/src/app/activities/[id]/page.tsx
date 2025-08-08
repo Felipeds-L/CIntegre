@@ -1,8 +1,10 @@
 import getActivity from "@/actions/getActivity";
+import getAuthUser from "@/actions/getAuthUser";
 import ActivitySection from "@/components/activity/ActivitySection";
 import Tag from "@/components/general/Tag";
 import SetLoading from "@/components/setLoading/setLoading";
 import Image from "next/image";
+import { format } from "date-fns";
 
 type ActivityIdParams = {
   params: {
@@ -13,26 +15,32 @@ type ActivityIdParams = {
 export default async function ActionPage({ params }: ActivityIdParams) {
   const { id } = await params;
 
+  const { data: user } = await getAuthUser();
+
   const { data, error } = await getActivity(id);
 
   if (!data) return <div className="text-center mt-10">{error}</div>;
+
+  const startDate = format(data.start_date, "dd/MM/yyyy");
+  const endDate = format(data.end_date, "dd/MM/yyyy");
+
   return (
     <section className="mb-16">
-      <SetLoading/>
+      <SetLoading />
       {/* Header Section */}
       <div className="flex relative h-80 mb-8">
         <Image
           className="w-full object-cover"
-          src={"/miku.jpg"}
+          src={data.photos[0]}
           width={1440}
           height={330}
           alt="image"
         />
 
         <div className="absolute bottom-5 left-5 right-0">
-          <Tag>{data.area_expertise[0]}</Tag>
-          <h1 className="text-white text-4xl">{data.title}</h1>
-          <p className="text-gray-300 text-3xl">{data.ong.name}</p>
+          <Tag>#{data.area_expertise[0]}</Tag>
+          <h1 className="text-4xl font-extralight">{data.title}</h1>
+          <p className="text-gray-600 text-3xl">{data.ong.name}</p>
         </div>
       </div>
 
@@ -61,10 +69,19 @@ export default async function ActionPage({ params }: ActivityIdParams) {
           </ActivitySection> */}
 
           {/* Experiences and Skills Section */}
-          <ActivitySection title="Experiências e Habilidades">
+          {/* <ActivitySection title="Experiências e Habilidades">
             <ul className="flex flex-wrap gap-2">
               {data.area_expertise.map((item, index) => (
                 <Tag key={index}>{item}</Tag>
+              ))}
+            </ul>
+          </ActivitySection> */}
+
+          {/* Tags Section */}
+          <ActivitySection title="Tags">
+            <ul className="flex flex-wrap gap-2.5">
+              {data.tags.map((tag, index) => (
+                <Tag key={index}>#{tag}</Tag>
               ))}
             </ul>
           </ActivitySection>
@@ -82,7 +99,7 @@ export default async function ActionPage({ params }: ActivityIdParams) {
                   height={24}
                   alt=""
                 />
-                <span>{data.status}</span>
+                <span>{`${startDate} - ${endDate}`}</span>
               </li>
 
               <li className="text-gray-600 flex items-center gap-2.5">
@@ -92,7 +109,7 @@ export default async function ActionPage({ params }: ActivityIdParams) {
                   height={24}
                   alt=""
                 />
-                <span>{data.category}</span>
+                <span>{data.duration}</span>
               </li>
 
               <li className="text-gray-600 flex items-center gap-2.5">
@@ -102,19 +119,17 @@ export default async function ActionPage({ params }: ActivityIdParams) {
                   height={24}
                   alt=""
                 />
-                <span>{data.area_expertise}</span>
+                <span>{data.address}</span>
               </li>
 
               <li className="text-gray-600 flex items-center gap-2.5">
                 <Image
-                  src={"/assets/calendar.svg"}
+                  src={"/assets/people.svg"}
                   width={24}
                   height={24}
                   alt=""
                 />
-                <span>
-                  {data.category}/{data.category} Voluntários
-                </span>
+                <span>Até {data.volunteer_quantity} Voluntários</span>
               </li>
             </ul>
           </ActivitySection>
@@ -123,7 +138,7 @@ export default async function ActionPage({ params }: ActivityIdParams) {
           <ActivitySection title="Sobre a ONG">
             <div className="flex gap-4 items-center">
               <Image
-                src={"/miku.jpg"}
+                src={"/no.jpg"}
                 width={48}
                 height={48}
                 alt="ONG Logo"
@@ -138,7 +153,7 @@ export default async function ActionPage({ params }: ActivityIdParams) {
             </p>
 
             <ul className="flex flex-col gap-2 pt-2.5">
-              <li>
+              {/* <li>
                 <span className=" flex items-center gap-2.5">
                   <Image
                     src={"/assets/globe.svg"}
@@ -159,7 +174,7 @@ export default async function ActionPage({ params }: ActivityIdParams) {
                   />
                   {data.ong.social_medias[1]}
                 </span>
-              </li>
+              </li> */}
               <li>
                 <span className="flex items-center gap-2.5">
                   <Image
@@ -176,7 +191,15 @@ export default async function ActionPage({ params }: ActivityIdParams) {
 
           {/* Buttons */}
 
-          <button className="flex w-full rounded-[4px] justify-center items-center bg-[#0f57bf] gap-2.5 text-white px-6 py-3 hover:cursor-pointer">
+          <button
+            className="flex w-full rounded-[4px] justify-center items-center bg-[#0f57bf] gap-2.5 text-white px-6 py-3 hover:cursor-pointer"
+            disabled={!user?.school}
+            style={{
+              backgroundColor: user?.school ? "#0f57bf" : "#333",
+              opacity: user?.school ? 1 : 0.5,
+              cursor: user?.school ? "pointer" : "not-allowed",
+            }}
+          >
             <Image
               src={"/assets/personButton.svg"}
               width={24}
@@ -186,19 +209,10 @@ export default async function ActionPage({ params }: ActivityIdParams) {
             <span>Participar da Atividade</span>
           </button>
 
-          <button className="flex w-full rounded-[4px] justify-center items-center bg-transparent gap-2.5 text-blue-800 px-6 py-3 border-2 border-blue-800 hover:cursor-pointer">
+          {/* <button className="flex w-full rounded-[4px] justify-center items-center bg-transparent gap-2.5 text-blue-800 px-6 py-3 border-2 border-blue-800 hover:cursor-pointer">
             <Image src={"/assets/share.svg"} width={24} height={24} alt="" />
             <span>Compartilhar Atividade</span>
-          </button>
-
-          {/* Tags Section */}
-          <ActivitySection title="Tags">
-            <ul className="flex flex-wrap gap-2.5">
-              {data.area_expertise.map((tag, index) => (
-                <Tag key={index}>{tag}</Tag>
-              ))}
-            </ul>
-          </ActivitySection>
+          </button> */}
         </div>
       </div>
     </section>

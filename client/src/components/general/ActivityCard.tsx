@@ -1,8 +1,10 @@
-import { Activity } from "@/actions/getActivities";
+import getActivities, { Activity } from "@/actions/getActivities";
 import { useUser } from "@/context/userContext";
 import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
+import { useState } from "react";
 
 interface CardProps {
   apiData: Activity | null;
@@ -49,6 +51,7 @@ export default function ActivityCard({ apiData }: CardProps) {
             #{apiData.tags[0]}
           </span>
 
+          {}
           <Link
             href={`activities/${apiData.id}`}
             className="rounded-sm bg-[#0f57bf] text-white px-6 py-2 text-sm"

@@ -23,10 +23,14 @@ export default function OngHome({ authUser }: { authUser: AuthUser }) {
 
   if (!activities) return null;
 
+  const ongActivities = activities.filter(
+    (activity) => activity.ong.id === authUser.ong?.id
+  );
+
   const filteredActivities =
     activeTab === "todos"
-      ? activities
-      : activities.filter((activity) => activity.status === "closed");
+      ? ongActivities
+      : ongActivities.filter((activity) => activity.status === "closed");
 
   if (!authUser.ong) return null;
   return (

@@ -6,9 +6,15 @@ export type Activity = {
   id: number;
   title: string;
   description: string;
-  category: "volunteer" | "donation";
-  photos: string[];
   area_expertise: string[];
+  tags: string[];
+  category: "volunteer" | "donation";
+  address: string;
+  duration: string;
+  start_date: Date;
+  end_date: Date;
+  volunteer_quantity: number;
+  photos: string[];
   status: "open" | "in_progress" | "closed";
   pontuation: number;
   ong_id: number;

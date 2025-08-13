@@ -8,7 +8,7 @@ interface RegisterState {
   data: null;
 }
 
-export default async function usersPost(
+export default async function schoolUsersPost(
   state: RegisterState | undefined,
   formdata: FormData
 ) {
@@ -77,8 +77,6 @@ export default async function usersPost(
     });
 
     const data = await response.json();
-
-    console.log(data);
 
     if (!response.ok) {
       return {

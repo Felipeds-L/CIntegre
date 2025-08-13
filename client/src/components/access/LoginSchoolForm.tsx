@@ -5,7 +5,7 @@ import Link from "next/link";
 import LargeInput from "../input/LargeInput";
 import LargeButton from "../buttons/LargeButton";
 import login from "@/actions/login";
-import { useSearchParams } from "next/navigation";
+
 import { useFormStatus } from "react-dom";
 
 function FormButton() {
@@ -26,11 +26,7 @@ function FormButton() {
   );
 }
 
-export default function LoginForm() {
-  const seachParams = useSearchParams();
-  const userType = seachParams.get("type");
-  const isOng = userType === "ong";
-
+export default function LoginSchoolForm() {
   const [state, action] = useActionState(login, {
     ok: false,
     error: "",
@@ -39,7 +35,7 @@ export default function LoginForm() {
 
   React.useEffect(() => {
     if (state.ok) {
-      window.location.href = "/profile";
+      window.location.href = "/home";
     }
   }, [state.ok]);
 
@@ -92,33 +88,19 @@ export default function LoginForm() {
       )}
 
       <div className="text-center">
-        {!isOng && (
-          <Link
-            href="/login/recovery"
-            className="text-sm text-blue-600 underline"
-          >
-            Esqueceu a senha?
-          </Link>
-        )}
+        <Link
+          href="/login/recovery"
+          className="text-sm text-blue-600 underline"
+        >
+          Esqueceu a senha?
+        </Link>
 
-        {isOng ? (
-          <p className="mt-4">
-            É uma ONG nova?{" "}
-            <Link
-              href="https://conecta.recife.pe.gov.br/acesso"
-              className="font-bold text-blue-600"
-            >
-              Crie sua conta!
-            </Link>
-          </p>
-        ) : (
-          <p className="mt-4">
-            Ainda não criou sua conta?{" "}
-            <Link href="/login/register" className="font-bold text-blue-600">
-              Crie agora!
-            </Link>
-          </p>
-        )}
+        <p className="mt-4">
+          Ainda não criou sua conta?{" "}
+          <Link href="/login/register" className="font-bold text-blue-600">
+            Crie agora!
+          </Link>
+        </p>
       </div>
     </>
   );

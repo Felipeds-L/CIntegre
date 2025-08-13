@@ -47,6 +47,34 @@ export class UserController {
     }
   }
 
+  public async createUserWithSchool(
+    req: Request,
+    res: Response,
+  ): Promise<Response> {
+    try {
+      const { userData, schoolData } = req.body;
+
+      if (!userData || !schoolData) {
+        return res
+          .status(400)
+          .json({ error: 'Missing user or school data' });
+      }
+
+      const newSchool =
+        await this.schoolService.createSchool(schoolData);
+      const newUser = await this.userService.createUser({
+        ...userData,
+        school_id: newSchool.id,
+      });
+
+      return res
+        .status(201)
+        .json({ user: newUser, school: newSchool });
+    } catch (error: any) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
+
   public async createUserWithSchoolOrOng(
     req: Request,
     res: Response,
@@ -108,7 +136,27 @@ export class UserController {
         return;
       }
 
-      res.status(200).json(user);
+      const { password, ...userWithoutPassword } = user;
+
+      if (user.school_id) {
+        const school = await this.schoolService.getSchool(
+          user.school_id,
+        );
+        res.status(200).json({
+          user: userWithoutPassword,
+          school,
+        });
+      }
+
+      if (user.ong_id) {
+        const ong = await this.ongService.getOng(
+          user.ong_id,
+        );
+        res.status(200).json({
+          user: userWithoutPassword,
+          ong,
+        });
+      }
     } catch (error: any) {
       res.status(500).json({ error: error.message });
     }

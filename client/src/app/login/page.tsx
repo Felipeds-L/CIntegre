@@ -1,11 +1,19 @@
-import LoginForm from "@/components/access/LoginForm";
-import SetLoading from "@/components/setLoading/setLoading";
+"use client";
 
-export default async function Login() {
+import LoginOngForm from "@/components/access/LoginOngForm";
+import LoginSchoolForm from "@/components/access/LoginSchoolForm";
+import SetLoading from "@/components/setLoading/setLoading";
+import { useSearchParams } from "next/navigation";
+
+export default function Login() {
+  const seachParams = useSearchParams();
+  const userType = seachParams.get("type");
+  const isOng = userType === "ong";
+
   return (
     <section className="formLogin">
       <SetLoading />
-      <LoginForm />
+      {isOng ? <LoginOngForm /> : <LoginSchoolForm />}
     </section>
   );
 }

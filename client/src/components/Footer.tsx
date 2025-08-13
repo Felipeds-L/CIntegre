@@ -43,9 +43,8 @@ export default function Footer() {
             <div>
               <h4 className="font-bold text-lg mb-2">Legal</h4>
               <nav className="flex flex-col gap-1">
-                <Link href="/">Política de Cookies</Link>
-                <Link href="/">Termos e Condições</Link>
-                <Link href="/">Política de Privacidade</Link>
+                <Link href="/about-use">Termos e Condições</Link>
+                <Link href="/about-privacy">Política de Privacidade</Link>
               </nav>
             </div>
           </div>
@@ -106,9 +105,8 @@ export default function Footer() {
               <div>
                 <h4 className="font-bold text-lg mb-2">Legal</h4>
                 <nav className="flex flex-col gap-1">
-                  <Link href="/">Política de Cookies</Link>
-                  <Link href="/">Termos e Condições</Link>
-                  <Link href="/">Política de Privacidade</Link>
+                  <Link href="/about-use">Termos e Condições</Link>
+                  <Link href="/about-privacy">Política de Privacidade</Link>
                 </nav>
               </div>
             </div>

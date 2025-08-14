@@ -44,9 +44,8 @@ export default async function getSchoolActivitiesBySchoolId(schoolId: number) {
       throw new Error("Failed to fetch activities");
     }
 
-    const schoolActivities = (await response.json()) as SchoolActivity[];
-    const data = schoolActivities.map((item) => item.activity);
-    console.log(data);
+    const data = (await response.json()) as SchoolActivity[];
+
     return { data, error: "", ok: true };
   } catch (err: unknown) {
     return apiError(err);

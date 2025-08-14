@@ -78,9 +78,7 @@ export default function CreateActionPage() {
 
   React.useEffect(() => {
     if (state?.ok) {
-      alert("Ação criada com sucesso!");
-      // Opcional: redirecionar para outra página
-      // router.push('/dashboard/actions');
+      router.push("/home");
 
       setFormData({
         title: "",

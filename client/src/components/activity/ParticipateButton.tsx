@@ -7,9 +7,14 @@ import getActivity from "@/actions/getActivity";
 type Props = {
   activity_id: string;
   school_id?: number;
+  onParticipate?: () => void;
 };
 
-export default function ParticipateButton({ activity_id, school_id }: Props) {
+export default function ParticipateButton({
+  activity_id,
+  school_id,
+  onParticipate,
+}: Props) {
   const handleActivityClick = async () => {
     const activity = await getActivity(activity_id);
     if (!activity.data) {
@@ -32,6 +37,7 @@ export default function ParticipateButton({ activity_id, school_id }: Props) {
 
     if (result.ok) {
       alert("Participação registrada com sucesso!");
+      onParticipate?.();
     } else {
       alert(result.error || "Erro ao registrar participação.");
     }

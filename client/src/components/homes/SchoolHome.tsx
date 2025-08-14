@@ -6,9 +6,10 @@ import React, { useState } from "react";
 import getSchoolActivitiesBySchoolId, {
   SchoolActivity,
 } from "@/actions/getSchoolActivity";
+import { Activity } from "@/actions/getActivities";
 
 export default function SchoolHome({ authUser }: { authUser: AuthUser }) {
-  const [activities, setActivities] = useState<SchoolActivity[] | null>([]);
+  const [activities, setActivities] = useState<Activity[] | null>([]);
 
   React.useEffect(() => {
     const fetchActivities = async () => {
@@ -19,7 +20,8 @@ export default function SchoolHome({ authUser }: { authUser: AuthUser }) {
         return;
       }
 
-      setActivities(response.data);
+      const data = response.data.map((item) => item.activity);
+      setActivities(data);
     };
     fetchActivities();
   }, [authUser.school]);

@@ -11,6 +11,7 @@ import DeleteButton from "@/components/activity/DeleteButton";
 import { Activity } from "@/actions/getActivities";
 import React from "react";
 import getActivity from "@/actions/getActivity";
+import getSchoolActivitiesBySchoolId from "@/actions/getSchoolActivity";
 
 type ActivityProps = {
   id: string;
@@ -28,11 +29,38 @@ export default function ActivityComp({
   const [activity, setActivity] = React.useState<Activity | null>(
     initialActivity
   );
+  const [isParticipating, setIsParticipating] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    const checkParticipation = async () => {
+      if (!user?.school) return;
+
+      const result = await getSchoolActivitiesBySchoolId(user.school.id);
+
+      if (result.ok && result.data) {
+        const participating = result.data.some(
+          (schoolActivity) => schoolActivity.activity.id.toString() === id
+        );
+        setIsParticipating(participating);
+      }
+    };
+    checkParticipation();
+  }, [user?.school, id]);
 
   const refreshActivity = async () => {
     const { data } = await getActivity(id);
     if (data) {
       setActivity(data);
+    }
+
+    if (user?.school) {
+      const result = await getSchoolActivitiesBySchoolId(user.school.id);
+      if (result.ok && result.data) {
+        const participating = result.data.some(
+          (schoolActivity) => schoolActivity.activity.id.toString() === id
+        );
+        setIsParticipating(participating);
+      }
     }
   };
 
@@ -40,6 +68,36 @@ export default function ActivityComp({
 
   const startDate = format(activity.start_date, "dd/MM/yyyy");
   const endDate = format(activity.end_date, "dd/MM/yyyy");
+
+  const buttonLayouts = () => {
+    if (user?.school) {
+      if (isParticipating) {
+        return (
+          <div className="flex w-full rounded-[4px] justify-center items-center bg-green-600 gap-2.5 text-white px-6 py-3">
+            <span>✓ Já Participando</span>
+          </div>
+        );
+      }
+
+      return (
+        <ParticipateButton
+          activity_id={id}
+          school_id={user?.school?.id}
+          onParticipate={refreshActivity}
+        />
+      );
+    }
+
+    if (
+      user?.ong &&
+      activity.ong.id === user.ong.id &&
+      activity.status !== "closed"
+    ) {
+      return <DeleteButton activity_id={id} onClose={refreshActivity} />;
+    }
+
+    return null;
+  };
 
   return (
     <section className="mb-16">
@@ -187,11 +245,7 @@ export default function ActivityComp({
           </ActivitySection>
 
           {/* Buttons */}
-          {user?.school ? (
-            <ParticipateButton activity_id={id} school_id={user?.school?.id} />
-          ) : (
-            <DeleteButton activity_id={id} onClose={refreshActivity} />
-          )}
+          {buttonLayouts()}
         </div>
       </div>
     </section>

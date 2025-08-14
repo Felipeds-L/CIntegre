@@ -13,6 +13,7 @@ export default function SettingsPage() {
   async function handleLogout() {
     await logout();
     setUser(null);
+    window.location.href = "/";
   }
 
   return (

@@ -41,10 +41,13 @@ export default function Header() {
             </nav>
 
             <div className="hidden sm:flex gap-4 items-center font-medium text-lg text-[#0A3A80]">
-              <Link href="/profile">
-                {user.ong ? user.ong.name : user.school?.name}
-              </Link>
-              {!user.ong && <p>{user.school?.score}</p>}
+              {user.ong ? (
+                <Link href="/profile">{user.ong.name}</Link>
+              ) : (
+                <Link href="/profile">
+                  {user.school?.name} | {user.school?.score} pontos
+                </Link>
+              )}
             </div>
           </>
         )}
@@ -63,7 +66,7 @@ export default function Header() {
             {user.ong ? user.ong.name : user.school?.name}
           </Link>
           <div className="flex gap-3 items-center">
-            {!user.ong && <p>{user.school?.score}</p>}
+            {!user.ong && <p>{user.school?.score} pontos</p>}
           </div>
         </div>
       )}

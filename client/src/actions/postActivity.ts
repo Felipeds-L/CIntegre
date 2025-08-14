@@ -136,15 +136,6 @@ export default async function postActivity(
       ong_id: user.ong.id,
     };
 
-    console.log(body);
-
-    // const images = formdata.getAll("images") as File[];
-    // images.forEach((image, index) => {
-    //   if (image && image.size > 0) {
-    //     bodyFormData.append(`images`, image);
-    //   }
-    // });
-
     const response = await fetch(url, {
       method: "POST",
       headers: {

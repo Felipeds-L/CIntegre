@@ -14,7 +14,6 @@ export class ActivityController {
   ): Promise<void> {
     try {
       const activityData = req.body;
-      console.log(activityData);
 
       const newActivity =
         await this.activityService.createActivity(

@@ -15,7 +15,6 @@ export class ActivityService {
     data: CreateActivityDTO,
   ): Promise<ActivityDTO> {
     const activity = data;
-    console.log(activity);
 
     const createdAction = await this.prisma.activity.create(
       {

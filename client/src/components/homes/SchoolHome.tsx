@@ -3,9 +3,7 @@ import { AuthUser } from "@/actions/getAuthUser";
 import ActivityCard from "@/components/general/ActivityCard";
 import SetLoading from "@/components/setLoading/setLoading";
 import React, { useState } from "react";
-import getSchoolActivitiesBySchoolId, {
-  SchoolActivity,
-} from "@/actions/getSchoolActivity";
+import getSchoolActivitiesBySchoolId from "@/actions/getSchoolActivity";
 import { Activity } from "@/actions/getActivities";
 
 export default function SchoolHome({ authUser }: { authUser: AuthUser }) {

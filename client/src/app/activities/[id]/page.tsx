@@ -3,9 +3,9 @@ import getAuthUser from "@/actions/getAuthUser";
 import ActivityComp from "@/components/activity/Activity";
 
 type ActivityIdParams = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
 export default async function ActionPage({ params }: ActivityIdParams) {

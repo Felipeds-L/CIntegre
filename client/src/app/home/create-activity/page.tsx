@@ -47,7 +47,6 @@ export default function CreateActionPage() {
 
   const [tags, setTags] = useState<string[]>([]);
   const [tagInput, setTagInput] = useState("");
-  const [previews, setPreviews] = useState<string[]>([]);
 
   function handleChange(
     e: React.ChangeEvent<
@@ -92,7 +91,6 @@ export default function CreateActionPage() {
         endDate: "",
       });
       setTags([]);
-      setPreviews([]);
     }
   }, [state?.ok, router]);
 

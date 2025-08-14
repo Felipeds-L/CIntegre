@@ -110,8 +110,16 @@ export class SchoolActivityService {
       await this.prisma.schoolActivity.delete({
         where: { id },
         include: {
-          school: true,
-          activity: true,
+          school: {
+            include: {
+              address: true,
+            },
+          },
+          activity: {
+            include: {
+              ong: true,
+            },
+          },
         },
       });
     return deletedAction as SchoolActivityDTO;

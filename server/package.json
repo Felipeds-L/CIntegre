@@ -6,6 +6,8 @@
     "dev": "tsx watch src/app.ts",
     "test": "jest",
     "cov": "jest --coverage",
+    "build": "tsc",
+    "start": "node dist/app.js",
     "seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {

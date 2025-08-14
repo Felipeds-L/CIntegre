@@ -24,8 +24,6 @@ export default function ActivityComp({
   user,
   initialActivity,
 }: ActivityProps) {
-  if (!initialActivity) return null;
-
   const [activity, setActivity] = React.useState<Activity | null>(
     initialActivity
   );

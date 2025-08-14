@@ -76,8 +76,6 @@ export default async function postActivity(
 
     const { url } = ACTIVITIES_POST();
 
-    const bodyFormData = new FormData();
-
     const fieldOfActionFilter = {
       Educação: "education",
       Saúde: "health",

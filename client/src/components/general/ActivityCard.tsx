@@ -1,5 +1,4 @@
-import getActivities, { Activity } from "@/actions/getActivities";
-import { useUser } from "@/context/userContext";
+import { Activity } from "@/actions/getActivities";
 import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,8 +9,6 @@ interface CardProps {
 }
 
 export default function ActivityCard({ apiData }: CardProps) {
-  const { user } = useUser();
-
   if (!apiData) {
     return null;
   }

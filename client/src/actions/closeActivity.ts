@@ -1,14 +1,9 @@
 "use server";
-import { SCHOOL_ACTIVITY_POST } from "@/lib/api";
+import { SCHOOL_ACTIVITY_UPDATE } from "@/lib/api";
 import apiError from "@/lib/apiError";
 import { cookies } from "next/headers";
 
-export default async function schoolActivityPost(
-  school_id: number,
-  activity_id: string,
-  status: string,
-  pontuation: number
-) {
+export default async function closeActivity(activity_id: string) {
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get("token");
@@ -21,34 +16,27 @@ export default async function schoolActivityPost(
       };
     }
 
-    const { url } = SCHOOL_ACTIVITY_POST();
-    const body = {
-      school_id,
-      activity_id,
-      status,
-      pontuation,
-    };
+    const { url } = SCHOOL_ACTIVITY_UPDATE(activity_id);
 
     const response = await fetch(url, {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token.value}`,
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify({ status: "closed" }),
     });
 
-    const data = await response.json();
-
     if (!response.ok) {
+      const data = await response.json();
       return {
         ok: false,
-        error: data.error || "Erro ao cadastrar escola em atividade.",
+        error: data.error || "Erro ao fechar atividade.",
         data: null,
       };
     }
 
-    return { data: null, ok: true, error: "" };
+    return { ok: true, error: "", data: null };
   } catch (err: unknown) {
     return apiError(err);
   }

@@ -30,8 +30,6 @@ export default function ParticipateButton({ activity_id, school_id }: Props) {
       pontuation
     );
 
-    console.log("resultado: " + result.data);
-
     if (result.ok) {
       alert("Participação registrada com sucesso!");
     } else {

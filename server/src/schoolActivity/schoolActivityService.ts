@@ -88,8 +88,16 @@ export class SchoolActivityService {
         where: { id },
         data: updateData, // Use the transformed data
         include: {
-          school: true,
-          activity: true,
+          school: {
+            include: {
+              address: true,
+            },
+          },
+          activity: {
+            include: {
+              ong: true,
+            },
+          },
         },
       });
     return updatedAction as SchoolActivityDTO;

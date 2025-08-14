@@ -10,7 +10,13 @@ export default function SchoolRequestsPage() {
   useEffect(() => {
     const fetchActivities = async () => {
       const response = await getActivities();
-      setActivities(response.data);
+      if (!response.data) {
+        return;
+      }
+      const activities = response.data?.filter(
+        (activity) => activity.status !== "closed"
+      );
+      setActivities(activities);
     };
     fetchActivities();
   }, []);

@@ -6,6 +6,7 @@ import SetLoading from "@/components/setLoading/setLoading";
 import Image from "next/image";
 import { format } from "date-fns";
 import ParticipateButton from "@/components/activity/ParticipateButton";
+import DeleteButton from "@/components/activity/DeleteButton";
 
 type ActivityIdParams = {
   params: {
@@ -14,7 +15,7 @@ type ActivityIdParams = {
 };
 
 export default async function ActionPage({ params }: ActivityIdParams) {
-  const { id } = params;
+  const { id } = await params;
 
   const { data: user } = await getAuthUser();
 
@@ -53,30 +54,6 @@ export default async function ActionPage({ params }: ActivityIdParams) {
           <ActivitySection title="Descrição">
             <p className="text-gray-700">{data.description}</p>
           </ActivitySection>
-
-          {/* Schedule Section */}
-          {/* <ActivitySection title="Cronograma da Atividade">
-            <ul>
-              {data.schedule.map((item, index) => (
-                <li
-                  key={index}
-                  className="text-gray-700 flex items-center gap-5"
-                >
-                  <strong>{item.time}</strong>
-                  <p>{item.activity}</p>
-                </li>
-              ))}
-            </ul>
-          </ActivitySection> */}
-
-          {/* Experiences and Skills Section */}
-          {/* <ActivitySection title="Experiências e Habilidades">
-            <ul className="flex flex-wrap gap-2">
-              {data.area_expertise.map((item, index) => (
-                <Tag key={index}>{item}</Tag>
-              ))}
-            </ul>
-          </ActivitySection> */}
 
           {/* Tags Section */}
           <ActivitySection title="Tags">
@@ -132,6 +109,26 @@ export default async function ActionPage({ params }: ActivityIdParams) {
                 />
                 <span>Até {data.volunteer_quantity} Voluntários</span>
               </li>
+
+              <li className="text-gray-600 flex items-center gap-2.5">
+                <Image
+                  src={"/assets/status.svg"}
+                  width={24}
+                  height={24}
+                  alt=""
+                />
+                <span
+                  style={{
+                    color:
+                      data.status === "open" || "in_progress" ? "green" : "red",
+                  }}
+                >
+                  Status:{" "}
+                  {data.status === "open" || "in_progress"
+                    ? "Aberta"
+                    : "Fechada"}
+                </span>
+              </li>
             </ul>
           </ActivitySection>
 
@@ -154,28 +151,6 @@ export default async function ActionPage({ params }: ActivityIdParams) {
             </p>
 
             <ul className="flex flex-col gap-2 pt-2.5">
-              {/* <li>
-                <span className=" flex items-center gap-2.5">
-                  <Image
-                    src={"/assets/globe.svg"}
-                    width={24}
-                    height={24}
-                    alt=""
-                  />
-                  {data.ong.social_medias[0]}
-                </span>
-              </li>
-              <li>
-                <span className="flex items-center gap-2.5">
-                  <Image
-                    src={"/assets/mail.svg"}
-                    width={24}
-                    height={24}
-                    alt=""
-                  />
-                  {data.ong.social_medias[1]}
-                </span>
-              </li> */}
               <li>
                 <span className="flex items-center gap-2.5">
                   <Image
@@ -191,13 +166,11 @@ export default async function ActionPage({ params }: ActivityIdParams) {
           </ActivitySection>
 
           {/* Buttons */}
-
-          <ParticipateButton activity_id={id} school_id={user?.school?.id} />
-
-          {/* <button className="flex w-full rounded-[4px] justify-center items-center bg-transparent gap-2.5 text-blue-800 px-6 py-3 border-2 border-blue-800 hover:cursor-pointer">
-            <Image src={"/assets/share.svg"} width={24} height={24} alt="" />
-            <span>Compartilhar Atividade</span>
-          </button> */}
+          {user?.school ? (
+            <ParticipateButton activity_id={id} school_id={user?.school?.id} />
+          ) : (
+            <DeleteButton activity_id={id} />
+          )}
         </div>
       </div>
     </section>

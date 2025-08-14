@@ -4,7 +4,6 @@ import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { useState } from "react";
 
 interface CardProps {
   apiData: Activity | null;

@@ -7,81 +7,55 @@ import SetLoading from "@/components/setLoading/setLoading";
 const faqData = [
   {
     indice: "Índice 1",
-    tituloGeral: "Visão Geral 1",
-    titulo1: "Lorem Ipsum",
+    tituloGeral: "Como faz para participar de uma atividade?",
+    titulo1: "Passo 1",
     texto1:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic ty. ",
-    titulo2: "Lorem Ipsum",
+      "O primeiro passo é se cadastrar como uma escola da Prefeitura e/ou realizar a autenticação pelo login.",
+    titulo2: "Passo 2",
     texto2:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic ty. ",
-    titulo3: "Lorem Ipsum",
+      "Logo após isso, a página inicial vai estar repleta de cases de atividades com descrições, tags e o status dela e basta você analisar e escolher a que deseja.",
+    titulo3: "Passo 3",
     texto3:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic ty. ",
+      "Basta você clicar no botão que quer participar e em alguns instantes um email de confirmação chegará.",
   },
   {
     indice: "Índice 2",
-    tituloGeral: "Visão Geral 2",
-    titulo1: "Lorem Ipsum",
+    tituloGeral: "Como criar uma atividade?",
+    titulo1: "Passo 1",
     texto1:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic ty. ",
-    titulo2: "Lorem Ipsum",
+      "Primeiramente, é necessário que você esteja logado como uma ONG, e assim que você fizer isso vai aparecer a página inicial.",
+    titulo2: "Passo 2",
     texto2:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic ty. ",
-    titulo3: "Lorem Ipsum",
+      "Agora, você deverá clicar no botão 'Criar uma nova ação'no canto superior direito.",
+    titulo3: "Passo 3",
     texto3:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic ty. ",
+      "Por fim, preencha os requisitos de acordo com a atividade que você pretende realizar e aperto no botão de criar e pronto. ",
   },
   {
     indice: "Índice 3",
-    tituloGeral: "Visão Geral 3",
-    titulo1: "Lorem Ipsum",
+    tituloGeral: "Como minha escola pode ganhar pontos?",
+    titulo1: "Qual o intuito?",
     texto1:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic ty. ",
-    titulo2: "Lorem Ipsum ",
+      "Os pontos servem como uma competição saudável para que escolas sem comprometam em se voluntariar (com os seus alunos) com atividades de Ong's comunitárias.",
+    titulo2: "Passo 1 ",
     texto2:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic ty. ",
-    titulo3: "Lorem Ipsum  ",
+      "Como escola, cada atividade vale pontos pré-determinados em cada case pela Ong que a criou, então, basta analisar na descrição os seus pontos e escolher para participar da ação.",
+    titulo3: "Passo 2 ",
     texto3:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic ty. ",
+      "Após a participação, cabe à Ong validar que realmente houve uma participação e automaticamente esses pontos vão entrar na conta da escola, aumentando a sua posição no ranking.",
   },
   {
     indice: "Índice 4",
-    tituloGeral: "Visão Geral 4",
-    titulo1: "Lorem Ipsum",
+    tituloGeral: "Como faço para saber mais sobre o objetivo dessa plataforma?",
+    titulo1: "Passo 1",
     texto1:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic ty. ",
-    titulo2: "Lorem Ipsum",
+      "No canto inferior da tela principal, existe um footer com um índice de links rápidos. ",
+    titulo2: "Passo 2",
     texto2:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic ty. ",
-    titulo3: "Lorem Ipsum",
+      "Clique no link 'Sobre nós'.",
+    titulo3: "Passo 3",
     texto3:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic ty. ",
-  },
-  {
-    indice: "Índice 5",
-    tituloGeral: "Visão Geral 5",
-    titulo1: "Lorem Ipsum",
-    texto1:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic ty. ",
-    titulo2: "Lorem Ipsum",
-    texto2:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic ty. ",
-    titulo3: "Lorem Ipsum",
-    texto3:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic ty. ",
-  },
-  {
-    indice: "Índice 6",
-    tituloGeral: "Visão Geral 6",
-    titulo1: "Lorem Ipsum",
-    texto1:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic ty. ",
-    titulo2: "Lorem Ipsum",
-    texto2:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic ty. ",
-    titulo3: "Lorem Ipsum",
-    texto3:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic ty. ",
+      "Nessa tela existe tudo explicado sobre nossa missão e nossa história, boa leitura!",
   },
 ];
 

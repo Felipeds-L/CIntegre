@@ -6,7 +6,7 @@
 */
 -- AlterEnum
 BEGIN;
-CREATE TYPE "AreaExpertise_new" AS ENUM ('education', 'health', 'environment', 'social_services', 'technology', 'culture', 'urban_planning', 'human_rights', 'food_security');
+CREATE TYPE "AreaExpertise_new" AS ENUM ('education', 'health', 'environment', 'social_services', 'tecnology', 'culture', 'urban_planning', 'human_rights', 'food_security');
 ALTER TABLE "Activity" ALTER COLUMN "area_expertise" TYPE "AreaExpertise_new"[] USING ("area_expertise"::text::"AreaExpertise_new"[]);
 ALTER TYPE "AreaExpertise" RENAME TO "AreaExpertise_old";
 ALTER TYPE "AreaExpertise_new" RENAME TO "AreaExpertise";

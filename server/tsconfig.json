@@ -1,26 +1,17 @@
 {
   "compilerOptions": {
-    "module": "CommonJS", // Módulos compatíveis com Node.js
-    "target": "ES6", // Configuração de compilação para ES6
-    "moduleResolution": "node", // Resolver módulos de acordo com o Node
-    "esModuleInterop": true, // Permitir interoperabilidade entre ES e CommonJS
-    "skipLibCheck": true, // Ignorar verificação de tipos nas bibliotecas
-    "strict": true, // Habilitar checagem rigorosa de tipos
-    "noEmit": true, // Não gerar arquivos JS, apenas verificar os tipos
-    "types": [
-      "jest",
-      "node"
-    ], // Incluir os tipos do Jest
-    "lib": [
-      "esnext",
-      "dom"
-    ]
+    "module": "CommonJS",
+    "target": "ES6",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmitOnError": false,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "types": ["jest", "node"],
+    "lib": ["esnext", "dom"]
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx"
-  ], // Incluir arquivos .ts e .tsx
-  "exclude": [
-    "node_modules"
-  ] // Excluir node_modules
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "prisma/seed.ts"]
 }

@@ -523,7 +523,7 @@ async function seed() {
         title: 'Oficina de Programação para Jovens',
         description:
           'Oficinas gratuitas de programação e tecnologia para jovens de 14 a 18 anos.',
-        area_expertise: ['technology', 'education'],
+        area_expertise: ['tecnology', 'education'],
         tags: [
           'tecnologia',
           'programação',
@@ -996,7 +996,7 @@ async function seed() {
         title: 'Mutirão de Digitalização de Documentos',
         description:
           'Auxílio na digitalização e organização de documentos para famílias de baixa renda.',
-        area_expertise: ['technology', 'social_services'],
+        area_expertise: ['tecnology', 'social_services'],
         tags: [
           'digitalização',
           'documentos',

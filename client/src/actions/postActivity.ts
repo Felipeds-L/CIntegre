@@ -83,7 +83,7 @@ export default async function postActivity(
       Saúde: "health",
       "Meio Ambiente": "environment",
       "Serviços Sociais": "social_services",
-      Tecnologia: "technology",
+      Tecnologia: "tecnology",
       Cultura: "culture",
       "Planejamento Urbano": "urban_planning",
       "Direitos Humanos": "human_rights",

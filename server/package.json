@@ -6,7 +6,8 @@
     "dev": "tsx watch src/app.ts",
     "test": "jest",
     "cov": "jest --coverage",
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "ts-node prisma/seed.ts",
+    "build": "tsc"
   },
   "dependencies": {
     "@prisma/client": "^6.11.1",

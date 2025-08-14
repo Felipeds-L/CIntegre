@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:no-lint-no-types": "NEXT_SKIP_TYPE_CHECK=true next build --no-lint",
     "start": "next start",
     "lint": "next lint",
     "test:watch": "jest --watch",

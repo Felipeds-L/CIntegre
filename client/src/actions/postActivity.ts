@@ -45,7 +45,7 @@ export default async function postActivity(
       };
     }
 
-    const {data: user} = await getAuthUser();
+    const { data: user } = await getAuthUser();
     if (!user?.ong) {
       return {
         ok: false,
@@ -53,7 +53,6 @@ export default async function postActivity(
         data: null,
       };
     }
-
 
     let tags: string[] = [];
     if (tagsString) {
@@ -76,8 +75,6 @@ export default async function postActivity(
     }
 
     const { url } = ACTIVITIES_POST();
-
-    const bodyFormData = new FormData();
 
     const fieldOfActionFilter = {
       Educação: "education",
@@ -107,7 +104,9 @@ export default async function postActivity(
       tags,
       status: "open",
       pontuation: (actionType === "volunteer" ? 200 : 100) as number,
-      photos: ["https://images.unsplash.com/photo-1576675466684-456bcdeccfbf?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"],
+      photos: [
+        "https://images.unsplash.com/photo-1576675466684-456bcdeccfbf?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      ],
       ong_id: user.ong.id,
     };
 
@@ -124,7 +123,7 @@ export default async function postActivity(
       method: "POST",
       headers: {
         Authorization: `Bearer ${token.value}`,
-        "Content-Type": "application/json", 
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
     });

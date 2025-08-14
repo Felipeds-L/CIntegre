@@ -1,4 +1,4 @@
-import getActivities, { Activity } from "@/actions/getActivities";
+import { Activity } from "@/actions/getActivities";
 import { useUser } from "@/context/userContext";
 import { format } from "date-fns";
 import Image from "next/image";

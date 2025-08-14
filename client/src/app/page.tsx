@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import getActivities, { Activity } from "@/actions/getActivities";
 import PhraseCarousel from "@/components/phraseCarousel/phraseCarousel";
 import SetLoading from "@/components/setLoading/setLoading";
-import getSchools, { School } from "@/actions/getSchools";
+import getSchools from "@/actions/getSchools";
 
 interface RankingData {
   position: string;

@@ -1,4 +1,5 @@
 import { jwtVerify } from "jose";
+import apiError from "./apiError";
 
 export default async function verifyToken(token: string) {
   if (!token) return false;
@@ -9,7 +10,8 @@ export default async function verifyToken(token: string) {
     });
 
     return true;
-  } catch (error) {
+  } catch (err) {
+    apiError(err);
     return false;
   }
 }

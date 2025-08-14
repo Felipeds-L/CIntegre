@@ -5,30 +5,6 @@ import SetLoading from "@/components/setLoading/setLoading";
 import { useEffect } from "react";
 import getSchools, { School } from "@/actions/getSchools";
 
-function StatCard({
-  value,
-  label,
-  period,
-  colorClass,
-}: {
-  value: number;
-  label: string;
-  period: string;
-  colorClass: string;
-}) {
-  return (
-    <div className="bg-white p-4 rounded-lg shadow-md flex items-center gap-4">
-      <div className={`w-3 h-3 rounded-full ${colorClass}`}></div>
-
-      <div>
-        <span className="text-3xl font-bold mb-1">{value}</span>
-        <span className="ml-1 font-semibold mb-1">{label}</span>
-        <p className="text-sm mb-1">{period}</p>
-      </div>
-    </div>
-  );
-}
-
 function PodiumCard({
   rank,
   score,
@@ -73,10 +49,6 @@ export default function RankingPage() {
 
   const [searchTerm, setSearchTerm] = useState("");
 
-  const sorted = schools?.sort(function (a, b) {
-    return b.score - a.score;
-  });
-
   const sortedRanking = schools?.map(function (a: School, index: number) {
     return {
       ...a,
@@ -108,27 +80,6 @@ export default function RankingPage() {
     <div className="bg-gray-50 min-h-screen p-4 sm:p-6 md:p-8">
       <SetLoading />
       <div className="max-w-7xl mx-auto">
-        {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
-          <StatCard
-            value={12}
-            label="ONGs"
-            period="Auxiliadas no dia"
-            colorClass="bg-green-500"
-          />
-          <StatCard
-            value={99}
-            label="ONGs"
-            period="Auxiliadas no mês"
-            colorClass="bg-blue-500"
-          />
-          <StatCard
-            value={123}
-            label="ONGs"
-            period="Auxiliadas no ano"
-            colorClass="bg-black"
-          />
-        </div> */}
-
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           {/* Top 3 */}
           <div className="flex flex-col md:flex-row justify-center items-end gap-4">

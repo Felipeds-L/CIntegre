@@ -3,6 +3,7 @@
 import { ACTIVITIES_POST } from "@/lib/api";
 import apiError from "@/lib/apiError";
 import { cookies } from "next/headers";
+import getAuthUser from "./getAuthUser";
 
 interface ActionState {
   ok: boolean;
@@ -34,7 +35,8 @@ export default async function postActivity(
       !location ||
       !volunteers ||
       !duration ||
-      !startDate
+      !startDate ||
+      !endDate
     ) {
       return {
         ok: false,
@@ -42,6 +44,16 @@ export default async function postActivity(
         data: null,
       };
     }
+
+    const {data: user} = await getAuthUser();
+    if (!user?.ong) {
+      return {
+        ok: false,
+        error: "Usuário não autenticado.",
+        data: null,
+      };
+    }
+
 
     let tags: string[] = [];
     if (tagsString) {
@@ -80,24 +92,26 @@ export default async function postActivity(
     };
 
     type FieldOfActionKey = keyof typeof fieldOfActionFilter;
-
-    const actionData = {
+    const formattedStartDate = new Date(startDate).toISOString();
+    const formattedEndDate = new Date(endDate).toISOString();
+    const body = {
       title,
       description,
-      area_expertise: fieldOfActionFilter[fieldOfAction as FieldOfActionKey],
+      area_expertise: [fieldOfActionFilter[fieldOfAction as FieldOfActionKey]],
       category: actionType === "Voluntariado" ? "volunteer" : "donation",
       address: location,
       volunteer_quantity: Number(volunteers),
       duration,
-      start_date: startDate,
-      end_date: endDate,
+      start_date: formattedStartDate,
+      end_date: formattedEndDate,
       tags,
       status: "open",
       pontuation: (actionType === "volunteer" ? 200 : 100) as number,
-      photos: [],
+      photos: ["https://images.unsplash.com/photo-1576675466684-456bcdeccfbf?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"],
+      ong_id: user.ong.id,
     };
 
-    bodyFormData.append("actionData", JSON.stringify(actionData));
+    console.log(body);
 
     // const images = formdata.getAll("images") as File[];
     // images.forEach((image, index) => {
@@ -110,8 +124,9 @@ export default async function postActivity(
       method: "POST",
       headers: {
         Authorization: `Bearer ${token.value}`,
+        "Content-Type": "application/json", 
       },
-      body: bodyFormData,
+      body: JSON.stringify(body),
     });
 
     const responseData = await response.json();

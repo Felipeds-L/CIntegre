@@ -47,7 +47,6 @@ export default function CreateActionPage() {
 
   const [tags, setTags] = useState<string[]>([]);
   const [tagInput, setTagInput] = useState("");
-  const [files, setFiles] = useState<File[]>([]);
   const [previews, setPreviews] = useState<string[]>([]);
 
   function handleChange(
@@ -77,31 +76,6 @@ export default function CreateActionPage() {
     setTagInput(e.target.value);
   }
 
-  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
-    if (e.target.files) {
-      const newFiles = Array.from(e.target.files);
-
-      setFiles(function (prevFiles) {
-        return [...prevFiles, ...newFiles];
-      });
-
-      const newPreviews = newFiles.map(function (file) {
-        return URL.createObjectURL(file);
-      });
-
-      setPreviews(function (prevPreviews) {
-        return [...prevPreviews, ...newPreviews];
-      });
-    }
-  }
-
-  function handleRemoveFile(indexToRemove: number) {
-    URL.revokeObjectURL(previews[indexToRemove]);
-
-    setFiles(files.filter((_, index) => index !== indexToRemove));
-    setPreviews(previews.filter((_, index) => index !== indexToRemove));
-  }
-
   React.useEffect(() => {
     if (state?.ok) {
       alert("Ação criada com sucesso!");
@@ -120,7 +94,6 @@ export default function CreateActionPage() {
         endDate: "",
       });
       setTags([]);
-      setFiles([]);
       setPreviews([]);
     }
   }, [state?.ok, router]);
@@ -218,7 +191,10 @@ export default function CreateActionPage() {
               <TagDisplay tags={tags} onRemoveTag={handleRemoveTag} />
             </div>
           </div>
+        </div>
 
+        {/* coluna 2 */}
+        <div className="flex flex-col gap-5">
           <div>
             <label htmlFor="actionType" className="block font-medium mb-1">
               Tipo da Ação
@@ -245,10 +221,7 @@ export default function CreateActionPage() {
             placeholder="Ex: Praia de Boa Viagem."
             required
           />
-        </div>
 
-        {/* coluna 2 */}
-        <div className="flex flex-col gap-5">
           <LargeInput
             name="duration"
             label="Duração Estimada por dia"
@@ -285,77 +258,9 @@ export default function CreateActionPage() {
             placeholder="Ex: 10"
             required
           />
-
-          <div>
-            <label className="block font-medium mb-1">Anexe suas fotos</label>
-
-            <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-              <div className="space-y-1 text-center">
-                <svg
-                  className="mx-auto h-12 w-12 text-gray-400"
-                  stroke="currentColor"
-                  fill="none"
-                  viewBox="0 0 48 48"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  ></path>
-                </svg>
-
-                <div className="flex text-sm text-gray-600">
-                  <label
-                    htmlFor="file-upload"
-                    className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600"
-                  >
-                    <span>Carregue suas fotos</span>
-                    <input
-                      id="file-upload"
-                      name="images"
-                      type="file"
-                      className="sr-only"
-                      multiple
-                      accept="image/*"
-                      onChange={handleFileChange}
-                    />
-                  </label>
-                </div>
-
-                <p className="text-xs text-gray-500">PNG ou JPG</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-4">
-            <h1 className="block font-medium mb-1">Pré-visualização:</h1>
-
-            <div className="mt-2 grid sm:grid-cols-4 md:grid-cols-5 gap-4">
-              {previews.map((previewUrl, index) => (
-                <div key={index} className="relative aspect-square">
-                  <img
-                    src={previewUrl}
-                    alt={`Preview ${index + 1}`}
-                    className="h-full w-full object-cover rounded-md"
-                  />
-
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveFile(index)}
-                    className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full h-6 w-6 flex items-center justify-center text-base font-bold"
-                  >
-                    ×
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-
           <div className="mt-0">
             <LargeButton type="submit" className="w-full" disabled={pending}>
-              {pending ? "Criando..." : "Criar"}
+              {pending ? "Criando..." : "Criar ação"}
             </LargeButton>
           </div>
         </div>

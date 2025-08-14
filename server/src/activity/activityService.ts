@@ -14,40 +14,26 @@ export class ActivityService {
   async createActivity(
     data: CreateActivityDTO,
   ): Promise<ActivityDTO> {
-    const {
-      area_expertise,
-      category,
-      description,
-      ong_id,
-      photos,
-      status,
-      pontuation,
-      title,
-      tags,
-      address,
-      duration,
-      start_date,
-      end_date,
-      volunteer_quantity,
-    } = data;
+    const activity = data;
+    console.log(activity);
 
     const createdAction = await this.prisma.activity.create(
       {
         data: {
-          title,
-          photos,
-          category,
-          description,
-          pontuation,
-          status,
-          area_expertise,
-          address,
-          tags,
-          duration,
-          start_date,
-          end_date,
-          volunteer_quantity,
-          ong: { connect: { id: ong_id } },
+          title: activity.title,
+          photos: activity.photos || [],
+          category: activity.category,
+          description: activity.description,
+          pontuation: activity.pontuation,
+          status: activity.status,
+          area_expertise: activity.area_expertise,
+          address: activity.address,
+          tags: activity.tags,
+          duration: activity.duration,
+          start_date: activity.start_date,
+          end_date: activity.end_date,
+          volunteer_quantity: activity.volunteer_quantity,
+          ong: { connect: { id: activity.ong_id } },
         },
         include: {
           ong: true,

@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - feat/git-actions
 
 jobs:
   build:

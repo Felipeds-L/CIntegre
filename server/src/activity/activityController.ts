@@ -13,45 +13,8 @@ export class ActivityController {
     res: Response,
   ): Promise<void> {
     try {
-      const {
-        title,
-        description,
-        area_expertise,
-        tags,
-        category,
-        address,
-        duration,
-        start_date,
-        end_date,
-        volunteer_quantity,
-        photos,
-        status,
-        pontuation,
-        ong_id,
-        ong,
-      } = req.body;
-
-      if (
-        !title ||
-        !photos ||
-        !description ||
-        !category ||
-        !area_expertise ||
-        !status ||
-        !pontuation ||
-        !ong_id ||
-        !tags ||
-        !address ||
-        !duration ||
-        !start_date ||
-        !end_date ||
-        !volunteer_quantity
-      ) {
-        res
-          .status(400)
-          .json({ error: 'Missing a required field' });
-      }
       const activityData = req.body;
+      console.log(activityData);
 
       const newActivity =
         await this.activityService.createActivity(

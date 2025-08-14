@@ -2,17 +2,21 @@
 
 import Image from "next/image";
 import closeActivity from "@/actions/closeActivity";
+import { useRouter } from "next/navigation";
 
 type Props = {
   activity_id: string;
+  onClose: () => void;
 };
 
-export default function DeleteButton({ activity_id }: Props) {
+export default function DeleteButton({ activity_id, onClose }: Props) {
+  const router = useRouter();
+
   const handleCloseClick = async () => {
     const result = await closeActivity(activity_id);
     if (result.ok) {
-      alert("Atividade fechada com sucesso!");
-      // Atualize a lista ou redirecione se necessário
+      router.refresh();
+      onClose?.();
     } else {
       alert(result.error || "Erro ao fechar atividade.");
     }

@@ -2,6 +2,7 @@
 import { SCHOOL_ACTIVITY_UPDATE } from "@/lib/api";
 import apiError from "@/lib/apiError";
 import { cookies } from "next/headers";
+import { revalidatePath } from "next/cache";
 
 export default async function closeActivity(activity_id: string) {
   try {
@@ -35,6 +36,8 @@ export default async function closeActivity(activity_id: string) {
         data: null,
       };
     }
+
+    revalidatePath(`/activities/${activity_id}`);
 
     return { ok: true, error: "", data: null };
   } catch (err: unknown) {

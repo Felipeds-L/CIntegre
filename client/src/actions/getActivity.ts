@@ -16,9 +16,7 @@ export default async function getActivity(id: string) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      next: {
-        revalidate: 60, // Cache for 60 seconds
-      },
+      cache: "no-store",
     });
 
     if (!response.ok) {

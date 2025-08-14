@@ -3,12 +3,15 @@ import {
   ActivityDTO,
   CreateActivityDTO,
 } from './activityDto';
+import { SchoolActivityService } from '../schoolActivity/schoolActivityService';
 
 export class ActivityService {
   private prisma: PrismaClient;
+  private schoolActivityService: SchoolActivityService;
 
   constructor() {
     this.prisma = new PrismaClient();
+    this.schoolActivityService = new SchoolActivityService();
   }
 
   async createActivity(
@@ -74,6 +77,35 @@ export class ActivityService {
         },
       },
     );
+
+    if (data.status === "closed") {
+      // Busca todas as SchoolActivity relacionadas a essa atividade
+      const schoolActivities = await this.prisma.schoolActivity.findMany({
+        where: { activity_id: id },
+      });
+
+      // Define a pontuação conforme o tipo da atividade
+      const points = updatedAction.category === "volunteer" ? 200 : 100;
+
+      // Atualiza a pontuação de cada SchoolActivity
+      for (const sa of schoolActivities) {
+        await this.prisma.schoolActivity.update({
+          where: { id: sa.id },
+          data: { pontuation: points },
+        });
+
+        // Opcional: Atualize também o score total da escola
+        await this.prisma.school.update({
+          where: { id: sa.school_id },
+          data: {
+            score: {
+              increment: points,
+            },
+          },
+        });
+      }
+    }
+
     return updatedAction as ActivityDTO;
   }
 

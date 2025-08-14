@@ -61,8 +61,6 @@ export default async function getAuthUser() {
 
     const data = (await response.json()) as AuthUser;
 
-    console.log("Fetched auth user:", data);
-
     return { data, ok: true, error: "" };
   } catch (err: unknown) {
     return apiError(err);

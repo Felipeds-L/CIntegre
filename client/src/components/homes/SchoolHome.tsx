@@ -1,23 +1,28 @@
 "use client";
-
-import getActivities, { Activity } from "@/actions/getActivities";
 import { AuthUser } from "@/actions/getAuthUser";
 import ActivityCard from "@/components/general/ActivityCard";
 import SetLoading from "@/components/setLoading/setLoading";
 import React, { useState } from "react";
+import getSchoolActivitiesBySchoolId, {
+  SchoolActivity,
+} from "@/actions/getSchoolActivity";
 
 export default function SchoolHome({ authUser }: { authUser: AuthUser }) {
-  if (!authUser.school) return null;
-
-  const [activities, setActivities] = useState<Activity[] | null>([]);
+  const [activities, setActivities] = useState<SchoolActivity[] | null>([]);
 
   React.useEffect(() => {
     const fetchActivities = async () => {
-      const response = await getActivities();
+      if (!authUser.school) return;
+      const response = await getSchoolActivitiesBySchoolId(authUser.school.id);
+
+      if (!response || !response.data) {
+        return;
+      }
+
       setActivities(response.data);
     };
     fetchActivities();
-  }, []);
+  }, [authUser.school]);
 
   return (
     <>
@@ -26,7 +31,7 @@ export default function SchoolHome({ authUser }: { authUser: AuthUser }) {
         <div className="container mx-auto">
           <h1 className="text-5xl font-bold">
             <span className="block">Boas Vindas,</span>
-            <span className="block">{authUser.school.name}</span>
+            <span className="block">{authUser.school?.name}</span>
           </h1>
           <p className="mt-2 text-lg">Veja os últimos pedidos de ONGs!</p>
         </div>

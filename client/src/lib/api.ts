@@ -81,11 +81,38 @@ export function ACTIVITIES_GET_BY_ID(id: string) {
     url: `${API_URL}/activities/${id}`,
   };
 }
+export function SCHOOL_ACTIVITY_UPDATE(id: string) {
+  return {
+    url: `${API_URL}/Activities/${id}`,
+  };
+}
 
 // --- School ---
 // Get all Schools
 export function SCHOOLS_GET() {
   return {
     url: `${API_URL}/schools`,
+  };
+}
+
+export function SCHOOL_ACTIVITY_DELETE(id: string) {
+  return {
+    url: `${API_URL}/schoolActivities/${id}`,
+  };
+}
+
+// --- SCHOOL_ACTIVITIES ---
+
+// Get SchoolActivities
+export function SCHOOL_ACTIVITIES_GET(id: number) {
+  return {
+    url: `${API_URL}/schoolActivities/school/${id}`,
+  };
+}
+
+// Create a new SchoolActivity
+export function SCHOOL_ACTIVITY_POST() {
+  return {
+    url: `${API_URL}/schoolActivities`,
   };
 }

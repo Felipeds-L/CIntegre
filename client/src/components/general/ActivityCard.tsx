@@ -55,7 +55,7 @@ export default function ActivityCard({ apiData }: CardProps) {
             href={`activities/${apiData.id}`}
             className="rounded-sm bg-[#0f57bf] text-white px-6 py-2 text-sm"
           >
-            {user?.school ? "Apoiar!" : "Ver detalhes"}
+            Ver detalhes
           </Link>
         </div>
       </div>

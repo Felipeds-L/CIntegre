@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import LargeButton from "@/components/buttons/LargeButton";
 import ActivityCard from "@/components/general/ActivityCard";
 import SetLoading from "@/components/setLoading/setLoading";
 import Link from "next/link";
@@ -28,7 +29,7 @@ export default function OngHome({ authUser }: { authUser: AuthUser }) {
 
   const filteredActivities =
     activeTab === "todos"
-      ? ongActivities
+      ? ongActivities.filter((activity) => activity.status !== "closed")
       : ongActivities.filter((activity) => activity.status === "closed");
 
   if (!authUser.ong) return null;
@@ -36,14 +37,14 @@ export default function OngHome({ authUser }: { authUser: AuthUser }) {
     <>
       <SetLoading />
       <section className="bg-gradient-to-r from-[#EBF3FF] to-[#85B6FF] px-8 py-12 text-black">
-        <div className="container mx-auto flex justify-between items-end">
-          <h1 className="text-7xl font-bold">
+        <div className="container mx-auto flex flex-col items-center justify-between gap-4 sm:flex-row sm:items-end">
+          <h1 className="text-center text-5xl font-bold sm:text-left sm:text-7xl">
             <span className="block">Bem-Vinda,</span>
             <span className="block">{authUser.ong.name}!</span>
           </h1>
           <Link
             href={"/home/create-activity"}
-            className="py-1.5 px-[6.25rem] text-white bg-[#0F57BF] rounded-md hover:bg-blue-700 cursor-pointer text-lg"
+            className="w-full text-center rounded-md bg-[#0F57BF] py-1.5 px-4 text-lg text-white hover:bg-blue-700 cursor-pointer sm:w-auto sm:px-[6.25rem]"
           >
             Criar uma nova ação
           </Link>

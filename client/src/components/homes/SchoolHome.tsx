@@ -18,7 +18,8 @@ export default function SchoolHome({ authUser }: { authUser: AuthUser }) {
         return;
       }
 
-      setActivities(response.data);
+      const data = response.data.map((item) => item.activity);
+      setActivities(data);
     };
     fetchActivities();
   }, [authUser.school]);

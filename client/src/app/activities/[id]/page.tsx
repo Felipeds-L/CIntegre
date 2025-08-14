@@ -5,6 +5,7 @@ import Tag from "@/components/general/Tag";
 import SetLoading from "@/components/setLoading/setLoading";
 import Image from "next/image";
 import { format } from "date-fns";
+import ParticipateButton from "@/components/activity/ParticipateButton";
 
 type ActivityIdParams = {
   params: {
@@ -13,7 +14,7 @@ type ActivityIdParams = {
 };
 
 export default async function ActionPage({ params }: ActivityIdParams) {
-  const { id } = await params;
+  const { id } = params;
 
   const { data: user } = await getAuthUser();
 
@@ -191,23 +192,7 @@ export default async function ActionPage({ params }: ActivityIdParams) {
 
           {/* Buttons */}
 
-          <button
-            className="flex w-full rounded-[4px] justify-center items-center bg-[#0f57bf] gap-2.5 text-white px-6 py-3 hover:cursor-pointer"
-            disabled={!user?.school}
-            style={{
-              backgroundColor: user?.school ? "#0f57bf" : "#333",
-              opacity: user?.school ? 1 : 0.5,
-              cursor: user?.school ? "pointer" : "not-allowed",
-            }}
-          >
-            <Image
-              src={"/assets/personButton.svg"}
-              width={24}
-              height={24}
-              alt=""
-            />
-            <span>Participar da Atividade</span>
-          </button>
+          <ParticipateButton activity_id={id} school_id={user?.school?.id} />
 
           {/* <button className="flex w-full rounded-[4px] justify-center items-center bg-transparent gap-2.5 text-blue-800 px-6 py-3 border-2 border-blue-800 hover:cursor-pointer">
             <Image src={"/assets/share.svg"} width={24} height={24} alt="" />

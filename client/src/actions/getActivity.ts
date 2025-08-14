@@ -1,3 +1,4 @@
+"use server";
 import { ACTIVITIES_GET_BY_ID } from "@/lib/api";
 import apiError from "@/lib/apiError";
 import { Activity } from "./getActivities";

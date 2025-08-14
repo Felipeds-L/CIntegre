@@ -89,3 +89,19 @@ export function SCHOOLS_GET() {
     url: `${API_URL}/schools`,
   };
 }
+
+// --- SCHOOL_ACTIVITIES ---
+
+// Get SchoolActivities
+export function SCHOOL_ACTIVITIES_GET() {
+  return {
+    url: `${API_URL}/schoolActivities`,
+  };
+}
+
+// Create a new SchoolActivity
+export function SCHOOL_ACTIVITY_POST() {
+  return {
+    url: `${API_URL}/schoolActivities/`,
+  };
+}

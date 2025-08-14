@@ -125,8 +125,16 @@ export class SchoolActivityService {
     return (await this.prisma.schoolActivity.findMany({
       where: { school_id: schoolId },
       include: {
-        school: true,
-        activity: true,
+        school: {
+          include: {
+            address: true,
+          },
+        },
+        activity: {
+          include: {
+            ong: true,
+          },
+        },
       },
     })) as SchoolActivityDTO[];
   }

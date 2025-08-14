@@ -7,8 +7,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import ActivityCard from '@/components/general/ActivityCard';
-import { useEffect, useState } from 'react';
-import getActivities, { Activity } from '@/actions/getActivities';
+import { Activity } from '@/actions/getActivities';
 
 export function CarouselCard({cards}: { cards: Activity[] | null}) {
 

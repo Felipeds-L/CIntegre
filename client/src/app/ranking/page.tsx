@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import React, { useState } from "react";
 import LargeInput from "@/components/input/LargeInput";
 import SetLoading from "@/components/setLoading/setLoading";

@@ -1,5 +1,4 @@
 "use client";
-import ActivityCard from "@/components/general/ActivityCard";
 import { CarouselCard } from "@/components/general/CarouselCard";
 import RankingSmall from "@/components/general/RankingSmall";
 import Image from "next/image";

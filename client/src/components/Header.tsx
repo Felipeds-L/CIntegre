@@ -3,9 +3,6 @@ import Link from "next/link";
 import cintegreHeader from "../../public/CIntegreHeader.svg";
 import getAuthUser from "@/actions/getAuthUser";
 
-const loggedIn = true;
-const ongLogged = false;
-
 export default async function Header() {
   const { data: user } = await getAuthUser();
 

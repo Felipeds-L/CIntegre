@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v3
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Instalar e buildar o server
+        run: |
+          cd server
+          npm install
+          npm run build
+
+      - name: Instalar e buildar o client
+        run: |
+          cd client
+          npm install
+          npm run build

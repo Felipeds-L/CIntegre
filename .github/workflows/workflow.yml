@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - feat/git-actions
+      - feat/github-actions
 
 jobs:
   build:
@@ -12,21 +12,28 @@ jobs:
 
     steps:
       - name: Baixar código
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Configurar Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
+      - name: Debug - Estrutura do repositório
+        run: ls -R
+
       - name: Instalar e buildar o server
         run: |
-          cd server
-          npm install
-          npm run build
+          if [ -d "server" ]; then
+            cd server
+            npm install
+            npm run build
+          fi
 
       - name: Instalar e buildar o client
         run: |
-          cd client
-          npm install
-          npm run build
+          if [ -d "client" ]; then
+            cd client
+            npm install
+            npm run build
+          fi

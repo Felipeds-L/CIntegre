@@ -9,9 +9,15 @@ import { setActivityRoutes } from './activity/activityRoutes';
 import { setAuthRoutes } from './auth/authRoutes';
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT: number = parseInt(process.env.PORT!);
+const HOST = String(process.env.HOST);
+
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN,
+  origin: [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+    'http://172.18.0.4:3000',
+  ],
   credentials: true,
 };
 
@@ -26,8 +32,21 @@ setSchoolActivityRoutes(app);
 setActivityRoutes(app);
 setAuthRoutes(app);
 
-app.listen(PORT, () => {
+app.get('/health', (req, res) => {
+  res.json({
+    status: 'OK',
+    timestamp: new Date().toISOString(),
+    cors: process.env.CORS_ORIGIN,
+  });
+});
+
+app.listen(PORT, HOST, () => {
   console.log(
-    `Server is running on http://localhost:${PORT}`,
+    `Server is running on http://${HOST}:${PORT}`,
+  );
+  console.log(
+    `🌐 CORS enabled for: ${
+      process.env.CORS_ORIGIN || 'http://localhost:3000'
+    }`,
   );
 });

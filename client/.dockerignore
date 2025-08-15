@@ -7,7 +7,6 @@ out
 dist
 
 # Environment
-.env
 
 # Tests
 src/components/__testes__

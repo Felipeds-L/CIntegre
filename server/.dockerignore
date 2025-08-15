@@ -6,7 +6,6 @@ dist
 build
 
 # Environment
-.env
 
 # Tests
 src/__testes__

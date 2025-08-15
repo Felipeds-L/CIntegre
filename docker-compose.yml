@@ -34,13 +34,13 @@ services:
       - DATABASE_URL=${DATABASE_URL}
       - JWT_SECRET=${JWT_SECRET}
       - PORT=${SERVER_PORT}
+      - HOST=${HOST}
+      - CORS_ORIGIN=${CORS_ORIGIN}
     depends_on:
       db:
         condition: service_healthy
     networks:
       - cintegre-network
-    volumes:
-      - ./server/.env:/app/.env
 
   # Frontend (Client)
   client:
@@ -55,8 +55,6 @@ services:
       - server
     networks:
       - cintegre-network
-    volumes:
-      - ./client/.env:/app/.env
 
 volumes:
   postgresql_data: {}

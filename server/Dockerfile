@@ -1,21 +1,42 @@
+# Build stage
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+# Copiar dependências e instalar tudo
+COPY package.json package-lock.json* ./
+COPY prisma ./prisma
+RUN npm ci
+
+# Copiar código e build
+COPY . .
+RUN npx prisma generate && npm run build
+
+# Compilar seed.ts para JavaScript
+RUN npx tsc prisma/seed.ts --outDir dist/prisma --esModuleInterop --skipLibCheck
+
+# Production stage  
 FROM node:20-alpine
 
 WORKDIR /app
 
-# Copiar dependências e schema do Prisma
+# Instalar netcat
+RUN apk add --no-cache netcat-openbsd
+
+# Copiar package.json e instalar apenas produção
 COPY package.json package-lock.json* ./
-COPY prisma ./prisma
+RUN npm ci --omit=dev && \
+    npm install prisma && \
+    npm cache clean --force
 
-# Instalar dependências
-RUN npm install
+# Copiar apenas arquivos essenciais do build
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 
-# Copiar código fonte
-COPY . .
-
-# Gerar Prisma Client e build
+# Gerar Prisma Client
 RUN npx prisma generate
-RUN npm run build
 
 EXPOSE 4000
 
-CMD ["sh", "-c", "while ! nc -z db 5432; do echo 'Waiting for db...'; sleep 2; done; npx prisma migrate deploy && npm run seed && node dist/app.js"]
+CMD ["sh", "-c", "while ! nc -z db 5432; do echo 'Waiting for db...'; sleep 2; done; npx prisma migrate deploy && node dist/prisma/seed.js && node dist/app.js"]

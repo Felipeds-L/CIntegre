@@ -49,7 +49,7 @@ export default function RankingPage() {
 
   const [searchTerm, setSearchTerm] = useState("");
   
-  //@typescript-eslint/no-unused-vars
+  {/* @typescript-eslint/no-unused-vars */}
   const sorted = schools?.sort(function (a, b) {
     return b.score - a.score;
   });

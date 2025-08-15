@@ -1,5 +1,28 @@
+# Dependencies 
 node_modules
-Dockerfile
-.dockerignore
+
+# Build
+dist
+build
+
+# Environment
+.env
+
+# Tests
 src/__testes__
+src/**/*.test.ts
+src/**/*.spec.ts
+coverage
+jest.config.js
+
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile*
+.dockerignore
+docker-compose*.yml
+
+# Documentation
 *.md

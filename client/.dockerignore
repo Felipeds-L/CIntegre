@@ -1,5 +1,33 @@
+# Dependencies
 node_modules
+
+# Next.js build
 .next
-Dockerfile
-.dockerignore
+out
+dist
+
+# Environment
+.env
+
+# Tests
 src/components/__testes__
+src/**/*.test.ts
+src/**/*.test.tsx
+src/**/*.spec.ts
+src/**/*.spec.tsx
+coverage
+jest.setup.ts
+jest.config.ts
+
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile*
+.dockerignore
+docker-compose*.yml
+
+# Documentation
+*.md
+README.md

@@ -49,11 +49,11 @@ export default function RankingPage() {
 
   const [searchTerm, setSearchTerm] = useState("");
   
-  //@typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const sorted = schools?.sort(function (a, b) {
     return b.score - a.score;
   });
-
+  
   const sortedRanking = schools?.map(function (a: School, index: number) {
     return {
       ...a,

@@ -48,12 +48,8 @@ export default function RankingPage() {
   const [schools, setSchools] = useState<School[] | null>([]);
 
   const [searchTerm, setSearchTerm] = useState("");
-  
-  //@typescript-eslint/no-unused-vars
-  const sorted = schools?.sort(function (a, b) {
-    return b.score - a.score;
-  });
 
+  
   const sortedRanking = schools?.map(function (a: School, index: number) {
     return {
       ...a,

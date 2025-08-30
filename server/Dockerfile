@@ -16,6 +16,6 @@ COPY . .
 RUN npx prisma generate
 RUN npm run build
 
-EXPOSE 4000
+EXPOSE 3003
 
 CMD ["sh", "-c", "while ! nc -z db 5432; do echo 'Waiting for db...'; sleep 2; done; npx prisma migrate deploy && npm run seed && node dist/app.js"]

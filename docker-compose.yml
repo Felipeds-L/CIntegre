@@ -28,35 +28,37 @@ services:
     build: ./server
     restart: always
     ports:
-      - "${SERVER_PORT}:4000"
+      - "${SERVER_PORT}:3003"
     environment:
       - NODE_ENV=${NODE_ENV}
       - DATABASE_URL=${DATABASE_URL}
       - JWT_SECRET=${JWT_SECRET}
       - PORT=${SERVER_PORT}
+      - CORS_ORIGIN=${CORS_ORIGIN}
     depends_on:
       db:
         condition: service_healthy
     networks:
       - cintegre-network
-    volumes:
-      - ./server/.env:/app/.env
 
   # Frontend (Client)
   client:
-    build: ./client
+    build:
+      context: ./client
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
     restart: always
     ports:
-      - "${CLIENT_PORT}:3000"
+      - "${CLIENT_PORT}:8003"
     environment:
       - NODE_ENV=${NODE_ENV}
       - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+      - JWT_SECRET=${JWT_SECRET}
+      - INTERNAL_API_URL=${INTERNAL_API_URL}
     depends_on:
       - server
     networks:
       - cintegre-network
-    volumes:
-      - ./client/.env:/app/.env
 
 volumes:
   postgresql_data: {}

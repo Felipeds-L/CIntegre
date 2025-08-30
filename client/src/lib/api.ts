@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL;
+export const API_URL = process.env.INTERNAL_API_URL;
 
 // --- USUÁRIOS ---
 // Criação de usuário

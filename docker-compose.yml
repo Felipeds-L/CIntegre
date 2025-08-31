@@ -12,9 +12,6 @@ services:
       - JWT_SECRET=${JWT_SECRET}
       - PORT=${SERVER_PORT}
       - CORS_ORIGIN=${CORS_ORIGIN}
-    depends_on:
-      db:
-        condition: service_healthy
     networks:
       - boraimpactar2
 

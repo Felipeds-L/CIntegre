@@ -1,3 +1,5 @@
+"use server";
+
 import { USERS_SCHOOL_POST } from "@/lib/api";
 import login from "./login";
 import apiError from "@/lib/apiError";
@@ -79,9 +81,11 @@ export default async function schoolUsersPost(
     const data = await response.json();
 
     if (!response.ok) {
+      const errorText = await response.text();
+      console.error("A API retornou um erro:", errorText);
       return {
         ok: false,
-        error: data.error || "Erro ao cadastrar usuário.",
+        error: `Erro do servidor: ${response.status}. Verifique o console para mais detalhes.`,
         data: null,
       };
     }
@@ -94,6 +98,7 @@ export default async function schoolUsersPost(
 
     return { data: null, ok: true, error: "" };
   } catch (err: unknown) {
+    console.error("Erro ao conectar com a API:", err);
     return apiError(err);
   }
 }

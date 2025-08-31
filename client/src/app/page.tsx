@@ -21,8 +21,13 @@ export default function HomePage() {
 
   useEffect(() => {
     const fetchActivities = async () => {
-      const response = await getActivities();
-      setActivities(response.data);
+      try {
+        const response = await getActivities();
+
+        setActivities(response.data);
+      } catch (error) {
+        console.error("5. Ocorreu um erro ao buscar atividades:", error);
+      }
     };
     fetchActivities();
   }, []);

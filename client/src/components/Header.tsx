@@ -15,7 +15,7 @@ export default function Header() {
         {/* Logo */}
         <Link href={user ? "/home" : "/"}>
           <Image
-            src="/CIntegreHeader.svg"
+            src="/cintegre/CIntegreHeader.svg"
             alt="Logo CIntegre"
             width={226}
             height={48}

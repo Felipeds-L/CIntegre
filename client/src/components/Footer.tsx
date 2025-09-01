@@ -14,13 +14,13 @@ export default function Footer() {
         <div className="flex justify-between w-full pb-6">
           <div className="flex gap-6 items-center">
             <Image
-              src="/CIntegreFooter.svg"
+              src="/cintegre/CIntegreFooter.svg"
               alt="CIntegre Logo"
               height={143}
               width={178}
             />
             <Image
-              src="/prefeituraLogo.svg"
+              src="/cintegre/prefeituraLogo.svg"
               alt="Prefeitura Logo"
               height={120}
               width={117}
@@ -76,13 +76,13 @@ export default function Footer() {
 
             <div className="flex gap-6 items-center mb-6">
               <Image
-                src="/CIntegreFooter.svg"
+                src="/cintegre/CIntegreFooter.svg"
                 alt="CIntegre Logo"
                 height={80}
                 width={100}
               />
               <Image
-                src="/prefeituraLogo.svg"
+                src="/cintegre/prefeituraLogo.svg"
                 alt="Prefeitura Logo"
                 height={70}
                 width={70}

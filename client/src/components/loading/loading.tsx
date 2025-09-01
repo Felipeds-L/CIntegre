@@ -12,7 +12,7 @@ export const Loading = () => {
 
         <div className="px-10 py-8 flex flex-col items-center gap-4">
           <Image
-            src={'/CIntegreLogoBlue.svg'}
+            src={'cintegre/CIntegreLogoBlue.svg'}
             alt="CIntegre Logo"
             width={100}
             height={40}

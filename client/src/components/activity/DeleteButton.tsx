@@ -27,7 +27,7 @@ export default function DeleteButton({ activity_id, onClose }: Props) {
       className="flex w-full rounded-[4px] justify-center items-center hover:bg-red-600 bg-red-500 gap-2.5 text-white font-semibold px-6 py-3 hover:cursor-pointer"
       onClick={handleCloseClick}
     >
-      <Image className="bg-white text-white" src={"/assets/delete.svg"} width={24} height={24} alt="" />
+      <Image className="bg-white text-white" src={"/assets/delete"} width={24} height={24} alt="" />
       <span>Fechar Atividade</span>
     </button>
   );

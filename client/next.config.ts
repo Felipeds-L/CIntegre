@@ -29,7 +29,29 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      // Adicionar hostname da VM para imagens locais
+      {
+        protocol: 'http',
+        hostname: 'vm-cinboraimpactar2.cin.ufpe.br',
+        port: '',
+        pathname: '/**',
+      }
     ],
+  },
+
+  // Configuração para servir arquivos estáticos com basePath
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Forwarded-Proto',
+            value: 'http',
+          },
+        ],
+      },
+    ];
   },
   
   // Configurações adicionais para proxy reverso

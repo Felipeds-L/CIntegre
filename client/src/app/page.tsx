@@ -84,7 +84,7 @@ export default function HomePage() {
           </div>
 
           <Image
-            src={"/CIntegreHero.svg"}
+            src={"cintegre/CIntegreHero.svg"}
             height={400}
             width={400}
             alt="CIntegre Logo"

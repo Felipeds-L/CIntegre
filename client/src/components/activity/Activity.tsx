@@ -145,7 +145,7 @@ export default function ActivityComp({
             <ul className="flex flex-col gap-4">
               <li className="text-gray-600 flex items-center gap-2.5">
                 <Image
-                  src={"/assets/calendar.svg"}
+                  src={"cintegre/assets/calendar.svg"}
                   width={24}
                   height={24}
                   alt=""
@@ -155,7 +155,7 @@ export default function ActivityComp({
 
               <li className="text-gray-600 flex items-center gap-2.5">
                 <Image
-                  src={"/assets/clock.svg"}
+                  src={"cintegre/assets/clock.svg"}
                   width={24}
                   height={24}
                   alt=""
@@ -165,7 +165,7 @@ export default function ActivityComp({
 
               <li className="text-gray-600 flex items-center gap-2.5">
                 <Image
-                  src={"/assets/mapPin.svg"}
+                  src={"cintegre/assets/mapPin.svg"}
                   width={24}
                   height={24}
                   alt=""
@@ -175,7 +175,7 @@ export default function ActivityComp({
 
               <li className="text-gray-600 flex items-center gap-2.5">
                 <Image
-                  src={"/assets/people.svg"}
+                  src={"cintegre/assets/people.svg"}
                   width={24}
                   height={24}
                   alt=""
@@ -185,7 +185,7 @@ export default function ActivityComp({
 
               <li className="text-gray-600 flex items-center gap-2.5">
                 <Image
-                  src={"/assets/status.svg"}
+                  src={"cintegre/assets/status.svg"}
                   width={24}
                   height={24}
                   alt=""
@@ -231,7 +231,7 @@ export default function ActivityComp({
               <li>
                 <span className="flex items-center gap-2.5">
                   <Image
-                    src={"/assets/phone.svg"}
+                    src={"cintegre/assets/phone.svg"}
                     width={24}
                     height={24}
                     alt=""

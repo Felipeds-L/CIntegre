@@ -54,7 +54,7 @@ export default function ParticipateButton({
       }}
       onClick={handleActivityClick}
     >
-      <Image src={"/assets/personButton.svg"} width={24} height={24} alt="" />
+      <Image src={"cintegre/assets/personButton.svg"} width={24} height={24} alt="" />
       <span>Participar da Atividade</span>
     </button>
   );

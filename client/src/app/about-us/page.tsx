@@ -5,7 +5,7 @@ const sectionsData = [
   {
     title: "Nossa Missão",
     text: "Construir uma plataforma que conecte escolas da Prefeitura que buscam proporcionar incentivos na formação e o desenvolvimento de seus estudantes (proporcionando experiências em múltiplas áreas) à Instituições Não-Governamentais (ONG's) que ajudam causas comunitárias e promovem o bem da cidadania.",
-    imageUrl: "/cintegrelogoblue.svg",
+    imageUrl: "cintegre/cintegrelogoblue.svg",
     imageOnLeft: false,
   },
   {

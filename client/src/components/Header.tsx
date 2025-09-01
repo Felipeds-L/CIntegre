@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import cintegreHeader from "../../public/CIntegreHeader.svg";
 import { useUser } from "@/context/userContext";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
@@ -16,7 +15,7 @@ export default function Header() {
         {/* Logo */}
         <Link href={user ? "/home" : "/"}>
           <Image
-            src={cintegreHeader}
+            src="/CIntegreHeader.svg"
             alt="Logo CIntegre"
             width={226}
             height={48}

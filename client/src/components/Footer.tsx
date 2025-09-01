@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import cintegreFooter from "../../public/CIntegreFooter.svg";
-import prefeituraFooter from "../../public/prefeituraLogo.svg";
 import Link from "next/link";
 
 export default function Footer() {
@@ -16,13 +14,13 @@ export default function Footer() {
         <div className="flex justify-between w-full pb-6">
           <div className="flex gap-6 items-center">
             <Image
-              src={cintegreFooter}
+              src="/CIntegreFooter.svg"
               alt="CIntegre Logo"
               height={143}
               width={178}
             />
             <Image
-              src={prefeituraFooter}
+              src="/prefeituraLogo.svg"
               alt="Prefeitura Logo"
               height={120}
               width={117}
@@ -78,13 +76,13 @@ export default function Footer() {
 
             <div className="flex gap-6 items-center mb-6">
               <Image
-                src={cintegreFooter}
+                src="/CIntegreFooter.svg"
                 alt="CIntegre Logo"
                 height={80}
                 width={100}
               />
               <Image
-                src={prefeituraFooter}
+                src="/prefeituraLogo.svg"
                 alt="Prefeitura Logo"
                 height={70}
                 width={70}
